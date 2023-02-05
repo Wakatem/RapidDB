@@ -2,24 +2,15 @@
 #include <iostream>
 #include "Database.h"
 
-Database::Database(string username, string password, string databaseIP, unsigned short databasePort, string ServiceName) {
-
-	this->username = username;
-	this->password = password;
-
+Database::Database(string databaseIP, unsigned short databasePort, string ServiceName)
+{
 	//setup OCCI environment
 	env = Environment::createEnvironment(Environment::DEFAULT);
 
 	//setup connection url
 	URL = databaseIP + ":" + to_string(databasePort) + (ServiceName.empty() ? "" : "/" + ServiceName);
-
-	//create connection
-	con = env->createConnection(username, password, URL);
-	cout << "Connected!" << endl;
-
-	//create blank statement
-	statement = con->createStatement();
 }
+
 
 ResultSet* Database::query(string SQLCommand)
 {
@@ -34,15 +25,6 @@ unsigned int Database::execute(string SQLCommand)
 	return statement->executeUpdate(SQLCommand);
 }
 
-void Database::closeConnection()
-{
-	env->terminateConnection(con);
-}
-
-void Database::closeEnvironment()
-{
-	Environment::terminateEnvironment(env);
-}
 
 void Database::commit()
 {
@@ -58,6 +40,28 @@ void Database::rollback()
 		cout << "Nothing to rollback to";
 	else
 		statement->executeUpdate("Rollback");
+}
+
+void Database::connect(string username, string password)
+{
+	//create connection
+	con = env->createConnection(username, password, URL);
+	cout << "Connected!" << endl;
+
+	//create blank statement
+	statement = con->createStatement();
+}
+
+void Database::disconnect()
+{
+	env->terminateConnection(con);
+}
+
+
+
+void Database::closeEnvironment()
+{
+	Environment::terminateEnvironment(env);
 }
 
 void Database::freeResources()

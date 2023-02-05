@@ -22,7 +22,7 @@ private:
 	bool autoCommit;
 
 public:
-	Database(string username, string password, string databaseIP, unsigned short databasePort, string ServiceName = "");
+	Database(string databaseIP, unsigned short databasePort, string ServiceName = "");
 	ResultSet* query(string SQLCommand);
 
 	/**
@@ -33,8 +33,9 @@ public:
 	A function to terminate all allocated resources related to SQL
 	*/
 	void freeResources();
-	void closeConnection();
-	void closeEnvironment();
 	void commit();
 	void rollback();
+	void connect(string username, string password);
+	void disconnect();
+	void closeEnvironment();
 };

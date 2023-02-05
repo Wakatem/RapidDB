@@ -132,6 +132,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="headers\Database.h" />
+    <ClInclude Include="headers\Organization.h" />
+    <ClInclude Include="headers\User.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Database.cpp" />
