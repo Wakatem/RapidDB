@@ -1,8 +1,6 @@
 
 #include <iostream>
 #include "Database.h"
-#include "Organization.h"
-#include "User.h";
 
 using namespace std;
 
