@@ -3,7 +3,6 @@
 - Projects' configurations are set on Debug, 64-bit mode
 - The OCCI library files are `64-bit based`. The system should be 64-bit.  
 
-<br/> 
 
 # General Notes:  
 - All configurations needed for integrating the OCCI library are done. Just clone the repo and test.
