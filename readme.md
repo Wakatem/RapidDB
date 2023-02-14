@@ -1,8 +1,8 @@
 # Setup Notes:
-- Download [compiled wxWidgets library](https://uowmailedu-my.sharepoint.com/:u:/g/personal/mb094_uowmail_edu_au/Een9ptEL2ipNtbqX1QoiNWABBfBJ4yKZlqmBqAE8bR4kQA?e=GmecLw) and copy it in the `resources` folder within the project.
-- Projects' configurations are set on Debug, 64-bit mode
+- Download [compiled wxWidgets library](https://uowmailedu-my.sharepoint.com/:u:/g/personal/mb094_uowmail_edu_au/Een9ptEL2ipNtbqX1QoiNWABBfBJ4yKZlqmBqAE8bR4kQA?e=GmecLw) and copy it in the `resources` folder within the project (if you are working on Gui).
+- Projects' configurations are set on Debug, 64-bit mode.
 - The OCCI library files are `64-bit based`. The system should be 64-bit.  
-
+- If you are working on Logic project, unload Gui project, or vice versa (to avoid random build errors if things not setup properly).
 
 # General Notes:  
 - All configurations needed for integrating the OCCI library are done. Just clone the repo and test.
