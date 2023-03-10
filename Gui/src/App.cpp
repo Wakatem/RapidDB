@@ -46,7 +46,6 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 
     //Display next screen
     nextScreen->Show(true);
-    wxLogMessage(wxString(std::to_string(screensReference.size())));
 }
 
 
