@@ -18,6 +18,7 @@ enum ScreenID
 {
 	ORG_REGISTER,
 	ADMIN_REGISTER,
+
 };
 
 extern vector<tuple<Screen, ScreenID>> screensReference;
