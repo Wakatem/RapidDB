@@ -22,6 +22,10 @@ enum ScreenID
 {
 	ORG_REGISTER,
 	ADMIN_REGISTER,
+	
+	//Akshita's Org page
+	ORG_SETUP,
+	ORG_SIGN_IN
 };
 
 extern vector<tuple<Screen, ScreenID>> screensReference;
@@ -31,3 +35,6 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 //Setup functions for screens
 Screen setupOrganizationRegister(wxWindow* parent);
 Screen setupAdminRegister(wxWindow* parent);
+
+//Akshita's Org page
+Screen setOrg(wxWindow* parent);

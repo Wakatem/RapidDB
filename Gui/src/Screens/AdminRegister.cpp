@@ -99,9 +99,9 @@ Screen setupAdminRegister(wxWindow* parent)
     screen->SetSizer(sizer);
 
 
-    wxPNGHandler* p = new wxPNGHandler();
-    wxImage::AddHandler(p);
-    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage("C:\\Users\\moody\\Desktop\\icon.png", wxBITMAP_TYPE_PNG).Rescale(300, 300, wxIMAGE_QUALITY_HIGH)));
+//    wxPNGHandler* p = new wxPNGHandler();
+  //  wxImage::AddHandler(p);
+    //wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage("C:\\Users\\moody\\Desktop\\icon.png", wxBITMAP_TYPE_PNG).Rescale(300, 300, wxIMAGE_QUALITY_HIGH)));
 
 
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Admin Registration", wxDefaultPosition, wxDefaultSize);
@@ -117,7 +117,7 @@ Screen setupAdminRegister(wxWindow* parent)
 
     //Bind controls with functions and add controls to sizer
     button->Bind(wxEVT_BUTTON, [](wxCommandEvent& evt) {RegisterAdmin(); });
-    sizer->Add(bitmapImage, 0, wxALIGN_CENTER_HORIZONTAL);
+   // sizer->Add(bitmapImage, 0, wxALIGN_CENTER_HORIZONTAL);
     sizer->Add(0, 120);
     sizer->Add(inputs, 0, wxALIGN_CENTER);
     sizer->Add(0, 130);
