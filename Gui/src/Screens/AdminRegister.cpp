@@ -105,7 +105,7 @@ Screen setupAdminRegister(wxWindow* parent)
 
 
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Admin Registration", wxDefaultPosition, wxDefaultSize);
-    text->SetPosition(DIP_POINT(485, 260, text));
+    text->SetPosition(DIP_POINT(480, 260, text));
     text->SetFont(text->GetFont().Scale(2.2).MakeUnderlined());
     
 
