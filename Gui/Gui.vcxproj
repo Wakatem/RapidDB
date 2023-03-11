@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Screens\AdminRegister.cpp" />
+    <ClCompile Include="src\Screens\Org.cpp" />
     <ClCompile Include="src\Screens\OrganizationRegister.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\MainFrame.cpp" />

@@ -20,9 +20,10 @@ using std::make_tuple;
 //Each screen must have a unique ScreenID assigned to it!
 enum ScreenID
 {
+	ORG_SETUP,
 	ORG_REGISTER,
+	ORG_SIGN_IN,
 	ADMIN_REGISTER,
-
 };
 
 extern vector<tuple<Screen, ScreenID>> screensReference;
@@ -32,3 +33,4 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 //Setup functions for screens
 Screen setupOrganizationRegister(wxWindow* parent);
 Screen setupAdminRegister(wxWindow* parent);
+Screen setOrg(wxWindow* parent);

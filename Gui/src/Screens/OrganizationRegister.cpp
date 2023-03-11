@@ -19,7 +19,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
     //Create screen parameters
     Screen screen = new wxPanel(parent);
     screen->SetSize(parent->GetSize());
-    screen->Show(true);
+    screen->Show(false);
 
     //Add screen pointer to list
     screensReference.push_back(make_tuple(screen, ORG_REGISTER));
