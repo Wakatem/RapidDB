@@ -7,6 +7,10 @@
 
 #include <vector>
 #include <tuple>
+#include <string>
+
+#define DIP_SIZE(width, height, window) wxWindow::FromDIP(wxSize(width, height), window)
+#define DIP_POINT(x, y, window) wxWindow::FromDIP(wxPoint(x, y), window)
 
 typedef wxPanel* Screen;
 using std::vector;
