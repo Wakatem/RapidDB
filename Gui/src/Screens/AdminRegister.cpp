@@ -30,12 +30,12 @@ wxBoxSizer* textInput(wxWindow* screen, wxString title, int marginHorizontally)
 
 
     wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY);
-    usernameInput->SetMinSize(DIP_SIZE(220, 25, usernameInput));
+    usernameInput->SetMinSize(DPI_SIZE(220, 25, usernameInput));
     usernameInput->SetBackgroundColour("#E5E7E9");
 
 
     inputSizer->Add(username);
-    inputSizer->Add(DIP_X(marginHorizontally, screen), 0);       //Adding space in pixels
+    inputSizer->Add(DPI_X(marginHorizontally, screen), 0);       //Adding space in pixels
     inputSizer->Add(usernameInput, 0);
     return inputSizer;
 }
@@ -54,7 +54,7 @@ wxBoxSizer* choicesBox(wxWindow* screen)
     wxChoice* choiceMenu = new wxChoice(screen, wxID_ANY, wxDefaultPosition, wxDefaultSize, choices);
 
     inputSizer->Add(username);
-    inputSizer->Add(DIP_X(40, screen), 0);       //Adding space in pixels
+    inputSizer->Add(DPI_X(40, screen), 0);       //Adding space in pixels
     inputSizer->Add(choiceMenu, 1);
     return inputSizer;
 }
@@ -68,7 +68,7 @@ wxSizer* rowInputs(wxWindow* screen)
 
     rowSizer->Add(textInput1);
     rowSizer->Add(textInput2);
-    rowSizer->Add(DIP_X(200, screen), 0);
+    rowSizer->Add(DPI_X(200, screen), 0);
 
 
 
@@ -110,37 +110,37 @@ Screen setupAdminRegister(wxWindow* parent)
     wxPNGHandler* p = new wxPNGHandler();
     wxImage::AddHandler(p);
     wxString logoPath = ASSESTS("image.png");
-    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(DIP_X(80, screen), DIP_X(100, screen), wxIMAGE_QUALITY_HIGH)));
+    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(100, 130, wxIMAGE_QUALITY_HIGH )));
 
 
     wxString backButtonPath = ASSESTS("back_button.png");
     wxButton* backButton = new wxButton(screen, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
-    backButton->SetSize(DIP_SIZE(40, 40, backButton));
-    backButton->SetBitmap(wxBitmap(wxImage(backButtonPath, wxBITMAP_TYPE_PNG).Rescale(DIP_X(18, backButton), DIP_Y(18, backButton), wxIMAGE_QUALITY_HIGH)));
+    backButton->SetSize(DPI_SIZE(40, 40, backButton));
+    backButton->SetBitmap(wxBitmap(wxImage(backButtonPath, wxBITMAP_TYPE_PNG).Rescale(40, 40, wxIMAGE_QUALITY_HIGH)));
     backButton->SetBackgroundColour("#FFFFFF");
     backButton->SetForegroundColour("#FFFFFF");
-    backButton->SetPosition(DIP_POINT(20, 30, backButton));
+    backButton->SetPosition(DPI_POINT(25, 35, screen));
 
     //Screen Title
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Admin Registration", wxDefaultPosition, wxDefaultSize);
-    text->SetPosition(DIP_POINT(483, 260, text));
+    text->SetPosition(DPI_POINT(483, 180, screen));
     text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
     
-    //Add input fields and a 'register' button
+    ////Add input fields and a 'register' button
     wxSizer* inputs = rowInputs(screen);
     wxButton* button = new wxButton(screen, wxID_ANY, "Register Admin");
-    button->SetMinSize(DIP_SIZE(200, 80, button));
+    button->SetMinSize(DPI_SIZE(200, 80, button));
     button->SetFont(button->GetFont().Scale(1.8f));
 
-    //Bind controls with functions and add controls to sizer
+    ////Bind controls with functions and add controls to sizer
     button->Bind(wxEVT_BUTTON, [](wxCommandEvent& evt) {RegisterAdmin(); });
     backButton->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {goBackToScreen(screen, ADMIN_REGISTER, ORG_REGISTER); });
 
-    sizer->Add(0, DIP_Y(30, screen));
+    sizer->Add(0, 30);
     sizer->Add(bitmapImage, 0, wxALIGN_CENTER);
-    sizer->Add(0, DIP_Y(130, screen));
+    sizer->Add(0, DPI_Y(130, screen));
     sizer->Add(inputs, 0, wxALIGN_CENTER);
-    sizer->Add(0, DIP_Y(60, screen));
+    sizer->Add(0, DPI_Y(60, screen));
     sizer->Add(button, 0, wxCENTER);
     
     return screen;
