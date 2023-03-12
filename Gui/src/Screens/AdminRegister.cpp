@@ -3,6 +3,15 @@
 /////////////////////////////////////////			User Input Control Functions		///////////////////////////////////////////////////
 
 
+void goBackToScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
+{
+    wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Inputs will be reset. Are you sure you want to leave?", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK | wxCANCEL);
+
+    if (dialog->ShowModal() == wxID_OK)
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, true);
+    
+}
+
 void RegisterAdmin()
 {
     wxLogMessage("Admin Registered");
@@ -94,10 +103,9 @@ Screen setupAdminRegister(wxWindow* parent)
     //Add screen pointer to list
     screensReference.push_back(make_tuple(screen, ADMIN_REGISTER));
 
-    //Implement screen content
+
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
     screen->SetSizer(sizer);
-
 
     wxPNGHandler* p = new wxPNGHandler();
     wxImage::AddHandler(p);
@@ -105,11 +113,20 @@ Screen setupAdminRegister(wxWindow* parent)
     wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(300, 300, wxIMAGE_QUALITY_HIGH)));
 
 
+    wxString backButtonPath = ASSESTS("back_button.png");
+    wxButton* backButton = new wxButton(screen, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
+    backButton->SetSize(DIP_SIZE(40, 40, backButton));
+    backButton->SetBitmap(wxBitmap(wxImage(backButtonPath, wxBITMAP_TYPE_PNG).Rescale(40, 40, wxIMAGE_QUALITY_HIGH)));
+    backButton->SetBackgroundColour("#FFFFFF");
+    backButton->SetForegroundColour("#FFFFFF");
+    backButton->SetPosition(DIP_POINT(20, 30, backButton));
+
+    //Screen Title
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Admin Registration", wxDefaultPosition, wxDefaultSize);
     text->SetPosition(DIP_POINT(480, 260, text));
     text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
     
-
+    //Add input fields and a 'register' button
     wxSizer* inputs = rowInputs(screen);
     wxButton* button = new wxButton(screen, wxID_ANY, "Register Admin");
     button->SetBackgroundColour("#AEB6BF");
@@ -118,6 +135,8 @@ Screen setupAdminRegister(wxWindow* parent)
 
     //Bind controls with functions and add controls to sizer
     button->Bind(wxEVT_BUTTON, [](wxCommandEvent& evt) {RegisterAdmin(); });
+    backButton->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {goBackToScreen(screen, ADMIN_REGISTER, ORG_REGISTER); });
+
     sizer->Add(bitmapImage, 0, wxALIGN_CENTER_HORIZONTAL);
     sizer->Add(0, 120);
     sizer->Add(inputs, 0, wxALIGN_CENTER);
