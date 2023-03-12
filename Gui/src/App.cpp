@@ -16,36 +16,45 @@ wxIMPLEMENT_APP(MyApp);
 
 void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, bool destroyCurrentScreen)
 {
-    int currentScreenIndex;
-    Screen nextScreen = nullptr;
 
-    int i = 0;
-    for (auto& screenTuple : screensReference)
+    try
     {
-        if (get<1>(screenTuple) == currentScreenID)
-            currentScreenIndex = i;
+        int currentScreenIndex;
+        Screen nextScreen = nullptr;
 
-        if (get<1>(screenTuple) == nextScreenID)
-            nextScreen = get<0>(screenTuple);
-       
-        i++;
+        int i = 0;
+        for (auto& screenTuple : screensReference)
+        {
+            if (get<1>(screenTuple) == currentScreenID)
+                currentScreenIndex = i;
+
+            if (get<1>(screenTuple) == nextScreenID)
+                nextScreen = get<0>(screenTuple);
+
+            i++;
+        }
+
+
+        //Display next screen
+        nextScreen == nullptr ? throw std::exception() : NULL;
+        nextScreen->Show(true);
+
+        //Remove object of current screen
+        if (destroyCurrentScreen)
+        {
+            currentScreen->Destroy();
+            screensReference.erase(screensReference.begin() + currentScreenIndex);
+        }
+        else
+        {
+            //Hide current screen
+            currentScreen->Show(false);
+        }
     }
-
-
-    //Remove object of current screen
-    if (destroyCurrentScreen)
+    catch (const std::exception&)
     {
-        currentScreen->Destroy();
-        screensReference.erase(screensReference.begin()+currentScreenIndex);
+        wxLogMessage("Unable to go to previous screen");
     }
-    else
-    {
-        //Hide current screen
-        currentScreen->Show(false);
-    }
-
-    //Display next screen
-    nextScreen->Show(true);
 }
 
 
@@ -54,10 +63,12 @@ bool MyApp::OnInit()
 
     wxString* title = new wxString("RapidDB");
     MainFrame* mainWindow = new MainFrame(*title);
-    Screen OrgRegister = setupOrganizationRegister(mainWindow);
-   // Screen AdminRegister = setupAdminRegister(mainWindow);
+    wxString logoPath = ASSESTS("icon.ico");
+    mainWindow->SetIcon(wxIcon(logoPath, wxBITMAP_TYPE_ICO));
+    //Screen OrgRegister = setupOrganizationRegister(mainWindow);
+    //Screen AdminRegister = setupAdminRegister(mainWindow);
     
-   // Screen OrgSet = setOrg(mainWindow);
+    Screen OrgSet = setOrg(mainWindow);
 
     mainWindow->Show(true);
     return true;
