@@ -21,7 +21,7 @@ wxBoxSizer* textInput_org_setup(wxWindow* screen, wxString title, int marginHori
 
 
     wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY);
-    usernameInput->SetMinSize(DIP_SIZE(220, 25, usernameInput));
+    usernameInput->SetMinSize(DPI_SIZE(220, 25, usernameInput));
     usernameInput->SetBackgroundColour("#E5E7E9");
 
 
@@ -58,7 +58,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
     //Create screen parameters
     Screen screen = new wxPanel(parent);
     screen->SetSize(parent->GetSize());
-    screen->Show(true);
+    screen->Show(false);
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
@@ -77,7 +77,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
 
     //title
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Organization Register screen", wxDefaultPosition, wxDefaultSize);
-    text->SetPosition(DIP_POINT(480, 260, text));
+    text->SetPosition(DPI_POINT(480, 260, text));
     text->SetFont(text->GetFont().Scale(2.2).MakeUnderlined());
 
 
@@ -85,7 +85,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
 
     wxButton* button = new wxButton(screen, wxID_ANY, "Register");
     button->SetBackgroundColour("#AEB6BF");
-    button->SetMinSize(DIP_SIZE(200, 80, button));
+    button->SetMinSize(DPI_SIZE(200, 80, button));
     button->SetFont(button->GetFont().Scale(1.8).MakeItalic());
 
     //Bind controls with functions
