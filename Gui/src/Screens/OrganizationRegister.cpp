@@ -30,7 +30,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
     wxPNGHandler* handler = new wxPNGHandler;
     wxImage::AddHandler(handler);
     wxStaticBitmap* image;
-    image = new wxStaticBitmap(screen, wxID_ANY, wxBitmap("rapidDB_logo.png", wxBITMAP_TYPE_PNG), wxPoint(900, 100), wxSize(100, 500));
+    //image = new wxStaticBitmap(screen, wxID_ANY, wxBitmap("rapidDB_logo.png", wxBITMAP_TYPE_PNG), wxPoint(900, 100), wxSize(100, 500));
 
     //title
     wxStaticText* title = new wxStaticText(screen, wxID_ANY, "Organization Register screen", wxPoint(850,300), wxDefaultSize, wxALIGN_RIGHT);

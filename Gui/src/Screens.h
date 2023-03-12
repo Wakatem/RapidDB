@@ -36,3 +36,7 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 Screen setupOrganizationRegister(wxWindow* parent);
 Screen setupAdminRegister(wxWindow* parent);
 Screen setOrg(wxWindow* parent);
+Screen setupSignIn(wxWindow* parent);
+
+//SignIn Logic
+void SignIn(wxString username, wxString password, bool isAdmin, bool isModerator);
