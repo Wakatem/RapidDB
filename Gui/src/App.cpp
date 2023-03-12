@@ -67,8 +67,8 @@ bool MyApp::OnInit()
     mainWindow->SetIcon(wxIcon(logoPath, wxBITMAP_TYPE_ICO));
 
     //Screen OrgRegister = setupOrganizationRegister(mainWindow);
-    Screen AdminRegister = setupAdminRegister(mainWindow); 
-    //Screen OrgSet = setOrg(mainWindow);
+    //Screen AdminRegister = setupAdminRegister(mainWindow); 
+    Screen OrgSet = setOrg(mainWindow);
 
     mainWindow->Show(true);
     return true;
