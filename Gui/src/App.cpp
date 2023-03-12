@@ -63,6 +63,9 @@ bool MyApp::OnInit()
 
     wxString* title = new wxString("RapidDB");
     MainFrame* mainWindow = new MainFrame(*title);
+    wxString logoPath = ASSESTS("icon.ico");
+    mainWindow->SetIcon(wxIcon(logoPath, wxBITMAP_TYPE_ICO));
+
     //Screen OrgRegister = setupOrganizationRegister(mainWindow);
     Screen AdminRegister = setupAdminRegister(mainWindow); 
     //Screen OrgSet = setOrg(mainWindow);
