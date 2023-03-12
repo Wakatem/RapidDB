@@ -17,7 +17,7 @@ wxBoxSizer* textInput(wxWindow* screen, wxString title, int marginHorizontally =
     wxBoxSizer* inputSizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxStaticText* username = new wxStaticText(screen, wxID_ANY, title, wxDefaultPosition, wxDefaultSize);
-    username->SetFont(username->GetFont().Scale(1.2).MakeBold());
+    username->SetFont(username->GetFont().Scale(1.2f).MakeBold());
 
 
     wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY);
@@ -36,7 +36,7 @@ wxBoxSizer* choicesBox(wxWindow* screen)
     wxBoxSizer* inputSizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxStaticText* username = new wxStaticText(screen, wxID_ANY, "Gender :", wxDefaultPosition, wxDefaultSize);
-    username->SetFont(username->GetFont().Scale(1.2).MakeBold());
+    username->SetFont(username->GetFont().Scale(1.2f).MakeBold());
 
 
     wxArrayString choices;
@@ -99,25 +99,26 @@ Screen setupAdminRegister(wxWindow* parent)
     screen->SetSizer(sizer);
 
 
-//    wxPNGHandler* p = new wxPNGHandler();
-  //  wxImage::AddHandler(p);
-    //wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage("C:\\Users\\moody\\Desktop\\icon.png", wxBITMAP_TYPE_PNG).Rescale(300, 300, wxIMAGE_QUALITY_HIGH)));
+    wxPNGHandler* p = new wxPNGHandler();
+    wxImage::AddHandler(p);
+    wxString logoPath = ASSESTS("image.png");
+    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(300, 300, wxIMAGE_QUALITY_HIGH)));
 
 
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Admin Registration", wxDefaultPosition, wxDefaultSize);
     text->SetPosition(DIP_POINT(480, 260, text));
-    text->SetFont(text->GetFont().Scale(2.2).MakeUnderlined());
+    text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
     
 
     wxSizer* inputs = rowInputs(screen);
     wxButton* button = new wxButton(screen, wxID_ANY, "Register Admin");
     button->SetBackgroundColour("#AEB6BF");
     button->SetMinSize(DIP_SIZE(200, 80, button));
-    button->SetFont(button->GetFont().Scale(1.8).MakeItalic());
+    button->SetFont(button->GetFont().Scale(1.8f).MakeItalic());
 
     //Bind controls with functions and add controls to sizer
     button->Bind(wxEVT_BUTTON, [](wxCommandEvent& evt) {RegisterAdmin(); });
-   // sizer->Add(bitmapImage, 0, wxALIGN_CENTER_HORIZONTAL);
+    sizer->Add(bitmapImage, 0, wxALIGN_CENTER_HORIZONTAL);
     sizer->Add(0, 120);
     sizer->Add(inputs, 0, wxALIGN_CENTER);
     sizer->Add(0, 130);

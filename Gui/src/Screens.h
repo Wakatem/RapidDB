@@ -1,6 +1,7 @@
 #pragma once
 
 #include <wx/wxprec.h>
+#include <wx/stdpaths.h>
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
@@ -9,6 +10,7 @@
 #include <tuple>
 #include <string>
 
+#define ASSESTS(assestName) wxStandardPaths::Get().GetDataDir().erase(wxStandardPaths::Get().GetDataDir().find("RapidDB") + 7).append("\\resources\\assets\\").append(assestName)
 #define DIP_SIZE(width, height, window) wxWindow::FromDIP(wxSize(width, height), window)
 #define DIP_POINT(x, y, window) wxWindow::FromDIP(wxPoint(x, y), window)
 
