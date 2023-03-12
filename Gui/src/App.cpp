@@ -55,9 +55,9 @@ bool MyApp::OnInit()
     wxString* title = new wxString("RapidDB");
     MainFrame* mainWindow = new MainFrame(*title);
     Screen OrgRegister = setupOrganizationRegister(mainWindow);
-    //Screen AdminRegister = setupAdminRegister(mainWindow);
+   // Screen AdminRegister = setupAdminRegister(mainWindow);
     
-    Screen OrgSet = setOrg(mainWindow);
+   // Screen OrgSet = setOrg(mainWindow);
 
     mainWindow->Show(true);
     return true;
