@@ -53,12 +53,11 @@ Screen setupSignIn(wxWindow* parent) {
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
     screen->SetSizer(sizer);
 
-    //add logo
-    wxPNGHandler* p = new wxPNGHandler();
-    wxImage::AddHandler(p);
-    wxString logoPath = ASSESTS("image.png");
-    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(150, 200, wxIMAGE_QUALITY_HIGH)));
-    bitmapImage->SetPosition(DIP_POINT(510, 30, bitmapImage));
+    // logo
+    wxPNGHandler* handler = new wxPNGHandler;
+    wxImage::AddHandler(handler);
+    wxStaticBitmap* image;
+    image = new wxStaticBitmap(screen, wxID_ANY, wxBitmap("rapidDB_logo.png", wxBITMAP_TYPE_PNG), wxPoint(900, 100), wxSize(100, 500));
 
     //add backbutton
     wxString backButtonPath = ASSESTS("back_button.png");
