@@ -10,6 +10,7 @@
 #include <tuple>
 #include <string>
 
+#define ASSESTS(assestName) wxStandardPaths::Get().GetDataDir().erase(wxStandardPaths::Get().GetDataDir().find("RapidDB") + 7).append("\\resources\\assets\\").append(assestName)
 #define DPI_SIZE(width, height, window) wxWindow::FromDIP(wxSize(width, height), window)
 #define DPI_POINT(x, y, window) wxWindow::FromDIP(wxPoint(x, y), window)
 #define DPI_X(xValue, window) wxWindow::FromDIP(xValue, window)

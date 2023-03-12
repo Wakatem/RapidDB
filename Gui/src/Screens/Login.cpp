@@ -62,11 +62,11 @@ Screen setupSignIn(wxWindow* parent) {
     //add backbutton
     wxString backButtonPath = ASSESTS("back_button.png");
     wxButton* backButton = new wxButton(screen, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
-    backButton->SetSize(DIP_SIZE(40, 40, backButton));
+    backButton->SetSize(DPI_SIZE(40, 40, backButton));
     backButton->SetBitmap(wxBitmap(wxImage(backButtonPath, wxBITMAP_TYPE_PNG).Rescale(40, 40, wxIMAGE_QUALITY_HIGH)));
     backButton->SetBackgroundColour("#FFFFFF");
     backButton->SetForegroundColour("#FFFFFF");
-    backButton->SetPosition(DIP_POINT(20, 30, backButton));
+    backButton->SetPosition(DPI_POINT(20, 30, backButton));
 
     // Add screen pointer to list
     screensReference.push_back(make_tuple(screen, ORG_SIGN_IN));
