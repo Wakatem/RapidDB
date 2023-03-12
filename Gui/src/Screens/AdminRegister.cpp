@@ -110,7 +110,7 @@ Screen setupAdminRegister(wxWindow* parent)
     wxPNGHandler* p = new wxPNGHandler();
     wxImage::AddHandler(p);
     wxString logoPath = ASSESTS("image.png");
-    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(300, 300, wxIMAGE_QUALITY_HIGH)));
+    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(150, 200, wxIMAGE_QUALITY_HIGH)));
 
 
     wxString backButtonPath = ASSESTS("back_button.png");
@@ -123,24 +123,24 @@ Screen setupAdminRegister(wxWindow* parent)
 
     //Screen Title
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Admin Registration", wxDefaultPosition, wxDefaultSize);
-    text->SetPosition(DIP_POINT(480, 260, text));
+    text->SetPosition(DIP_POINT(483, 250, text));
     text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
     
     //Add input fields and a 'register' button
     wxSizer* inputs = rowInputs(screen);
     wxButton* button = new wxButton(screen, wxID_ANY, "Register Admin");
-    button->SetBackgroundColour("#AEB6BF");
     button->SetMinSize(DIP_SIZE(200, 80, button));
-    button->SetFont(button->GetFont().Scale(1.8f).MakeItalic());
+    button->SetFont(button->GetFont().Scale(1.8f));
 
     //Bind controls with functions and add controls to sizer
     button->Bind(wxEVT_BUTTON, [](wxCommandEvent& evt) {RegisterAdmin(); });
     backButton->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {goBackToScreen(screen, ADMIN_REGISTER, ORG_REGISTER); });
 
-    sizer->Add(bitmapImage, 0, wxALIGN_CENTER_HORIZONTAL);
-    sizer->Add(0, 120);
+    sizer->Add(0, 40);
+    sizer->Add(bitmapImage, 0, wxALIGN_CENTER);
+    sizer->Add(0, 240);
     sizer->Add(inputs, 0, wxALIGN_CENTER);
-    sizer->Add(0, 130);
+    sizer->Add(0, 120);
     sizer->Add(button, 0, wxCENTER);
     
     
