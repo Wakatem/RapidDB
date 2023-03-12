@@ -47,13 +47,15 @@ Screen setOrg(wxWindow* parent)
     wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen1, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG)));
 
     wxBoxSizer* sizer2 = new wxBoxSizer(wxHORIZONTAL);
-    wxButton* button1 = new wxButton(screen1, wxID_ANY, "Set Up Org", wxDefaultPosition); 
+    wxButton* button1 = new wxButton(screen1, wxID_ANY, "Set Up Org", wxDefaultPosition);
+    button1->SetFont(button1->GetFont().Scale(1.8f));
     wxButton* button2 = new wxButton(screen1, wxID_ANY, "Sign In Org", wxDefaultPosition);
+    button2->SetFont(button2->GetFont().Scale(1.8f));
 
     sizer->Add(bitmapImage, 0, wxCENTER);
 
     sizer2->Add(button1, 0, wxCENTER);
-    sizer2->Add(1000, 0);
+    sizer2->Add(500, 0);
     sizer2->Add(button2, 0, wxCENTER);
 
 
