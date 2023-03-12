@@ -26,7 +26,7 @@ wxBoxSizer* textInput_org_setup(wxWindow* screen, wxString title, int marginHori
 
 
     inputSizer->Add(username);
-    inputSizer->Add(marginHorizontally, 0);       //Adding space in pixels
+    inputSizer->Add(DPI_X(marginHorizontally, screen), 0);       //Adding space in pixels
     inputSizer->Add(usernameInput, 0);
     return inputSizer;
 }
@@ -59,7 +59,6 @@ Screen setupOrganizationRegister(wxWindow* parent)
     Screen screen = new wxPanel(parent);
     screen->SetSize(parent->GetSize());
     screen->Show(false);
-    screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
     screensReference.push_back(make_tuple(screen, ORG_REGISTER));
