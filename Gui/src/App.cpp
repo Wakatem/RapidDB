@@ -66,9 +66,9 @@ bool MyApp::OnInit()
     wxString logoPath = ASSESTS("icon.ico");
     mainWindow->SetIcon(wxIcon(logoPath, wxBITMAP_TYPE_ICO));
 
-    Screen login = setupSignIn(mainWindow);
-    //Screen OrgRegister = setupOrganizationRegister(mainWindow);
-    //Screen AdminRegister = setupAdminRegister(mainWindow); 
+    //Screen login = setupSignIn(mainWindow);
+    Screen OrgRegister = setupOrganizationRegister(mainWindow);
+    Screen AdminRegister = setupAdminRegister(mainWindow); 
     //Screen OrgSet = setOrg(mainWindow);
 
     mainWindow->Show(true);
