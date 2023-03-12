@@ -11,10 +11,10 @@
 #include <string>
 
 #define ASSESTS(assestName) wxStandardPaths::Get().GetDataDir().erase(wxStandardPaths::Get().GetDataDir().find("RapidDB") + 7).append("\\resources\\assets\\").append(assestName)
-#define DIP_SIZE(width, height, window) wxWindow::FromDIP(wxSize(width, height), window)
-#define DIP_POINT(x, y, window) wxWindow::FromDIP(wxPoint(x, y), window)
-#define DIP_X(xValue, window) wxWindow::FromDIP(wxPoint(xValue, 0), window).x
-#define DIP_Y(yValue, window) wxWindow::FromDIP(wxPoint(0, yValue), window).y
+#define DIP_SIZE(width, height, window) wxWindow::FromDIP(wxSize(width, height), NULL)
+#define DIP_POINT(x, y, window) wxWindow::FromDIP(wxPoint(x, y), NULL)
+#define DIP_X(xValue, window) wxWindow::FromDIP(wxPoint(xValue, 0), NULL).x
+#define DIP_Y(yValue, window) wxWindow::FromDIP(wxPoint(0, yValue), NULL).y
 
 typedef wxPanel* Screen;
 using std::vector;

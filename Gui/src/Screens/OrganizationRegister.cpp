@@ -26,8 +26,36 @@ wxBoxSizer* textInput_org_setup(wxWindow* screen, wxString title, int marginHori
 
 
     inputSizer->Add(username);
-    inputSizer->Add(marginHorizontally, 0);       //Adding space in pixels
+    inputSizer->Add(DIP_X(marginHorizontally, screen), 0);       //Adding space in pixels
     inputSizer->Add(usernameInput, 0);
+    return inputSizer;
+}
+
+wxBoxSizer* choicesBox_tz(wxWindow* screen)
+{
+    wxBoxSizer* inputSizer = new wxBoxSizer(wxHORIZONTAL);
+
+    wxStaticText* username = new wxStaticText(screen, wxID_ANY, "Time Zone :", wxDefaultPosition, wxDefaultSize);
+    username->SetFont(username->GetFont().Scale(1.2f).MakeBold());
+
+
+    wxArrayString choices;
+    choices.Add("UTC +9:30");
+    choices.Add("UTC +9");
+    choices.Add("UTC +5");
+    choices.Add("UTC +4");
+    choices.Add("UTC +3");
+    choices.Add("UTC +1");
+    choices.Add("UTC +0");
+    choices.Add("UTC -4");
+    choices.Add("UTC -6");
+    choices.Add("UTC -8:00 / -7:00");
+
+    wxChoice* choiceMenu = new wxChoice(screen, wxID_ANY, wxDefaultPosition, wxDefaultSize, choices);
+
+    inputSizer->Add(username);
+    inputSizer->Add(DIP_X(40, screen), 0);       //Adding space in pixels
+    inputSizer->Add(choiceMenu, 1);
     return inputSizer;
 }
 
@@ -41,11 +69,11 @@ wxSizer* rowInputs_org_setup(wxWindow* screen)
     rowSizer->Add(name);
     rowSizer->Add(country);
 
-    wxBoxSizer* timeZone = textInput_org_setup(screen, "Time Zone :", 50);
+    wxBoxSizer* choiceMenu = choicesBox_tz(screen);
     wxBoxSizer* email = textInput_org_setup(screen, "Email :", 50);
     wxBoxSizer* password = textInput_org_setup(screen, "Password :", 50);
 
-    rowSizer->Add(timeZone, 1);
+    rowSizer->Add(choiceMenu, 1);
     rowSizer->Add(email);
     rowSizer->Add(password);
 
@@ -70,10 +98,10 @@ Screen setupOrganizationRegister(wxWindow* parent)
     screen->SetSizer(sizer);
 
     // logo
-   /* wxPNGHandler* handler = new wxPNGHandler;
-    wxImage::AddHandler(handler);
-    wxStaticBitmap* image;
-    image = new wxStaticBitmap(screen, wxID_ANY, wxBitmap("rapidDB_logo.png", wxBITMAP_TYPE_PNG), wxPoint(900, 100), wxSize(100, 500));*/
+    wxPNGHandler* p = new wxPNGHandler();
+    wxImage::AddHandler(p);
+    wxString logoPath = ASSESTS("image.png");
+    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(DIP_X(80, screen), DIP_X(100, screen), wxIMAGE_QUALITY_HIGH)));
 
     //title
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Organization Register screen", wxDefaultPosition, wxDefaultSize);
@@ -91,9 +119,10 @@ Screen setupOrganizationRegister(wxWindow* parent)
     //Bind controls with functions
     button->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {RegisterOrg(screen, ORG_REGISTER, ADMIN_REGISTER); });
 
-    sizer->Add(0, 120);
+    sizer->Add(0,DIP_Y(100,screen));
+    sizer->Add(bitmapImage, 0, wxALIGN_CENTER);
     sizer->Add(inputs, 0, wxALIGN_CENTER);
-    sizer->Add(0, 130);
+    sizer->Add(0, DIP_Y(110, screen));
     sizer->Add(button, 0, wxCENTER);
     return screen;
 }
