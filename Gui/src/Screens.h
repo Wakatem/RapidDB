@@ -28,6 +28,7 @@ enum ScreenID
 	ORG_REGISTER,
 	ORG_SIGN_IN,
 	ADMIN_REGISTER,
+	TEST
 };
 
 extern vector<tuple<Screen, ScreenID>> screensReference;

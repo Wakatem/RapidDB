@@ -25,7 +25,7 @@ void SignIn(wxString username, wxString password, bool isAdmin, bool isModerator
     }
 
     if (isLoggedIn) {
-        shiftScreen(currentScreen, ORG_SIGN_IN, ORG_SETUP, true);
+        shiftScreen(currentScreen, ORG_SIGN_IN, TEST, true);
     }
     else {
         wxMessageBox("Invalid Login", "Error", wxICON_ERROR | wxOK, currentScreen);
@@ -73,7 +73,7 @@ Screen setupSignIn(wxWindow* parent) {
 
     // screen title
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Organization Log In screen", wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT);
-    text->SetPosition(DIP_POINT(430, 240, text));
+    text->SetPosition(DPI_POINT(430, 240, text));
     text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
 
     // Username input
