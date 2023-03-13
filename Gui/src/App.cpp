@@ -14,7 +14,7 @@ public:
 wxIMPLEMENT_APP(MyApp);
 
 
-void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, bool destroyCurrentScreen)
+void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, bool destroyCurrentScreen, wxShowEffect animation, int animationDuration)
 {
 
     try
@@ -37,19 +37,25 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 
         //Display next screen
         nextScreen == nullptr ? throw std::exception() : NULL;
-        nextScreen->Show(true);
+        //nextScreen->Show(true);
+        nextScreen->ShowWithEffect(animation, animationDuration);
+        currentScreen->Show(false);
+        nextScreen->GetContainingSizer()->Layout();     //Align new screen on the window
+
+
 
         //Remove object of current screen
-        if (destroyCurrentScreen)
-        {
-            currentScreen->Destroy();
-            screensReference.erase(screensReference.begin() + currentScreenIndex);
-        }
-        else
-        {
-            //Hide current screen
-            currentScreen->Show(false);
-        }
+        //if (destroyCurrentScreen)
+        //{
+        //    currentScreen->Destroy();
+        //    screensReference.erase(screensReference.begin() + currentScreenIndex);
+        //}
+        //else
+        //{
+        //    //Hide current screen
+        //    currentScreen->Show(false);
+        //}
+
     }
     catch (const std::exception&)
     {
@@ -66,14 +72,23 @@ bool MyApp::OnInit()
     wxString logoPath = ASSESTS("icon.ico");
     mainWindow->SetIcon(wxIcon(logoPath, wxBITMAP_TYPE_ICO));
 
+    wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
+    mainWindow->SetSizer(mainSizer);
+
+
     Screen login = setupLogin(mainWindow);
-    //Screen OrgRegister = setupOrganizationRegister(mainWindow);
-    //Screen AdminRegister = setupAdminRegister(mainWindow); 
+
+    //Screen AdminRegister = setupAdminRegister(mainWindow);
     //Screen OrgSet = setOrg(mainWindow);
+    //Screen OrgRegister = setupOrganizationRegister(mainWindow);
+
+    mainSizer->Add(login, 1, wxEXPAND);
+    //mainSizer->Add(OrgSet, 1, wxEXPAND);
+    //mainSizer->Add(OrgRegister, 1, wxEXPAND);
+    //mainSizer->Add(AdminRegister, 1, wxEXPAND);
+
+
 
     mainWindow->Show(true);
     return true;
 }
-
-
-

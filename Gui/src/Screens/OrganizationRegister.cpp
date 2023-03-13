@@ -8,13 +8,13 @@ void goBackToScreenToOrgSetUp(Screen currentScreen, ScreenID currentScreenID, Sc
     wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Inputs will be reset. Are you sure you want to leave?", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK | wxCANCEL);
 
     if (dialog->ShowModal() == wxID_OK)
-        shiftScreen(currentScreen, currentScreenID, nextScreenID, true);
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_RIGHT);
 
 }
 
 void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
 {
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false);
+    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
 }
 
 
@@ -94,7 +94,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
     //Create screen parameters
     Screen screen = new wxPanel(parent);
     screen->SetSize(parent->GetSize());
-    screen->Show(true);
+    screen->Hide();
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
@@ -123,13 +123,13 @@ Screen setupOrganizationRegister(wxWindow* parent)
 
     //title
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Organization Registration", wxDefaultPosition, wxDefaultSize);
-    text->SetPosition(DPI_POINT(483, 180, screen));
+    text->SetPosition(DPI_POINT(463, 180, screen));
     text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
 
 
     //Add input fields and "Register" button
     wxSizer* inputs = rowInputs_org_setup(screen);
-    wxButton* button = new wxButton(screen, wxID_ANY, "Register Admin");
+    wxButton* button = new wxButton(screen, wxID_ANY, "Register Organization");
     button->SetMinSize(DPI_SIZE(200, 80, button));
     button->SetFont(button->GetFont().Scale(1.8f));
 

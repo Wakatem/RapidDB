@@ -10,12 +10,12 @@ Before comitting ensure to pull updates...then use commiit and pull with amend
 
 void Org_set(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
 {
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false);
+    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
 }
 
 void Org_sign(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
 {
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false);
+    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
 }
 
 
@@ -32,7 +32,6 @@ Screen setOrg(wxWindow* parent)
     //Create screen parameters
     Screen screen1 = new wxPanel(parent);
     screen1->SetSize(parent->GetSize());
-    screen1->Show(false);
 
     //Add screen pointer to list
     screensReference.push_back(make_tuple(screen1, ORG_SETUP));
