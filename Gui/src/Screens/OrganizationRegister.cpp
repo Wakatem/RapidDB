@@ -8,13 +8,13 @@ void goBackToScreenToOrgSetUp(Screen currentScreen, ScreenID currentScreenID, Sc
     wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Inputs will be reset. Are you sure you want to leave?", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK | wxCANCEL);
 
     if (dialog->ShowModal() == wxID_OK)
-        shiftScreen(currentScreen, currentScreenID, nextScreenID, true);
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_RIGHT);
 
 }
 
 void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
 {
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false);
+    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
 }
 
 

@@ -8,7 +8,7 @@ void goBackToScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nex
     wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Inputs will be reset. Are you sure you want to leave?", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK | wxCANCEL);
 
     if (dialog->ShowModal() == wxID_OK)
-        shiftScreen(currentScreen, currentScreenID, nextScreenID, true);
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_RIGHT);
 
 }
 

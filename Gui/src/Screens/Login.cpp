@@ -25,7 +25,7 @@ void SignIn(wxString username, wxString password, bool isAdmin, bool isModerator
     }
 
     if (isLoggedIn) {
-        shiftScreen(currentScreen, ORG_SIGN_IN, TEST, true);
+        shiftScreen(currentScreen, ORG_SIGN_IN, TEST, true, wxSHOW_EFFECT_SLIDE_TO_LEFT);
     }
     else {
         wxMessageBox("Invalid Login", "Error", wxICON_ERROR | wxOK, currentScreen);
@@ -38,7 +38,7 @@ void goBack(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenI
     wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Inputs will be reset. Are you sure you want to leave?", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK | wxCANCEL);
 
     if (dialog->ShowModal() == wxID_OK)
-        shiftScreen(currentScreen, currentScreenID, nextScreenID, true);
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, true, wxSHOW_EFFECT_SLIDE_TO_RIGHT);
 
 }
 

@@ -10,12 +10,12 @@ Before comitting ensure to pull updates...then use commiit and pull with amend
 
 void Org_set(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
 {
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false);
+    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
 }
 
 void Org_sign(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
 {
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false);
+    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
 }
 
 

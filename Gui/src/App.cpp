@@ -14,7 +14,7 @@ public:
 wxIMPLEMENT_APP(MyApp);
 
 
-void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, bool destroyCurrentScreen)
+void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, bool destroyCurrentScreen, wxShowEffect animation, int animationDuration)
 {
 
     try
@@ -37,8 +37,9 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 
         //Display next screen
         nextScreen == nullptr ? throw std::exception() : NULL;
+        //nextScreen->Show(true);
+        nextScreen->ShowWithEffect(animation, animationDuration);
         currentScreen->Show(false);
-        nextScreen->Show(true);
         nextScreen->GetContainingSizer()->Layout();     //Align new screen on the window
         
         
@@ -82,6 +83,7 @@ bool MyApp::OnInit()
     mainSizer->Add(OrgSet, 1, wxEXPAND);
     mainSizer->Add(OrgRegister, 1, wxEXPAND);
     mainSizer->Add(AdminRegister, 1, wxEXPAND);
+
 
 
     mainWindow->Show(true);
