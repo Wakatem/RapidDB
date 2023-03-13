@@ -41,9 +41,15 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
         nextScreen->ShowWithEffect(animation, animationDuration);
         currentScreen->Show(false);
         nextScreen->GetContainingSizer()->Layout();     //Align new screen on the window
+<<<<<<< HEAD
 
 
 
+=======
+        
+        
+        
+>>>>>>> 752af287ff1a269d5cccb6171d9da6d0e5999e56
         //Remove object of current screen
         //if (destroyCurrentScreen)
         //{
@@ -75,7 +81,20 @@ bool MyApp::OnInit()
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     mainWindow->SetSizer(mainSizer);
 
-    Screen AdminRegister = setupAdminRegister(mainWindow);
+<<<<<<< HEAD
+
+    Screen login = setupLogin(mainWindow);
+
+    //Screen AdminRegister = setupAdminRegister(mainWindow);
+    //Screen OrgSet = setOrg(mainWindow);
+    //Screen OrgRegister = setupOrganizationRegister(mainWindow);
+
+    mainSizer->Add(login, 1, wxEXPAND);
+    //mainSizer->Add(OrgSet, 1, wxEXPAND);
+    //mainSizer->Add(OrgRegister, 1, wxEXPAND);
+    //mainSizer->Add(AdminRegister, 1, wxEXPAND);
+=======
+    Screen AdminRegister = setupAdminRegister(mainWindow); 
     Screen OrgSet = setOrg(mainWindow);
     Screen OrgRegister = setupOrganizationRegister(mainWindow);
     //Screen login = setupSignIn(mainWindow);
@@ -83,9 +102,14 @@ bool MyApp::OnInit()
     mainSizer->Add(OrgSet, 1, wxEXPAND);
     mainSizer->Add(OrgRegister, 1, wxEXPAND);
     mainSizer->Add(AdminRegister, 1, wxEXPAND);
+>>>>>>> 752af287ff1a269d5cccb6171d9da6d0e5999e56
 
 
 
     mainWindow->Show(true);
     return true;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 752af287ff1a269d5cccb6171d9da6d0e5999e56

@@ -40,6 +40,3 @@ Screen setupOrganizationRegister(wxWindow* parent);
 Screen setupAdminRegister(wxWindow* parent);
 Screen setOrg(wxWindow* parent);
 Screen setupLogin(wxWindow* parent);
-
-//SignIn Logic
-void SignIn(wxString username, wxString password, bool isAdmin, bool isModerator, Screen currentScreen);
