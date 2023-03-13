@@ -40,4 +40,4 @@ Screen setupOrganizationRegister(wxWindow* parent);
 Screen setupAdminRegister(wxWindow* parent);
 Screen setOrg(wxWindow* parent);
 Screen setupSignIn(wxWindow* parent);
-
+Screen OrganizationSigin(wxWindow* parent);

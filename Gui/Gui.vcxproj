@@ -25,6 +25,7 @@
     <ClCompile Include="src\Screens\OrganizationRegister.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\MainFrame.cpp" />
+    <ClCompile Include="src\Screens\Org_Sign.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MainFrame.h" />

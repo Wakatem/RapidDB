@@ -78,11 +78,13 @@ bool MyApp::OnInit()
     Screen AdminRegister = setupAdminRegister(mainWindow); 
     Screen OrgSet = setOrg(mainWindow);
     Screen OrgRegister = setupOrganizationRegister(mainWindow);
+    Screen OrgSign = OrganizationSigin(mainWindow);
     //Screen login = setupSignIn(mainWindow);
 
     mainSizer->Add(OrgSet, 1, wxEXPAND);
     mainSizer->Add(OrgRegister, 1, wxEXPAND);
     mainSizer->Add(AdminRegister, 1, wxEXPAND);
+    mainSizer->Add(OrgSign, 1, wxEXPAND);
 
 
 

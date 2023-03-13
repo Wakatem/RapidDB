@@ -110,7 +110,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
     wxPNGHandler* p = new wxPNGHandler();
     wxImage::AddHandler(p);
     wxString logoPath = ASSESTS("image.png");
-    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(100, 130, wxIMAGE_QUALITY_HIGH)));
+    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(130, 160, wxIMAGE_QUALITY_HIGH)));
 
     //back
     wxString backButtonPath = ASSESTS("back_button.png");
