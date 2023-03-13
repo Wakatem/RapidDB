@@ -28,13 +28,16 @@ enum ScreenID
 	ORG_REGISTER,
 	ORG_SIGN_IN,
 	ADMIN_REGISTER,
+	TEST
 };
 
 extern vector<tuple<Screen, ScreenID>> screensReference;
-void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, bool destroyCurrentScreen);
+void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, bool destroyCurrentScreen, wxShowEffect animation, int animationDuration = 0U);
 
 
 //Setup functions for screens
 Screen setupOrganizationRegister(wxWindow* parent);
 Screen setupAdminRegister(wxWindow* parent);
 Screen setOrg(wxWindow* parent);
+Screen setupSignIn(wxWindow* parent);
+

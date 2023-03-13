@@ -8,8 +8,8 @@ void goBackToScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nex
     wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Inputs will be reset. Are you sure you want to leave?", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK | wxCANCEL);
 
     if (dialog->ShowModal() == wxID_OK)
-        shiftScreen(currentScreen, currentScreenID, nextScreenID, true);
-    
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_RIGHT);
+
 }
 
 void RegisterAdmin()
@@ -62,7 +62,7 @@ wxBoxSizer* choicesBox(wxWindow* screen)
 wxSizer* rowInputs(wxWindow* screen)
 {
     wxFlexGridSizer* rowSizer = new wxFlexGridSizer(3, 50, 100);
-    
+
     wxBoxSizer* textInput1 = textInput(screen, "First Name :", 40);
     wxBoxSizer* textInput2 = textInput(screen, "Last Name :", 40);
 
@@ -97,7 +97,7 @@ Screen setupAdminRegister(wxWindow* parent)
     //Create screen parameters
     Screen screen = new wxPanel(parent);
     screen->SetSize(parent->GetSize());
-    screen->Show(true);
+    screen->Hide();
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
@@ -110,7 +110,7 @@ Screen setupAdminRegister(wxWindow* parent)
     wxPNGHandler* p = new wxPNGHandler();
     wxImage::AddHandler(p);
     wxString logoPath = ASSESTS("image.png");
-    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(100, 130, wxIMAGE_QUALITY_HIGH )));
+    wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(100, 130, wxIMAGE_QUALITY_HIGH)));
 
 
     wxString backButtonPath = ASSESTS("back_button.png");
@@ -125,7 +125,7 @@ Screen setupAdminRegister(wxWindow* parent)
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Admin Registration", wxDefaultPosition, wxDefaultSize);
     text->SetPosition(DPI_POINT(483, 180, screen));
     text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
-    
+
     ////Add input fields and a 'register' button
     wxSizer* inputs = rowInputs(screen);
     wxButton* button = new wxButton(screen, wxID_ANY, "Register Admin");
@@ -142,6 +142,6 @@ Screen setupAdminRegister(wxWindow* parent)
     sizer->Add(inputs, 0, wxALIGN_CENTER);
     sizer->Add(0, DPI_Y(60, screen));
     sizer->Add(button, 0, wxCENTER);
-    
+
     return screen;
 }
