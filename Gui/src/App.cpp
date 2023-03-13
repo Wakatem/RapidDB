@@ -37,19 +37,24 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 
         //Display next screen
         nextScreen == nullptr ? throw std::exception() : NULL;
+        currentScreen->Show(false);
         nextScreen->Show(true);
-
+        nextScreen->GetContainingSizer()->Layout();     //Align new screen on the window
+        
+        
+        
         //Remove object of current screen
-        if (destroyCurrentScreen)
-        {
-            currentScreen->Destroy();
-            screensReference.erase(screensReference.begin() + currentScreenIndex);
-        }
-        else
-        {
-            //Hide current screen
-            currentScreen->Show(false);
-        }
+        //if (destroyCurrentScreen)
+        //{
+        //    currentScreen->Destroy();
+        //    screensReference.erase(screensReference.begin() + currentScreenIndex);
+        //}
+        //else
+        //{
+        //    //Hide current screen
+        //    currentScreen->Show(false);
+        //}
+
     }
     catch (const std::exception&)
     {
@@ -66,10 +71,18 @@ bool MyApp::OnInit()
     wxString logoPath = ASSESTS("icon.ico");
     mainWindow->SetIcon(wxIcon(logoPath, wxBITMAP_TYPE_ICO));
 
-    //Screen login = setupSignIn(mainWindow);
-    Screen OrgRegister = setupOrganizationRegister(mainWindow);
+    wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
+    mainWindow->SetSizer(mainSizer);
+
     Screen AdminRegister = setupAdminRegister(mainWindow); 
-    //Screen OrgSet = setOrg(mainWindow);
+    Screen OrgSet = setOrg(mainWindow);
+    Screen OrgRegister = setupOrganizationRegister(mainWindow);
+    //Screen login = setupSignIn(mainWindow);
+
+    mainSizer->Add(OrgSet, 1, wxEXPAND);
+    mainSizer->Add(OrgRegister, 1, wxEXPAND);
+    mainSizer->Add(AdminRegister, 1, wxEXPAND);
+
 
     mainWindow->Show(true);
     return true;

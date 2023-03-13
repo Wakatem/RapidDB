@@ -94,7 +94,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
     //Create screen parameters
     Screen screen = new wxPanel(parent);
     screen->SetSize(parent->GetSize());
-    screen->Show(true);
+    screen->Hide();
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
@@ -129,7 +129,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
 
     //Add input fields and "Register" button
     wxSizer* inputs = rowInputs_org_setup(screen);
-    wxButton* button = new wxButton(screen, wxID_ANY, "Register Admin");
+    wxButton* button = new wxButton(screen, wxID_ANY, "Register Organization");
     button->SetMinSize(DPI_SIZE(200, 80, button));
     button->SetFont(button->GetFont().Scale(1.8f));
 
