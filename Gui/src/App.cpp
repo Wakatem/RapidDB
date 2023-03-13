@@ -73,6 +73,3 @@ bool MyApp::OnInit()
     mainWindow->Show(true);
     return true;
 }
-
-
-
