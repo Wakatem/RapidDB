@@ -146,4 +146,3 @@ Screen setupOrganizationRegister(wxWindow* parent)
     return screen;
 }
 
-

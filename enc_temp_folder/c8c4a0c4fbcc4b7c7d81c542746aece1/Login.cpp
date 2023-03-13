@@ -34,7 +34,11 @@ void SignIn(wxString username, wxString password, bool isAdmin, bool isModerator
     }
 
     if (isLoggedIn) {
+<<<<<<< HEAD
         //shiftScreen(currentScreen, ORG_SIGN_IN, TEST, true);
+=======
+        shiftScreen(currentScreen, ORG_SIGN_IN, TEST, true, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+>>>>>>> 752af287ff1a269d5cccb6171d9da6d0e5999e56
     }
     else {
         wxMessageBox("Invalid Login", "Error", wxICON_ERROR | wxOK, currentScreen);
@@ -45,7 +49,15 @@ void SignIn(wxString username, wxString password, bool isAdmin, bool isModerator
 
 void RegisterLogin()
 {
+<<<<<<< HEAD
     wxLogMessage("User Registered");
+=======
+    wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Inputs will be reset. Are you sure you want to leave?", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK | wxCANCEL);
+
+    if (dialog->ShowModal() == wxID_OK)
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, true, wxSHOW_EFFECT_SLIDE_TO_RIGHT);
+
+>>>>>>> 752af287ff1a269d5cccb6171d9da6d0e5999e56
 }
 
 wxBoxSizer* textInput_setup(wxWindow* screen, wxString title, int marginTop)
@@ -55,7 +67,7 @@ wxBoxSizer* textInput_setup(wxWindow* screen, wxString title, int marginTop)
     wxStaticText* username = new wxStaticText(screen, wxID_ANY, title, wxDefaultPosition, wxDefaultSize);
     username->SetFont(username->GetFont().Scale(1.2f).MakeBold());
 
-
+    
     wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY);
     usernameInput->SetMinSize(DPI_SIZE(220, 25, usernameInput));
     usernameInput->SetBackgroundColour("#E5E7E9");
