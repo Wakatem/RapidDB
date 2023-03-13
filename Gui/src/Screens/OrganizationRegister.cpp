@@ -71,17 +71,17 @@ wxSizer* rowInputs_org_setup(wxWindow* screen)
 {
     wxFlexGridSizer* rowSizer = new wxFlexGridSizer(2, 50, 100);
 
-    wxBoxSizer* name = textInput_org_setup(screen, "Name:",35);
+    wxBoxSizer* name = textInput_org_setup(screen, "Name:", 35);
     wxBoxSizer* country = textInput_org_setup(screen, "Country:", 40);
 
     rowSizer->Add(name);
     rowSizer->Add(country);
 
-    wxBoxSizer* email = textInput_org_setup(screen, "Email:",40);
-    wxBoxSizer* password = textInput_org_setup(screen, "Password:",33);
+    wxBoxSizer* email = textInput_org_setup(screen, "Email:", 40);
+    wxBoxSizer* password = textInput_org_setup(screen, "Password:", 33);
     wxBoxSizer* choiceMenu = choicesBox_tz(screen, 20);
 
-    rowSizer->Add(email,1);
+    rowSizer->Add(email, 1);
     rowSizer->Add(password);
     rowSizer->Add(choiceMenu);
 
@@ -101,32 +101,11 @@ Screen setupOrganizationRegister(wxWindow* parent)
     screensReference.push_back(make_tuple(screen, ORG_REGISTER));
 
     //Implement screen content
-  
+
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
     screen->SetSizer(sizer);
 
     // logo
-    wxPNGHandler* handler = new wxPNGHandler;
-    wxImage::AddHandler(handler);
-    wxStaticBitmap* image;
-    image = new wxStaticBitmap(screen, wxID_ANY, wxBitmap("rapidDB_logo.png", wxBITMAP_TYPE_PNG), wxPoint(900, 100), wxSize(100, 500));
-
-    //title
-    wxStaticText* title = new wxStaticText(screen, wxID_ANY, "Organization Register screen", wxPoint(850,300), wxDefaultSize, wxALIGN_RIGHT);
-
-    //org name
-    wxStaticText* name = new wxStaticText(screen, wxID_ANY, "Organization Name:", wxPoint(500, 400), wxDefaultSize, wxALIGN_RIGHT);
-    wxTextCtrl* name_entry = new wxTextCtrl(screen, wxID_ANY, "", wxPoint(650, 400), wxSize(200, 30));
-    name_entry->SetHint("Organization Name");
-    wxFont font = name->GetFont();
-    font.SetWeight(wxFONTWEIGHT_BOLD);
-    name->SetFont(font);
-
-    //country
-    wxStaticText* country = new wxStaticText(screen, wxID_ANY, "Country:", wxPoint(500, 450), wxDefaultSize, wxALIGN_RIGHT);
-    wxTextCtrl* country_entry = new wxTextCtrl(screen, wxID_ANY, "", wxPoint(650, 450), wxSize(200, 30));
-    country_entry->SetHint("Country");
-    country->SetFont(font);
 
     wxPNGHandler* p = new wxPNGHandler();
     wxImage::AddHandler(p);
@@ -166,5 +145,4 @@ Screen setupOrganizationRegister(wxWindow* parent)
     sizer->Add(button, 0, wxCENTER);
     return screen;
 }
-
 
