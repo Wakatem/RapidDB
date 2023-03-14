@@ -77,8 +77,8 @@ wxSizer* rowInputs_org_setup(wxWindow* screen)
     rowSizer->Add(name);
     rowSizer->Add(country);
 
-    wxBoxSizer* email = textInput_org_setup(screen, "Email:", 40);
-    wxBoxSizer* password = textInput_org_setup(screen, "Password:", 33);
+    wxBoxSizer* email = textInput_org_setup(screen, "Email:", 39);
+    wxBoxSizer* password = textInput_org_setup(screen, "Password:", 30);
     wxBoxSizer* choiceMenu = choicesBox_tz(screen, 20);
 
     rowSizer->Add(email, 1);
@@ -133,7 +133,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
     //Add input fields and "Register" button
     wxSizer* inputs = rowInputs_org_setup(screen);
     wxButton* button = new wxButton(screen, wxID_ANY, "Register Organization");
-    button->SetMinSize(DPI_SIZE(200, 80, button));
+    button->SetMinSize(DPI_SIZE(230, 80, button));
     button->SetFont(button->GetFont().Scale(1.8f));
 
     //Bind controls with functions
