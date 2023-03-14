@@ -98,7 +98,10 @@ Screen setupOrganizationRegister(wxWindow* parent)
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
-    screensReference.push_back(make_tuple(screen, ORG_REGISTER));
+    ScreenID previousScreen = ORG_SETUP;
+    ScreenID currentScreen = ORG_REGISTER;
+    ScreenID nextScreen = ADMIN_REGISTER;
+    screensReference.push_back(make_tuple(screen, currentScreen));
 
     //Implement screen content
 
@@ -134,8 +137,8 @@ Screen setupOrganizationRegister(wxWindow* parent)
     button->SetFont(button->GetFont().Scale(1.8f));
 
     //Bind controls with functions
-    button->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {RegisterOrg(screen, ORG_REGISTER, ADMIN_REGISTER); });
-    backButton->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {goBackToScreenToOrgSetUp(screen, ORG_REGISTER, ORG_SETUP); });
+    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen](wxCommandEvent& evt) {RegisterOrg(screen, currentScreen, nextScreen); });
+    backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBackToScreenToOrgSetUp(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);
     sizer->Add(bitmapImage, 0, wxALIGN_CENTER);

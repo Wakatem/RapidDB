@@ -117,7 +117,10 @@ Screen setupLogin(wxWindow* parent)
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
-    screensReference.push_back(make_tuple(screen, LOGIN));
+    ScreenID previousScreen = ORG_SETUP;
+    ScreenID currentScreen = LOGIN;
+    ScreenID nextScreen = TEST;
+    screensReference.push_back(make_tuple(screen, currentScreen));
 
 
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
@@ -138,19 +141,19 @@ Screen setupLogin(wxWindow* parent)
     backButton->SetPosition(DPI_POINT(25, 35, screen));
 
     //Screen Title
-    wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Sign In", wxDefaultPosition, wxDefaultSize);
+    wxStaticText* text = new wxStaticText(screen, wxID_ANY, "User Login", wxDefaultPosition, wxDefaultSize);
     text->SetPosition(DPI_POINT(483, 180, screen));
     text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
 
     ////Add input fields and a 'register' button
     wxSizer* inputs = rowinputs(screen);
-    wxButton* button = new wxButton(screen, wxID_ANY, "Sign In");
+    wxButton* button = new wxButton(screen, wxID_ANY, "Log In");
     button->SetMinSize(DPI_SIZE(300, 50, button));
     button->SetFont(button->GetFont().Scale(1.8f));
 
     ////Bind controls with functions and add controls to sizer
     button->Bind(wxEVT_BUTTON, [screen, inputs](wxCommandEvent& evt) {RegisterLogin(); });
-    backButton->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {goBack(screen, ORG_SIGN_IN, ORG_REGISTER); });
+    backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBack(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);
     sizer->Add(bitmapImage, 0, wxALIGN_CENTER);

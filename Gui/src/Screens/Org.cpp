@@ -34,7 +34,10 @@ Screen setOrg(wxWindow* parent)
     screen1->SetSize(parent->GetSize());
 
     //Add screen pointer to list
-    screensReference.push_back(make_tuple(screen1, ORG_SETUP));
+    ScreenID currentScreen = ORG_SETUP;
+    ScreenID nextScreen1 = ORG_REGISTER;
+    ScreenID nextScreen2 = ORG_SIGN_IN;
+    screensReference.push_back(make_tuple(screen1, currentScreen));
 
     //Implement screen content
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
@@ -58,7 +61,7 @@ Screen setOrg(wxWindow* parent)
 
     sizer->Add(sizer2, 1, wxALIGN_CENTER);
     //Bind controls with functions
-    button1->Bind(wxEVT_BUTTON, [screen1](wxCommandEvent& evt) {Org_set(screen1, ORG_SETUP, ORG_REGISTER); });
-    button2->Bind(wxEVT_BUTTON, [screen1](wxCommandEvent& evt) {Org_sign(screen1, ORG_SETUP, ORG_SIGN_IN); });
+    button1->Bind(wxEVT_BUTTON, [screen1, currentScreen, nextScreen1](wxCommandEvent& evt) {Org_set(screen1, currentScreen, nextScreen1); });
+    button2->Bind(wxEVT_BUTTON, [screen1, currentScreen, nextScreen2](wxCommandEvent& evt) {Org_sign(screen1, currentScreen, nextScreen2); });
     return screen1;
 }
