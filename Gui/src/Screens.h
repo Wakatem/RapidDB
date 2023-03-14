@@ -39,5 +39,5 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 Screen setupOrganizationRegister(wxWindow* parent);
 Screen setupAdminRegister(wxWindow* parent);
 Screen setOrg(wxWindow* parent);
-Screen setupSignIn(wxWindow* parent);
+Screen setupLogin(wxWindow* parent);
 Screen OrganizationSigin(wxWindow* parent);
