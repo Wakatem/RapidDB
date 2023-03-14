@@ -69,10 +69,12 @@ Screen OrganizationSigin(wxWindow* parent)
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
-    screensReference.push_back(make_tuple(screen, ORG_SIGN_IN));
+    ScreenID previousScreen = ORG_SETUP;
+    ScreenID currentScreen = ORG_SIGN_IN;
+    ScreenID nextScreen = LOGIN;
+    screensReference.push_back(make_tuple(screen, currentScreen));
 
     //Implement screen content
-
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
     screen->SetSizer(sizer);
 
@@ -105,8 +107,8 @@ Screen OrganizationSigin(wxWindow* parent)
     button->SetFont(button->GetFont().Scale(1.8f));
 
     //Bind controls with functions
-    button->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {Org_signin(screen, ORG_SIGN_IN, ADMIN_REGISTER); });
-    backButton->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {goBackToScreenToOrgPage(screen, ORG_SIGN_IN, ORG_SETUP); });
+    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen](wxCommandEvent& evt) {Org_signin(screen, currentScreen, nextScreen); });
+    backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBackToScreenToOrgPage(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);
     sizer->Add(bitmapImage, 0, wxALIGN_CENTER);

@@ -77,8 +77,8 @@ wxSizer* rowInputs_org_setup(wxWindow* screen)
     rowSizer->Add(name);
     rowSizer->Add(country);
 
-    wxBoxSizer* email = textInput_org_setup(screen, "Email:", 40);
-    wxBoxSizer* password = textInput_org_setup(screen, "Password:", 33);
+    wxBoxSizer* email = textInput_org_setup(screen, "Email:", 39);
+    wxBoxSizer* password = textInput_org_setup(screen, "Password:", 30);
     wxBoxSizer* choiceMenu = choicesBox_tz(screen, 20);
 
     rowSizer->Add(email, 1);
@@ -98,7 +98,10 @@ Screen setupOrganizationRegister(wxWindow* parent)
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
-    screensReference.push_back(make_tuple(screen, ORG_REGISTER));
+    ScreenID previousScreen = ORG_SETUP;
+    ScreenID currentScreen = ORG_REGISTER;
+    ScreenID nextScreen = ADMIN_REGISTER;
+    screensReference.push_back(make_tuple(screen, currentScreen));
 
     //Implement screen content
 
@@ -130,12 +133,12 @@ Screen setupOrganizationRegister(wxWindow* parent)
     //Add input fields and "Register" button
     wxSizer* inputs = rowInputs_org_setup(screen);
     wxButton* button = new wxButton(screen, wxID_ANY, "Register Organization");
-    button->SetMinSize(DPI_SIZE(200, 80, button));
+    button->SetMinSize(DPI_SIZE(230, 80, button));
     button->SetFont(button->GetFont().Scale(1.8f));
 
     //Bind controls with functions
-    button->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {RegisterOrg(screen, ORG_REGISTER, ADMIN_REGISTER); });
-    backButton->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {goBackToScreenToOrgSetUp(screen, ORG_REGISTER, ORG_SETUP); });
+    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen](wxCommandEvent& evt) {RegisterOrg(screen, currentScreen, nextScreen); });
+    backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBackToScreenToOrgSetUp(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);
     sizer->Add(bitmapImage, 0, wxALIGN_CENTER);

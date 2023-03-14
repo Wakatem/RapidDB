@@ -21,15 +21,23 @@
   <ItemGroup>
     <ClCompile Include="src\Screens\Login.cpp" />
     <ClCompile Include="src\Screens\AdminRegister.cpp" />
+    <ClCompile Include="src\Screens\MainScreen.cpp" />
     <ClCompile Include="src\Screens\Org.cpp" />
     <ClCompile Include="src\Screens\OrganizationRegister.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\MainFrame.cpp" />
     <ClCompile Include="src\Screens\Org_Sign.cpp" />
+    <ClCompile Include="src\Tabs\Databases.cpp" />
+    <ClCompile Include="src\Tabs\Diagnostics.cpp" />
+    <ClCompile Include="src\Tabs\Reports.cpp" />
+    <ClCompile Include="src\Tabs\Settings.cpp" />
+    <ClCompile Include="src\Tabs\UserInfo.cpp" />
+    <ClCompile Include="src\Tabs\UsersManagement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MainFrame.h" />
     <ClInclude Include="src\Screens.h" />
+    <ClInclude Include="src\Tabs.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

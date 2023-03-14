@@ -17,6 +17,8 @@
 #define DPI_Y(yValue, window) wxWindow::FromDIP(yValue, window)
 
 typedef wxPanel* Screen;
+typedef wxPanel* Tab;
+typedef wxPanel* TabWindow;
 using std::vector;
 using std::tuple;
 using std::make_tuple;
@@ -28,7 +30,8 @@ enum ScreenID
 	ORG_REGISTER,
 	ORG_SIGN_IN,
 	ADMIN_REGISTER,
-	TEST
+	LOGIN,
+	MAIN
 };
 
 extern vector<tuple<Screen, ScreenID>> screensReference;
@@ -39,5 +42,6 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 Screen setupOrganizationRegister(wxWindow* parent);
 Screen setupAdminRegister(wxWindow* parent);
 Screen setOrg(wxWindow* parent);
-Screen setupSignIn(wxWindow* parent);
+Screen setupLogin(wxWindow* parent);
 Screen OrganizationSigin(wxWindow* parent);
+Screen setupMainScreen(wxWindow* parent);

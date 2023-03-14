@@ -12,9 +12,11 @@ void goBackToScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nex
 
 }
 
-void RegisterAdmin()
+void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
 {
-    wxLogMessage("Admin Registered");
+    wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Organization registered successfully", wxString::FromAscii(wxMessageBoxCaptionStr));
+    dialog->ShowModal();
+    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
 }
 
 
@@ -101,7 +103,10 @@ Screen setupAdminRegister(wxWindow* parent)
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
-    screensReference.push_back(make_tuple(screen, ADMIN_REGISTER));
+    ScreenID previousScreen = ORG_REGISTER;
+    ScreenID currentScreen = ADMIN_REGISTER;
+    ScreenID nextScreen = ORG_SIGN_IN;
+    screensReference.push_back(make_tuple(screen, currentScreen));
 
 
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
@@ -133,8 +138,8 @@ Screen setupAdminRegister(wxWindow* parent)
     button->SetFont(button->GetFont().Scale(1.8f));
 
     ////Bind controls with functions and add controls to sizer
-    button->Bind(wxEVT_BUTTON, [](wxCommandEvent& evt) {RegisterAdmin(); });
-    backButton->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {goBackToScreen(screen, ADMIN_REGISTER, ORG_REGISTER); });
+    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen](wxCommandEvent& evt) {RegisterAdmin(screen, currentScreen, nextScreen); });
+    backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBackToScreen(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);
     sizer->Add(bitmapImage, 0, wxALIGN_CENTER);

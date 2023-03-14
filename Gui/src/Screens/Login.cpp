@@ -72,8 +72,8 @@ wxBoxSizer* checkBox_setup(wxWindow* screen)
 {
     wxBoxSizer* inputSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    wxStaticText* username = new wxStaticText(screen, wxID_ANY, "User Role :", wxDefaultPosition, wxDefaultSize);
-    username->SetFont(username->GetFont().Scale(1.2f).MakeBold());
+    wxStaticText* userRole = new wxStaticText(screen, wxID_ANY, "User Role :", wxDefaultPosition, wxDefaultSize);
+    userRole->SetFont(userRole->GetFont().Scale(1.2f).MakeBold());
 
 
     wxArrayString choices;
@@ -81,24 +81,21 @@ wxBoxSizer* checkBox_setup(wxWindow* screen)
     choices.Add("Moderator");
     wxChoice* choiceMenu = new wxChoice(screen, wxID_ANY, wxDefaultPosition, wxDefaultSize, choices);
 
-    inputSizer->Add(username);
-    inputSizer->Add(DPI_X(40, screen), 0);       //Adding space in pixels
+    inputSizer->Add(userRole);
+    inputSizer->Add(DPI_X(44, screen), 0);       //Adding space in pixels
     inputSizer->Add(choiceMenu, 1);
     return inputSizer;
 }
 
 wxSizer* rowinputs(wxWindow* screen)
 {
-    wxFlexGridSizer* rowSizer = new wxFlexGridSizer(3, 50, 100);
+    wxFlexGridSizer* rowSizer = new wxFlexGridSizer(2, 50, 100);
 
     wxBoxSizer* username1 = textInput_setup(screen, "Username :", 40);
     wxBoxSizer* password1 = textInput_setup(screen, "Password :", 40);
 
     rowSizer->Add(username1);
     rowSizer->Add(password1);
-    rowSizer->Add(DPI_X(200, screen), 0);
-
-
     wxBoxSizer* choiceMenu = checkBox_setup(screen);
 
     rowSizer->Add(choiceMenu);
@@ -113,10 +110,14 @@ Screen setupLogin(wxWindow* parent)
     //Create screen parameters
     Screen screen = new wxPanel(parent);
     screen->SetSize(parent->GetSize());
+    screen->Hide();
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
-    screensReference.push_back(make_tuple(screen, ORG_SIGN_IN));
+    ScreenID previousScreen = ORG_SETUP;
+    ScreenID currentScreen = LOGIN;
+    ScreenID nextScreen = MAIN;
+    screensReference.push_back(make_tuple(screen, currentScreen));
 
 
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
@@ -137,19 +138,19 @@ Screen setupLogin(wxWindow* parent)
     backButton->SetPosition(DPI_POINT(25, 35, screen));
 
     //Screen Title
-    wxStaticText* text = new wxStaticText(screen, wxID_ANY, "Sign In", wxDefaultPosition, wxDefaultSize);
-    text->SetPosition(DPI_POINT(483, 180, screen));
+    wxStaticText* text = new wxStaticText(screen, wxID_ANY, "User Login", wxDefaultPosition, wxDefaultSize);
+    text->SetPosition(DPI_POINT(527, 180, screen));
     text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
 
     ////Add input fields and a 'register' button
     wxSizer* inputs = rowinputs(screen);
-    wxButton* button = new wxButton(screen, wxID_ANY, "Sign In");
+    wxButton* button = new wxButton(screen, wxID_ANY, "Log In");
     button->SetMinSize(DPI_SIZE(300, 50, button));
     button->SetFont(button->GetFont().Scale(1.8f));
 
     ////Bind controls with functions and add controls to sizer
     button->Bind(wxEVT_BUTTON, [screen, inputs](wxCommandEvent& evt) {RegisterLogin(); });
-    backButton->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {goBack(screen, ORG_SIGN_IN, ORG_REGISTER); });
+    backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBack(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);
     sizer->Add(bitmapImage, 0, wxALIGN_CENTER);
