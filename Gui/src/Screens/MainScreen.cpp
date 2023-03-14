@@ -12,48 +12,62 @@ vector<Tab> tabsReference;
 
 
 
-void activateTab(int newTabWindowID, wxWindow* tabWindow)
+void activateTab(int previousTabWindowID, int newTabWindowID, wxWindow* tabWindow)
 {
-    for (int i = 0; i < tabsReference.size(); i++)
-    {
-        Tab t = tabsReference[i];
-        wxWindow* title;
+    Tab previousTab = tabsReference[previousTabWindowID];
+    wxWindow* previousTabTitle = nullptr;
 
-        //Detect which tab is currently active
-        switch (tabWindow->GetId())
+        switch (previousTabWindowID)
         {
         case DATABASES:
-            title = t->GetWindowChild(DATABASES_TITLE);
+            previousTabTitle = previousTab->GetWindowChild(DATABASES_TITLE);
             break;
         case DIAGNOSTICS:
-            title = t->GetWindowChild(DIAGNOSTICS_TITLE);
+            previousTabTitle = previousTab->GetWindowChild(DIAGNOSTICS_TITLE);
             break;
         case REPORTS:
-            title = t->GetWindowChild(REPORTS_TITLE);
+            previousTabTitle = previousTab->GetWindowChild(REPORTS_TITLE);
             break;
         case USERSMANAGEMENT:
-            title = t->GetWindowChild(USERSMANAGEMENT);
+            previousTabTitle = previousTab->GetWindowChild(USERSMANAGEMENT_TITLE);
             break;
         case SETTINGS:
-            title = t->GetWindowChild(SETTINGS_TITLE);
+            previousTabTitle = previousTab->GetWindowChild(SETTINGS_TITLE);
             break;
         default:
-            title = nullptr;
             break;
         }
 
-        //update selected tab style
-        if (i == newTabWindowID)
+        Tab newTab = tabsReference[newTabWindowID];
+        wxWindow* newTabTitle = nullptr;
+
+        switch (newTabWindowID)
         {
-            if (title != nullptr)
-                title->SetFont(title->GetFont().Scale(2.7f).MakeBold());
-            continue;
+        case DATABASES:
+            newTabTitle = newTab->GetWindowChild(DATABASES_TITLE);
+            break;
+        case DIAGNOSTICS:
+            newTabTitle = newTab->GetWindowChild(DIAGNOSTICS_TITLE);
+            break;
+        case REPORTS:
+            newTabTitle = newTab->GetWindowChild(REPORTS_TITLE);
+            break;
+        case USERSMANAGEMENT:
+            newTabTitle = newTab->GetWindowChild(USERSMANAGEMENT_TITLE);
+            break;
+        case SETTINGS:
+            newTabTitle = newTab->GetWindowChild(SETTINGS_TITLE);
+            break;
+        default:
+            break;
         }
 
-        //update "un-selected" tab style
-        if (title != nullptr)
-            title->SetFont(title->GetFont().Scale(2.1f));
-    }
+
+      previousTabTitle->SetFont(wxGetCCDefaultFont().Scale(2.1f));
+      previousTabTitle->Center();
+      newTabTitle->SetFont(wxGetCCDefaultFont().Scale(2.7f).MakeBold());
+      newTabTitle->Center();
+
 }
 
 /////////////////////////////////////////			                            		///////////////////////////////////////////////////

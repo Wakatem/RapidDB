@@ -17,14 +17,15 @@ void selectDatabasesTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 	//condition to prevent unnecessary changes when clicking the same tab
 	if (tabWindow->GetId() != 1)
 	{
-		//Replace existing tab
+		activateTab(tabWindow->GetId(), DATABASES, tabWindow);
+		tabWindow->SetId(wxWindowID(DATABASES));
+
+		//Replace existing tab window
 		bool tabRemoved = tabWindow->DestroyChildren();
 		if (tabRemoved)
 			TabWindow tabContent = setupDatabasesWindow(tabWindow);
 		else
 			wxLogError("Cannot open tab");
-		tabWindow->SetId(wxWindowID(DATABASES));
-		activateTab(DATABASES, tabWindow);
 	}
 
 }
@@ -47,6 +48,7 @@ Tab setupDatabasesTab(wxWindow* parent, wxWindow* tabWindow)
 
 	//On first load, databases tab is the default
 	TabWindow tabContent = setupDatabasesWindow(tabWindow);
+	tabWindow->SetId(DATABASES);
 
 	text->Bind(wxEVT_LEFT_DOWN, [parent, tab, tabWindow](wxMouseEvent& evt) {selectDatabasesTab(parent, tab, tabWindow); });
 	tab->Bind(wxEVT_LEFT_DOWN, [parent, tab, tabWindow](wxMouseEvent& evt) {selectDatabasesTab(parent, tab, tabWindow); });

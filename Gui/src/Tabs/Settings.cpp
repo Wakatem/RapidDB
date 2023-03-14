@@ -17,14 +17,15 @@ void selectSettingsTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 	//condition to prevent unnecessary changes when clicking the same tab
 	if (tabWindow->GetId() != 5)
 	{
-		//Replace existing tab
+		activateTab(tabWindow->GetId(), SETTINGS, tabWindow);
+		tabWindow->SetId(wxWindowID(SETTINGS));
+
+		//Replace existing tab window
 		bool tabRemoved = tabWindow->DestroyChildren();
 		if (tabRemoved)
 			TabWindow tabContent = setupSettingsWindow(tabWindow);
 		else
 			wxLogError("Cannot open tab");
-		tabWindow->SetId(wxWindowID(SETTINGS));
-		activateTab(SETTINGS, tabWindow);
 	}
 }
 

@@ -18,14 +18,15 @@ void selectUsersManagementTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWind
 	//condition to prevent unnecessary changes when clicking the same tab
 	if (tabWindow->GetId() != 4)
 	{
-		//Replace existing tab
+		activateTab(tabWindow->GetId(), USERSMANAGEMENT, tabWindow);
+		tabWindow->SetId(wxWindowID(USERSMANAGEMENT));
+
+		//Replace existing tab window
 		bool tabRemoved = tabWindow->DestroyChildren();
 		if (tabRemoved)
 			TabWindow tabContent = setupUsersManagementWindow(tabWindow);
 		else
 			wxLogError("Cannot open tab");
-		tabWindow->SetId(wxWindowID(USERSMANAGEMENT));
-		activateTab(USERSMANAGEMENT, tabWindow);
 	}
 }
 

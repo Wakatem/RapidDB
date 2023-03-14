@@ -11,23 +11,23 @@ TabWindow setupUserInfoScreen(wxWindow* parent)
 	text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
 	return window;
 }
-void selectUserInfoTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
-{
-	//condition to prevent unnecessary changes when clicking the same tab
-	if (tabWindow->GetId() != 0)
-	{
-		//Replace existing tab
-		bool tabRemoved = tabWindow->DestroyChildren();
-		if (tabRemoved)
-			TabWindow tabContent = setupUserInfoScreen(tabWindow);
-		else
-			wxLogError("Cannot open tab");
-		tabWindow->SetId(wxWindowID(USERINFO));
-
-		tab->SetBackgroundColour("#000000");
-		tab->Refresh();
-	}
-}
+//void selectUserInfoTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
+//{
+//	//condition to prevent unnecessary changes when clicking the same tab
+//	if (tabWindow->GetId() != 0)
+//	{
+//		//Replace existing tab
+//		bool tabRemoved = tabWindow->DestroyChildren();
+//		if (tabRemoved)
+//			TabWindow tabContent = setupUserInfoScreen(tabWindow);
+//		else
+//			wxLogError("Cannot open tab");
+//		tabWindow->SetId(wxWindowID(USERINFO));
+//
+//		tab->SetBackgroundColour("#000000");
+//		tab->Refresh();
+//	}
+//}
 
 Tab setupUserInfoTab(wxWindow* parent, wxWindow* tabWindow)
 {

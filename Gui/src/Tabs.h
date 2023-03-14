@@ -44,7 +44,7 @@ enum ComponentID
 
 
 extern vector<Tab> tabsReference;
-void activateTab(int newTabWindowID, wxWindow* tabWindow);
+void activateTab(int previousTabWindowID, int newTabWindowID, wxWindow* tabWindow);
 
 //Setup functions for tabs and corresponding tab window
 Tab setupUserInfoTab(wxWindow* parent, wxWindow* tabWindow);

@@ -17,14 +17,15 @@ void selectReportsTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 	//condition to prevent unnecessary changes when clicking the same tab
 	if (tabWindow->GetId() != 3)
 	{
-		//Replace existing tab
+		activateTab(tabWindow->GetId(), REPORTS, tabWindow);
+		tabWindow->SetId(wxWindowID(REPORTS));
+
+		//Replace existing tab window
 		bool tabRemoved = tabWindow->DestroyChildren();
 		if (tabRemoved)
 			TabWindow tabContent = setupReportsWindow(tabWindow);
 		else
 			wxLogError("Cannot open tab");
-		tabWindow->SetId(wxWindowID(REPORTS));
-		activateTab(REPORTS, tabWindow);
 	}
 }
 

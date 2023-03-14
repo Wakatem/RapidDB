@@ -17,14 +17,15 @@ void selectDiagnosticsTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 	//condition to prevent unnecessary changes when clicking the same tab
 	if (tabWindow->GetId() != 2)
 	{
-		//Replace existing tab
+		activateTab(tabWindow->GetId(), DIAGNOSTICS, tabWindow);
+		tabWindow->SetId(wxWindowID(DIAGNOSTICS));
+
+		//Replace existing tab window
 		bool tabRemoved = tabWindow->DestroyChildren();
 		if (tabRemoved)
 			TabWindow tabContent = setupDiagnosticsWindow(tabWindow);
 		else
 			wxLogError("Cannot open tab");
-		tabWindow->SetId(wxWindowID(DIAGNOSTICS));
-		activateTab(DIAGNOSTICS, tabWindow);
 
 	}
 }
