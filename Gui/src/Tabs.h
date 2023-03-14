@@ -25,7 +25,6 @@ using std::make_tuple;
 
 //Setup functions for tabs and corresponding tab window
 Tab setupUserInfoTab(wxWindow* parent, wxWindow* tabWindow);
-TabWindow setupUserInfoScreen(wxWindow* parent);
 Tab setupDatabasesTab(wxWindow* parent, wxWindow* tabWindow);
 Tab setupDiagnosticsTab(wxWindow* parent, wxWindow* tabWindow);
 Tab setupReportsTab(wxWindow* parent, wxWindow* tabWindow);
