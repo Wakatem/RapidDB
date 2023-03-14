@@ -14,7 +14,8 @@ void goBackToScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nex
 
 void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
 {
-    wxLogMessage("Admin Registered");
+    wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Organization registered successfully", wxString::FromAscii(wxMessageBoxCaptionStr));
+    dialog->ShowModal();
     shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
 }
 
@@ -132,7 +133,7 @@ Screen setupAdminRegister(wxWindow* parent)
 
     ////Add input fields and a 'register' button
     wxSizer* inputs = rowInputs(screen);
-    wxButton* button = new wxButton(screen, wxID_ANY, "Register Admin");
+    wxButton* button = new wxButton(screen, wxID_ANY, "Register");
     button->SetMinSize(DPI_SIZE(200, 80, button));
     button->SetFont(button->GetFont().Scale(1.8f));
 

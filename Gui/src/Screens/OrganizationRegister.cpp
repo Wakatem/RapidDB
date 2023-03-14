@@ -132,7 +132,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
 
     //Add input fields and "Register" button
     wxSizer* inputs = rowInputs_org_setup(screen);
-    wxButton* button = new wxButton(screen, wxID_ANY, "Register Organization");
+    wxButton* button = new wxButton(screen, wxID_ANY, "Register");
     button->SetMinSize(DPI_SIZE(230, 80, button));
     button->SetFont(button->GetFont().Scale(1.8f));
 
