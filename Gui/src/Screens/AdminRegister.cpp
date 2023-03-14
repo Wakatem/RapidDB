@@ -133,7 +133,7 @@ Screen setupAdminRegister(wxWindow* parent)
 
     ////Add input fields and a 'register' button
     wxSizer* inputs = rowInputs(screen);
-    wxButton* button = new wxButton(screen, wxID_ANY, "Register");
+    wxButton* button = new wxButton(screen, wxID_ANY, "Register Admin");
     button->SetMinSize(DPI_SIZE(200, 80, button));
     button->SetFont(button->GetFont().Scale(1.8f));
 

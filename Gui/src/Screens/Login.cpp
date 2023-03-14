@@ -89,16 +89,13 @@ wxBoxSizer* checkBox_setup(wxWindow* screen)
 
 wxSizer* rowinputs(wxWindow* screen)
 {
-    wxFlexGridSizer* rowSizer = new wxFlexGridSizer(3, 50, 100);
+    wxFlexGridSizer* rowSizer = new wxFlexGridSizer(2, 50, 100);
 
     wxBoxSizer* username1 = textInput_setup(screen, "Username :", 40);
     wxBoxSizer* password1 = textInput_setup(screen, "Password :", 40);
 
     rowSizer->Add(username1);
     rowSizer->Add(password1);
-    rowSizer->Add(DPI_X(200, screen), 0);
-
-
     wxBoxSizer* choiceMenu = checkBox_setup(screen);
 
     rowSizer->Add(choiceMenu);
@@ -142,7 +139,7 @@ Screen setupLogin(wxWindow* parent)
 
     //Screen Title
     wxStaticText* text = new wxStaticText(screen, wxID_ANY, "User Login", wxDefaultPosition, wxDefaultSize);
-    text->SetPosition(DPI_POINT(483, 180, screen));
+    text->SetPosition(DPI_POINT(527, 180, screen));
     text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());
 
     ////Add input fields and a 'register' button
