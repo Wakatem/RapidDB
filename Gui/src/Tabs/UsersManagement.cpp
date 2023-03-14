@@ -5,11 +5,37 @@ TabWindow setupUsersManagementWindow(wxWindow* parent)
 	return 0;
 }
 
-Tab setupUsersManagementTab(wxWindow* parent)
+
+void selectUsersManagementTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 {
-	Tab userInfoTab = new wxPanel(parent);
-	userInfoTab->SetBackgroundColour("#6F6B66");
+	//condition to prevent unnecessary changes when clicking the same tab
+	if (tabWindow->GetId() != 4)
+	{
+		TabWindow tabContent = setupUsersManagementWindow(parent);
+		delete tabWindow;
+		tabWindow = tabContent;
+		tabWindow->SetId(wxWindowID(4));
+
+		tab->SetBackgroundColour("#000000");
+		tab->Refresh();
+	}
+}
+
+Tab setupUsersManagementTab(wxWindow* parent, wxWindow* tabWindow)
+{
+	Tab tab = new wxPanel(parent);
+	tab->SetBackgroundColour("#6F6B66");
+
+	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+	tab->SetSizer(sizer);
+
+	wxStaticText* text = new wxStaticText(tab, wxID_ANY, "UsersManagement", wxDefaultPosition, wxDefaultSize);
+	text->SetForegroundColour("white");
+	text->SetFont(text->GetFont().Scale(3.0f).MakeBold());
+	sizer->Add(text, 1, wxALIGN_CENTER);
 
 
-	return userInfoTab;
+	tab->Bind(wxEVT_LEFT_DOWN, [parent, tab, tabWindow](wxMouseEvent& evt) {selectUsersManagementTab(parent, tab, tabWindow); });
+
+	return tab;
 }

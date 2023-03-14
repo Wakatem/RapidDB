@@ -22,31 +22,12 @@ using std::tuple;
 using std::make_tuple;
 
 
-//Each tab must have a unique ScreenID assigned to it!
-enum TabID
-{
-	DATABASES
-};
-
-extern vector<tuple<Tab, TabID>> tabsReference;
-void shiftTab(Tab currentScreen, Tab currentScreenID, Tab nextScreenID, bool destroyCurrentScreen, wxShowEffect animation, int animationDuration = 0U);
-
 
 //Setup functions for tabs and corresponding tab window
-Tab setupUserInfoTab(wxWindow* parent);
+Tab setupUserInfoTab(wxWindow* parent, wxWindow* tabWindow);
 TabWindow setupUserInfoScreen(wxWindow* parent);
-
-Tab setupDatabasesTab(wxWindow* parent);
-TabWindow setupDatabasesWindow(wxWindow* parent);
-
-Tab setupDiagnosticsTab(wxWindow* parent);
-TabWindow setupDiagnosticsWindow(wxWindow* parent);
-
-Tab setupReportsTab(wxWindow* parent);
-TabWindow setupReportsWindow(wxWindow* parent);
-
-Tab setupUsersManagementTab(wxWindow* parent);
-TabWindow setupUsersManagementWindow(wxWindow* parent);
-
-Tab setupSettingsTab(wxWindow* parent);
-TabWindow setupSettingsWindow(wxWindow* parent);
+Tab setupDatabasesTab(wxWindow* parent, wxWindow* tabWindow);
+Tab setupDiagnosticsTab(wxWindow* parent, wxWindow* tabWindow);
+Tab setupReportsTab(wxWindow* parent, wxWindow* tabWindow);
+Tab setupUsersManagementTab(wxWindow* parent, wxWindow* tabWindow);
+Tab setupSettingsTab(wxWindow* parent, wxWindow* tabWindow);

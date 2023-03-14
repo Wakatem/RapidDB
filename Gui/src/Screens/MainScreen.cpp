@@ -38,21 +38,23 @@ Screen setupMainScreen(wxWindow* parent)
 
     wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
     screen->SetSizer(sizer);
-
+    
     wxBoxSizer* tabsSizer = new wxBoxSizer(wxVERTICAL);
+    TabWindow tabWindow = new wxPanel(screen);
+    
 
-    Tab UserInfoTab = setupUserInfoTab(screen);
-    Tab DatabasesTab = setupDatabasesTab(screen);
-    Tab DiagnosticsTab = setupDiagnosticsTab(screen);
-    Tab Reports = setupReportsTab(screen);
+    //Create tabs
+    Tab UserInfoTab = setupUserInfoTab(screen, tabWindow);
+    Tab DatabasesTab = setupDatabasesTab(screen, tabWindow);
+    Tab DiagnosticsTab = setupDiagnosticsTab(screen, tabWindow);
+    Tab Reports = setupReportsTab(screen, tabWindow);
+    Tab SettingsTab = setupSettingsTab(screen, tabWindow);
+    
     Tab UsersManagementTab = nullptr;
-    if (userIsAdmin)
-    {
-        Tab UsersManagementTab = setupUsersManagementTab(screen);
-    }
-    Tab SettingsTab = setupSettingsTab(screen);
+    userIsAdmin ? UsersManagementTab = setupUsersManagementTab(screen, tabWindow) : NULL;
 
 
+    //Add tabs
     tabsSizer->Add(UserInfoTab, 1, wxEXPAND);
     tabsSizer->Add(DatabasesTab, 1, wxEXPAND);
     tabsSizer->Add(DiagnosticsTab, 1, wxEXPAND);
@@ -61,10 +63,7 @@ Screen setupMainScreen(wxWindow* parent)
     tabsSizer->Add(SettingsTab, 1, wxEXPAND);
 
 
-    TabWindow tabWindow = new wxPanel(screen);
-
-    //activateTab(DatabasesTab, DatabasesWindow, tabWindow);
-
+    //Add tabs list and tab window to parent sizer
     sizer->Add(tabsSizer, 1, wxEXPAND);
     sizer->Add(tabWindow, 3, wxEXPAND);
 
