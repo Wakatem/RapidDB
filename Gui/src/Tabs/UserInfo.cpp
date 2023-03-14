@@ -22,7 +22,7 @@ void selectUserInfoTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 			TabWindow tabContent = setupUserInfoScreen(tabWindow);
 		else
 			wxLogError("Cannot open tab");
-		tabWindow->SetId(wxWindowID(0));
+		tabWindow->SetId(wxWindowID(USERINFO));
 
 		tab->SetBackgroundColour("#000000");
 		tab->Refresh();

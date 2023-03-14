@@ -23,23 +23,24 @@ void selectDiagnosticsTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 			TabWindow tabContent = setupDiagnosticsWindow(tabWindow);
 		else
 			wxLogError("Cannot open tab");
-		tabWindow->SetId(wxWindowID(2));
+		tabWindow->SetId(wxWindowID(DIAGNOSTICS));
+		activateTab(DIAGNOSTICS, tabWindow);
 
 	}
 }
 
 Tab setupDiagnosticsTab(wxWindow* parent, wxWindow* tabWindow)
 {
-	Tab tab = new wxPanel(parent);
+	Tab tab = new wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_SIMPLE);
 	tab->SetBackgroundColour("#42403D");
 
 	wxBoxSizer* sizer1 = new wxBoxSizer(wxHORIZONTAL);
 	tab->SetSizer(sizer1);
 	wxBoxSizer* sizer2 = new wxBoxSizer(wxVERTICAL);
 
-	wxStaticText* text = new wxStaticText(tab, wxID_ANY, "Diagnostics", wxDefaultPosition);
+	wxStaticText* text = new wxStaticText(tab, DIAGNOSTICS_TITLE, "Diagnostics", wxDefaultPosition);
 	text->SetForegroundColour("white");
-	text->SetFont(text->GetFont().Scale(2.2f));
+	text->SetFont(text->GetFont().Scale(2.1f));
 
 	sizer2->Add(text, 0, wxCENTER);
 	sizer1->Add(sizer2, 1, wxALIGN_CENTER);

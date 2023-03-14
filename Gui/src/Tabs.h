@@ -22,6 +22,29 @@ using std::tuple;
 using std::make_tuple;
 
 
+//Any tab-related component that needs a unique id, its id must be defined here
+enum ComponentID
+{
+	//Tabs IDs
+	USERINFO,
+	DATABASES,
+	DIAGNOSTICS,
+	REPORTS,
+	USERSMANAGEMENT,
+	SETTINGS,
+
+
+	//Tab components
+	DATABASES_TITLE,
+	DIAGNOSTICS_TITLE,
+	REPORTS_TITLE,
+	USERSMANAGEMENT_TITLE,
+	SETTINGS_TITLE,
+};
+
+
+extern vector<Tab> tabsReference;
+void activateTab(int newTabWindowID, wxWindow* tabWindow);
 
 //Setup functions for tabs and corresponding tab window
 Tab setupUserInfoTab(wxWindow* parent, wxWindow* tabWindow);

@@ -23,24 +23,24 @@ void selectDatabasesTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 			TabWindow tabContent = setupDatabasesWindow(tabWindow);
 		else
 			wxLogError("Cannot open tab");
-		tabWindow->SetId(wxWindowID(1));
-
+		tabWindow->SetId(wxWindowID(DATABASES));
+		activateTab(DATABASES, tabWindow);
 	}
 
 }
 
 Tab setupDatabasesTab(wxWindow* parent, wxWindow* tabWindow)
 {
-	Tab tab = new wxPanel(parent);
+	Tab tab = new wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_SIMPLE);
 	tab->SetBackgroundColour("#42403D");
 
 	wxBoxSizer* sizer1 = new wxBoxSizer(wxHORIZONTAL);
 	tab->SetSizer(sizer1);
 	wxBoxSizer* sizer2 = new wxBoxSizer(wxVERTICAL);
 
-	wxStaticText* text = new wxStaticText(tab, wxID_ANY, "Databases", wxDefaultPosition);
+	wxStaticText* text = new wxStaticText(tab, DATABASES_TITLE, "Databases", wxDefaultPosition);
 	text->SetForegroundColour("white");
-	text->SetFont(text->GetFont().Scale(2.5f).MakeBold());
+	text->SetFont(text->GetFont().Scale(2.7f).MakeBold());
 	
 	sizer2->Add(text, 0, wxCENTER);
 	sizer1->Add(sizer2, 1, wxALIGN_CENTER);
