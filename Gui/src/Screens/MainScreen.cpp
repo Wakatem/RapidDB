@@ -23,7 +23,7 @@ void activateTab(Tab selectedTab, TabWindow selectedWindow, TabWindow tabWindow)
 Screen setupMainScreen(wxWindow* parent)
 {
 
-    bool userIsAdmin = false;
+    bool userIsAdmin = true;
     //Create screen parameters
     Screen screen = new wxPanel(parent);
     screen->SetSize(parent->GetSize());

@@ -36,19 +36,19 @@ Tab setupDatabasesTab(wxWindow* parent, wxWindow* tabWindow)
 	Tab tab = new wxPanel(parent);
 	tab->SetBackgroundColour("#6F6B66");
 
-	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	tab->SetSizer(sizer);
+	wxBoxSizer* sizer1 = new wxBoxSizer(wxHORIZONTAL);
+	tab->SetSizer(sizer1);
+	wxBoxSizer* sizer2 = new wxBoxSizer(wxVERTICAL);
 
-	wxStaticText* text = new wxStaticText(tab, wxID_ANY, "Databases", wxDefaultPosition, wxDefaultSize);
+	wxStaticText* text = new wxStaticText(tab, wxID_ANY, "Databases", wxDefaultPosition);
 	text->SetForegroundColour("white");
-	text->SetFont(text->GetFont().Scale(3.0f).MakeBold());
-	sizer->Add(text,  1, wxALIGN_CENTER | wxCENTER);
+	text->SetFont(text->GetFont().Scale(2.5f).MakeBold());
+	
+	sizer2->Add(text, 0, wxCENTER);
+	sizer1->Add(sizer2, 1, wxALIGN_CENTER);
 
 	//On first load, databases tab is the default
-	//TabWindow tabContent = setupDatabasesWindow(parent);
-	//delete tabWindow;
-	//tabWindow = tabContent;
-	//tabWindow->SetId(wxWindowID(1));
+	TabWindow tabContent = setupDatabasesWindow(tabWindow);
 
 	text->Bind(wxEVT_LEFT_DOWN, [parent, tab, tabWindow](wxMouseEvent& evt) {selectDatabasesTab(parent, tab, tabWindow); });
 	tab->Bind(wxEVT_LEFT_DOWN, [parent, tab, tabWindow](wxMouseEvent& evt) {selectDatabasesTab(parent, tab, tabWindow); });
