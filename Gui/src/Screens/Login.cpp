@@ -116,7 +116,7 @@ Screen setupLogin(wxWindow* parent)
     //Add screen pointer to list
     ScreenID previousScreen = ORG_SETUP;
     ScreenID currentScreen = LOGIN;
-    ScreenID nextScreen = TEST;
+    ScreenID nextScreen = MAIN;
     screensReference.push_back(make_tuple(screen, currentScreen));
 
 

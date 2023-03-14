@@ -75,19 +75,21 @@ bool MyApp::OnInit()
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     mainWindow->SetSizer(mainSizer);
 
-    Screen OrgSet = setOrg(mainWindow);
+    //Screen OrgSet = setOrg(mainWindow);
     
-    Screen OrgRegister = setupOrganizationRegister(mainWindow);
-    Screen AdminRegister = setupAdminRegister(mainWindow);
-    
-    Screen OrgSign = OrganizationSigin(mainWindow);
-    Screen Login = setupLogin(mainWindow);
+    //Screen OrgRegister = setupOrganizationRegister(mainWindow);
+    //Screen AdminRegister = setupAdminRegister(mainWindow);
+    //
+    //Screen OrgSign = OrganizationSigin(mainWindow);
+    //Screen Login = setupLogin(mainWindow);
+    Screen MainScreen = setupMainScreen(mainWindow);
 
-    mainSizer->Add(OrgSet, 1, wxEXPAND);
-    mainSizer->Add(OrgRegister, 1, wxEXPAND);
-    mainSizer->Add(AdminRegister, 1, wxEXPAND);
-    mainSizer->Add(OrgSign, 1, wxEXPAND);
-    mainSizer->Add(Login, 1, wxEXPAND);
+    //mainSizer->Add(OrgSet, 1, wxEXPAND);
+    //mainSizer->Add(OrgRegister, 1, wxEXPAND);
+    //mainSizer->Add(AdminRegister, 1, wxEXPAND);
+    //mainSizer->Add(OrgSign, 1, wxEXPAND);
+    //mainSizer->Add(Login, 1, wxEXPAND);
+    mainSizer->Add(MainScreen, 1, wxEXPAND);
 
 
 
