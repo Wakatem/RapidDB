@@ -72,8 +72,8 @@ wxBoxSizer* checkBox_setup(wxWindow* screen)
 {
     wxBoxSizer* inputSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    wxStaticText* username = new wxStaticText(screen, wxID_ANY, "User Role :", wxDefaultPosition, wxDefaultSize);
-    username->SetFont(username->GetFont().Scale(1.2f).MakeBold());
+    wxStaticText* userRole = new wxStaticText(screen, wxID_ANY, "User Role :", wxDefaultPosition, wxDefaultSize);
+    userRole->SetFont(userRole->GetFont().Scale(1.2f).MakeBold());
 
 
     wxArrayString choices;
@@ -81,8 +81,8 @@ wxBoxSizer* checkBox_setup(wxWindow* screen)
     choices.Add("Moderator");
     wxChoice* choiceMenu = new wxChoice(screen, wxID_ANY, wxDefaultPosition, wxDefaultSize, choices);
 
-    inputSizer->Add(username);
-    inputSizer->Add(DPI_X(40, screen), 0);       //Adding space in pixels
+    inputSizer->Add(userRole);
+    inputSizer->Add(DPI_X(44, screen), 0);       //Adding space in pixels
     inputSizer->Add(choiceMenu, 1);
     return inputSizer;
 }
