@@ -55,12 +55,12 @@ Screen setupMainScreen(wxWindow* parent)
 
 
     //Add tabs
-    tabsSizer->Add(UserInfoTab, 1, wxEXPAND);
-    tabsSizer->Add(DatabasesTab, 1, wxEXPAND);
-    tabsSizer->Add(DiagnosticsTab, 1, wxEXPAND);
-    tabsSizer->Add(Reports, 1, wxEXPAND);
-    userIsAdmin ? tabsSizer->Add(UsersManagementTab, 1, wxEXPAND) : NULL;
-    tabsSizer->Add(SettingsTab, 1, wxEXPAND);
+    tabsSizer->Add(UserInfoTab, 2, wxEXPAND);
+    tabsSizer->Add(DatabasesTab, 3, wxEXPAND);
+    tabsSizer->Add(DiagnosticsTab, 3, wxEXPAND);
+    tabsSizer->Add(Reports, 3, wxEXPAND);
+    userIsAdmin ? tabsSizer->Add(UsersManagementTab, 3, wxEXPAND) : NULL;
+    tabsSizer->Add(SettingsTab, 3, wxEXPAND);
 
 
     //Add tabs list and tab window to parent sizer

@@ -25,8 +25,6 @@ void selectDatabasesTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 			wxLogError("Cannot open tab");
 		tabWindow->SetId(wxWindowID(1));
 
-		tab->SetBackgroundColour("#000000");
-		tab->Refresh();
 	}
 
 }
@@ -34,7 +32,7 @@ void selectDatabasesTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 Tab setupDatabasesTab(wxWindow* parent, wxWindow* tabWindow)
 {
 	Tab tab = new wxPanel(parent);
-	tab->SetBackgroundColour("#6F6B66");
+	tab->SetBackgroundColour("#42403D");
 
 	wxBoxSizer* sizer1 = new wxBoxSizer(wxHORIZONTAL);
 	tab->SetSizer(sizer1);

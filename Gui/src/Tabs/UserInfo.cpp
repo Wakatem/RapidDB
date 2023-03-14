@@ -32,7 +32,7 @@ void selectUserInfoTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWindow)
 Tab setupUserInfoTab(wxWindow* parent, wxWindow* tabWindow)
 {
 	Tab tab = new wxPanel(parent);
-	tab->SetBackgroundColour("#6F6B66");
+	tab->SetBackgroundColour("#676663");
 
 	//tab->Bind(wxEVT_LEFT_DOWN, [parent, tab, tabWindow](wxMouseEvent& evt) {selectUserInfoTab(parent, tab, tabWindow); });
 

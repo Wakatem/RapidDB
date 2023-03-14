@@ -26,15 +26,13 @@ void selectUsersManagementTab(wxWindow* parent, wxWindow* tab, wxWindow* tabWind
 			wxLogError("Cannot open tab");
 		tabWindow->SetId(wxWindowID(4));
 
-		tab->SetBackgroundColour("#000000");
-		tab->Refresh();
 	}
 }
 
 Tab setupUsersManagementTab(wxWindow* parent, wxWindow* tabWindow)
 {
 	Tab tab = new wxPanel(parent);
-	tab->SetBackgroundColour("#6F6B66");
+	tab->SetBackgroundColour("#42403D");
 
 	wxBoxSizer* sizer1 = new wxBoxSizer(wxHORIZONTAL);
 	tab->SetSizer(sizer1);
@@ -42,7 +40,7 @@ Tab setupUsersManagementTab(wxWindow* parent, wxWindow* tabWindow)
 
 	wxStaticText* text = new wxStaticText(tab, wxID_ANY, "Users Management", wxDefaultPosition);
 	text->SetForegroundColour("white");
-	text->SetFont(text->GetFont().Scale(2.5f).MakeBold());
+	text->SetFont(text->GetFont().Scale(2.2f));
 
 	sizer2->Add(text, 0, wxCENTER);
 	sizer1->Add(sizer2, 1, wxALIGN_CENTER);
