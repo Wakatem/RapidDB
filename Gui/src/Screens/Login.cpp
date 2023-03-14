@@ -117,7 +117,7 @@ Screen setupLogin(wxWindow* parent)
     screen->SetBackgroundColour(wxColor("#FFFFFF"));
 
     //Add screen pointer to list
-    screensReference.push_back(make_tuple(screen, ORG_SIGN_IN));
+    screensReference.push_back(make_tuple(screen, LOGIN));
 
 
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);

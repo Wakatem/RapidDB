@@ -105,7 +105,7 @@ Screen OrganizationSigin(wxWindow* parent)
     button->SetFont(button->GetFont().Scale(1.8f));
 
     //Bind controls with functions
-    button->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {Org_signin(screen, ORG_SIGN_IN, ADMIN_REGISTER); });
+    button->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {Org_signin(screen, ORG_SIGN_IN, LOGIN); });
     backButton->Bind(wxEVT_BUTTON, [screen](wxCommandEvent& evt) {goBackToScreenToOrgPage(screen, ORG_SIGN_IN, ORG_SETUP); });
 
     sizer->Add(0, 30);
