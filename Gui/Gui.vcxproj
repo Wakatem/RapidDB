@@ -35,9 +35,13 @@
     <ClCompile Include="src\Tabs\UsersManagement.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\MainFrame.h" />
     <ClInclude Include="src\Screens.h" />
     <ClInclude Include="src\Tabs.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Gui.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
