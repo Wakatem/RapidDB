@@ -11,7 +11,7 @@ public:
     virtual bool OnInit();
 };
 
-wxIMPLEMENT_APP(MyApp);
+IMPLEMENT_APP_CONSOLE(MyApp);
 
 
 void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, bool destroyCurrentScreen, wxShowEffect animation, int animationDuration)

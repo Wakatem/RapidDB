@@ -35,13 +35,9 @@
     <ClCompile Include="src\Tabs\UsersManagement.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="src\MainFrame.h" />
     <ClInclude Include="src\Screens.h" />
     <ClInclude Include="src\Tabs.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Gui.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -158,7 +154,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\$(Resources)\wxWidgets\lib\vc_x64_lib\mswud;$(SolutionDir)\$(Resources)\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\$(Resources)\wxWidgets\lib\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>comctl32.lib;rpcrt4.lib;shell32.lib;gdi32.lib;kernel32.lib;user32.lib;comdlg32.lib;ole32.lib;oleaut32.lib;advapi32.lib;wxpngd.lib;wxjpegd.lib;wxzlibd.lib;wxbase32ud.lib;wxmsw32ud_core.lib;%(AdditionalDependencies)</AdditionalDependencies>
