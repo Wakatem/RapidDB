@@ -59,13 +59,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\MainFrame.h">
+    <ClInclude Include="headers\MainFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Screens.h">
+    <ClInclude Include="headers\Screens.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Tabs.h">
+    <ClInclude Include="headers\Tabs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
-#include "../Screens.h"
-#include "../Tabs.h"
+#include "../../headers/Screens.h"
+#include "../../headers/Tabs.h"
 
 vector<Tab> tabsReference;
 

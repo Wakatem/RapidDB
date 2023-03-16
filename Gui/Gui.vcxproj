@@ -35,9 +35,9 @@
     <ClCompile Include="src\Tabs\UsersManagement.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\MainFrame.h" />
-    <ClInclude Include="src\Screens.h" />
-    <ClInclude Include="src\Tabs.h" />
+    <ClInclude Include="headers\MainFrame.h" />
+    <ClInclude Include="headers\Screens.h" />
+    <ClInclude Include="headers\Tabs.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

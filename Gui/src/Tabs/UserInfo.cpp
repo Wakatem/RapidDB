@@ -1,4 +1,4 @@
-#include "../Tabs.h"
+#include "../../headers/Tabs.h"
 
 TabWindow setupUserInfoScreen(wxWindow* parent)
 {

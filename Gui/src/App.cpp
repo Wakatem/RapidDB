@@ -1,6 +1,6 @@
 
-#include "MainFrame.h"
-#include "Screens.h"
+#include "../headers/MainFrame.h"
+#include "../headers/Screens.h"
 
 using std::get;
 vector<tuple<Screen, ScreenID>> screensReference;
