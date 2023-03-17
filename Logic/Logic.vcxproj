@@ -162,6 +162,7 @@
     <ClCompile Include="src\RDBFileManager.cpp" />
     <ClCompile Include="src\Database.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\User.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

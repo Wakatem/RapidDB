@@ -6,7 +6,13 @@
 #include <vector>
 
 
-class User : protected Organization
+enum UserType
+{
+	ADMIN,
+	MOD
+};
+
+class User
 {
 protected:
 	string firstName;
@@ -16,31 +22,18 @@ protected:
 	string phoneNumber;
 	string username;
 	string password;
-	int activityHistory [4]; //still unknown
-	int reports[4]; //still unknown
-	vector <tuple <string, string>> associatedDBs;
+	//int activityHistory [4]; //still unknown
+	//vector <Report> reports;
+	//vector <tuple <string, string>> associatedDBs;
 
 public:
-	User();
-	void setDetails();
-	void changeFirstname();
-	void changeLastname();
-	void changeEmail();
-	void changePhoneNumber();
-	void changeUsername();
-	void changePassword();
-	vector<tuple <string, string>>& getAssociatedDBs();
-};
-
-
-class Admin : public User
-{
-public:
-	void createUser();
-	void deleteUser();
-	void addDatabase();
-	void removeDatabase();
-	void updateDatabaseIP();
-	void updateDatabasePort();
-	void updateDatabaseServiceName();
+	User(string firstName, string lastName, char gender, string email, string phoneNumber, string username, string password);
+	string getFirstname();
+	string getLastname();
+	char getGender();
+	string getEmail();
+	string getPhoneNumber();
+	string getUsername();
+	string getPassword();
+	//vector<tuple <string, string>> getAssociatedDBs();
 };
