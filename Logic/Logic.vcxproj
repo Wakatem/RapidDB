@@ -126,6 +126,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\$(Resources)\instantclient_64\sdk\include;$(SolutionDir)\$(ProjectName)\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,8 +155,11 @@
     <ClInclude Include="headers\Database.h" />
     <ClInclude Include="headers\Organization.h" />
     <ClInclude Include="headers\User.h" />
+    <ClInclude Include="headers\RDBManagers.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Organization.cpp" />
+    <ClCompile Include="src\RDBFileManager.cpp" />
     <ClCompile Include="src\Database.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
