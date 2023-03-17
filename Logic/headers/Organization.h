@@ -9,10 +9,6 @@ using namespace::std;
 
 class Organization
 {
-protected:
-	vector <User> users;
-	vector <Database> databases;
-
 private:
 	string name;
 	string country;
@@ -20,10 +16,21 @@ private:
 	string passcode;
 	string privatekey;
 	string email;
-	int reports[4]; //still unknown
+	vector <User> users;
+	vector <Database> databases;
+	//vector <Report> reports;
 
 public:
+	Organization(string orgName, string orgCountry, string timezone, string passcode, string email);
 	Organization();
+	string gerOrgName();
+	string getCountry();
+	string getTimezone();
+	string getPasscode();
+	string getPrivatekey();
+	string getEmail();
+	vector <User> getUsers();
 	vector <Database> getDatabases();
-	vector <User> getModerators();
+	void setPrivatekey(string newPrivatekey);
+	//vector <Report> getReports();
 };
