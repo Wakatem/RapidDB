@@ -5,10 +5,15 @@
 #include <string>
 #include <filesystem>
 #include "Organization.h"
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/serialization/binary_object.hpp>
+#include <boost/serialization/serialization.hpp>
 
 namespace fs = std::filesystem;
 using std::fstream;
 using std::string;
+using boost::serialization::make_binary_object;
 
 namespace RDBFileManager
 {
@@ -29,7 +34,7 @@ namespace RDBUserManager
 	//void changeEmail(User user, string newEmail);
 	//void changePhoneNumber(User user, string newPhoneNumber);
 	//void changePassword(User user, string oldPassword, string newPassword);
-	User createUser(Organization org, User user);
+	void addUser(Organization org, User user);
 	void deleteUser();
 	//void changeUsername(User user, string newUsername);
 };

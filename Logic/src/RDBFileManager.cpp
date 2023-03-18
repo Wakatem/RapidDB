@@ -5,7 +5,6 @@ namespace RDBFileManager
 	void encrypt()
 	{
 
-		std::cout << "w";
 	}
 
 
@@ -16,20 +15,11 @@ namespace RDBFileManager
 
 	void createRDBfile(Organization* org, string path)
 	{
-		fstream f;
 		string filename = path + "\\" + org->gerOrgName() + ".rdb";
-		f.open(filename, std::ios::out | std::ios::binary);
+		fstream f(filename, std::ios::out | std::ios::binary);
+		boost::archive::binary_oarchive outputAR(f, boost::archive::no_header);
 
-		if (f.is_open())
-		{
-
-			f.write(reinterpret_cast<char*>(org), sizeof(Organization));
-			f.close();
-		}
-		else
-		{
-			cout << "ERROOROR";
-		}
+		outputAR << org;
 
 	}
 
@@ -45,19 +35,10 @@ namespace RDBFileManager
 			{
 				//process reading
 				string filename = path + "\\" + entry.path().filename().string();
-				fstream f;
-				f.open(filename, std::ios::in | std::ios::binary);
+				fstream f(filename, std::ios::in | std::ios::binary);
+				boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
 
-				if (f.is_open())
-				{
-					f.read(reinterpret_cast<char*>(org), sizeof(Organization));
-					f.close();
-				}
-				else
-				{
-					cout << "ERROOROR";
-				}
-
+				inputAR >> org;
 				break;
 
 			}
@@ -83,6 +64,8 @@ namespace RDBFileManager
 			//send message indicating no RDB file was found
 			cout << "Cannot find a RDB file";
 		}
+
+		return RDBfound;
 	}
 
 
@@ -103,5 +86,7 @@ namespace RDBFileManager
 			//send message indicating no LoginFile was found
 			cout << "Cannot find a LoginFile";
 		}
+
+		return LoginFilefound;
 	}
 }
