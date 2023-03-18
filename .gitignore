@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 enc_temp_folder/
-
+example/
 resources/wxWidgets
 resources/boost
 # User-specific files
