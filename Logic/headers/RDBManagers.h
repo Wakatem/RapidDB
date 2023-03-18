@@ -19,9 +19,11 @@ namespace RDBFileManager
 
 	void createRDBfile(Organization& org, string path);
 	void readRDBfile(Organization& org, string path);
-	void saveToRDBfile(string path);
 	bool findRDBfile(string path);
-	bool findLoginFile();
+
+	void createRDBUfile(User& user, string path);
+	void readRDBUfile(User& user, string path);
+	bool findRDBUfile(string path);
 }
 
 

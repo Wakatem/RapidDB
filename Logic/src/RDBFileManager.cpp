@@ -69,7 +69,7 @@ namespace RDBFileManager
 	}
 
 
-	bool findLoginFile(string path)
+	bool findRDBUfile(string path)
 	{
 		bool LoginFilefound = false;
 		for (const auto& entry : fs::directory_iterator(path))
@@ -88,5 +88,38 @@ namespace RDBFileManager
 		}
 
 		return LoginFilefound;
+	}
+
+
+
+
+
+	void createRDBUfile(User& user, string path)
+	{
+		string filename = path + "\\" + (user.getFirstname() + user.getLastname()) + ".rdbu";
+		fstream f(filename, std::ios::out | std::ios::binary);
+		boost::archive::binary_oarchive outputAR(f, boost::archive::no_header);
+
+		outputAR << user;
+	}
+
+	void readRDBUfile(User& user, string path)
+	{
+		bool RDBUfound = findRDBUfile(path);
+
+		if (RDBUfound)
+		{
+			for (const auto& entry : fs::directory_iterator(path))
+			{
+				//process reading
+				string filename = path + "\\" + entry.path().filename().string();
+				fstream f(filename, std::ios::in | std::ios::binary);
+				boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
+
+				inputAR >> user;
+				break;
+
+			}
+		}
 	}
 }
