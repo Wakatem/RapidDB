@@ -24,6 +24,7 @@ protected:
 	string phoneNumber;
 	string username;
 	string password;
+	UserType userType;
 	//int activityHistory [4]; //still unknown
 	//vector <Report> reports;
 	//vector <tuple <string, string>> associatedDBs;
@@ -37,6 +38,7 @@ protected:
 		ar& phoneNumber;
 		ar& username;
 		ar& password;
+		ar& userType;
 	}
 
 public:
@@ -49,5 +51,6 @@ public:
 	string getPhoneNumber();
 	string getUsername();
 	string getPassword();
+	UserType getUserType();
 	//vector<tuple <string, string>> getAssociatedDBs();
 };

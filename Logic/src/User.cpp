@@ -9,6 +9,7 @@ User::User(string firstName, string lastName, char gender, string email, string 
 	this->phoneNumber = phoneNumber;
 	this->username = username;
 	this->password = password;
+	this->userType = userType;
 }
 
 User::User()
@@ -49,4 +50,9 @@ string User::getUsername()
 string User::getPassword()
 {
 	return this->password;
+}
+
+UserType User::getUserType()
+{
+	return this->userType;
 }
