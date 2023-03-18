@@ -13,17 +13,18 @@
 namespace fs = std::filesystem;
 using std::fstream;
 using std::string;
+extern string programFolderPath, dataFolderPath, reportsFolderPath;
 
 namespace RDBFileManager
 {
+	void addPaths(string programPath, string dataPath, string reportsPath);
+	void saveRDBfile(Organization& org);
+	void readRDBfile(Organization& org);
+	bool findRDBfile();
 
-	void saveRDBfile(Organization& org, string path);
-	void readRDBfile(Organization& org, string path);
-	bool findRDBfile(string path);
-
-	void createRDBUfile(User& user, string path);
-	void readRDBUfile(User& user, string path);
-	bool findRDBUfile(string path);
+	void createRDBUfile(User& user);
+	void readRDBUfile(User& user);
+	bool findRDBUfile();
 }
 
 
@@ -51,9 +52,9 @@ namespace RDBDatabaseManager
 
 namespace RDBSecurityManager
 {
-	string loadOrgName(string path);
-	bool orgSignin(Organization& org, string orgPasscode, string path);
-	bool userLogin(Organization& org, User& user, string username, string password, string path);
+	string loadOrgName();
+	bool orgSignin(Organization& org, string orgPasscode);
+	bool userLogin(Organization& org, User& user, string username, string password);
 	void encrypt();
 	void decrypt();
 }

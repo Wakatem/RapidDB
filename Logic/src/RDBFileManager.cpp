@@ -2,20 +2,17 @@
 
 namespace RDBFileManager
 {
-	void encrypt()
-	{
 
+	void addPaths(string programPath, string dataPath, string reportsPath)
+	{
+		programFolderPath = programPath;
+		dataFolderPath = dataPath;
+		reportsFolderPath = reportsPath;
 	}
 
-
-	void decrypt()
+	void saveRDBfile(Organization& org)
 	{
-
-	}
-
-	void saveRDBfile(Organization& org, string path)
-	{
-		string filename = path + "\\" + org.gerOrgName() + ".rdb";
+		string filename = dataFolderPath + "\\" + org.gerOrgName() + ".rdb";
 		fstream f(filename, std::ios::out | std::ios::binary);
 		boost::archive::binary_oarchive outputAR(f, boost::archive::no_header);
 
@@ -25,18 +22,18 @@ namespace RDBFileManager
 
 
 
-	void readRDBfile(Organization& org, string path)
+	void readRDBfile(Organization& org)
 	{
-		bool RDBfound = findRDBfile(path);
+		bool RDBfound = findRDBfile();
 
 		if (RDBfound)
 		{
-			for (const auto& entry : fs::directory_iterator(path))
+			for (const auto& entry : fs::directory_iterator(dataFolderPath))
 			{
 				if (entry.path().extension() == ".rdb")
 				{
 					//process reading
-					string filename = path + "\\" + entry.path().filename().string();
+					string filename = dataFolderPath + "\\" + entry.path().filename().string();
 					fstream f(filename, std::ios::in | std::ios::binary);
 					boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
 
@@ -50,10 +47,10 @@ namespace RDBFileManager
 	}
 
 
-	bool findRDBfile(string path)
+	bool findRDBfile()
 	{
 		bool RDBfound = false;
-		for (const auto& entry : fs::directory_iterator(path))
+		for (const auto& entry : fs::directory_iterator(dataFolderPath))
 		{
 			if (entry.path().extension() == ".rdb")
 			{
@@ -72,10 +69,10 @@ namespace RDBFileManager
 	}
 
 
-	bool findRDBUfile(string path)
+	bool findRDBUfile()
 	{
 		bool LoginFilefound = false;
-		for (const auto& entry : fs::directory_iterator(path))
+		for (const auto& entry : fs::directory_iterator(dataFolderPath))
 		{
 			if (entry.path().extension() == ".rdbu")
 			{
@@ -97,27 +94,27 @@ namespace RDBFileManager
 
 
 
-	void createRDBUfile(User& user, string path)
+	void createRDBUfile(User& user)
 	{
-		string filename = path + "\\" + (user.getFirstname() + user.getLastname()) + ".rdbu";
+		string filename = dataFolderPath + "\\" + (user.getFirstname() + user.getLastname()) + ".rdbu";
 		fstream f(filename, std::ios::out | std::ios::binary);
 		boost::archive::binary_oarchive outputAR(f, boost::archive::no_header);
 
 		outputAR << user;
 	}
 
-	void readRDBUfile(User& user, string path)
+	void readRDBUfile(User& user)
 	{
-		bool RDBUfound = findRDBUfile(path);
+		bool RDBUfound = findRDBUfile();
 
 		if (RDBUfound)
 		{
-			for (const auto& entry : fs::directory_iterator(path))
+			for (const auto& entry : fs::directory_iterator(dataFolderPath))
 			{
 				if (entry.path().extension() == ".rdbu")
 				{
 					//process reading
-					string filename = path + "\\" + entry.path().filename().string();
+					string filename = dataFolderPath + "\\" + entry.path().filename().string();
 					fstream f(filename, std::ios::in | std::ios::binary);
 					boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
 
