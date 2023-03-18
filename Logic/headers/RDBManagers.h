@@ -17,7 +17,7 @@ using std::string;
 namespace RDBFileManager
 {
 
-	void createRDBfile(Organization& org, string path);
+	void saveRDBfile(Organization& org, string path);
 	void readRDBfile(Organization& org, string path);
 	bool findRDBfile(string path);
 

@@ -13,7 +13,7 @@ namespace RDBFileManager
 
 	}
 
-	void createRDBfile(Organization& org, string path)
+	void saveRDBfile(Organization& org, string path)
 	{
 		string filename = path + "\\" + org.gerOrgName() + ".rdb";
 		fstream f(filename, std::ios::out | std::ios::binary);
