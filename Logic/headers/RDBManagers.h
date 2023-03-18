@@ -31,14 +31,13 @@ namespace RDBFileManager
 
 namespace RDBUserManager
 {
-	//void setDetails(Organization org, User user, string firstName, string lastName, char gender, string email, string phoneNumber, string username, string password);
-	//void changeFirstname(User user, string newFirstname);
-	//void changeLastname(User user, string newLastname);
-	//void changeEmail(User user, string newEmail);
-	//void changePhoneNumber(User user, string newPhoneNumber);
-	//void changePassword(User user, string oldPassword, string newPassword);
+	//void changeFirstname(Organization& org, User user, string newFirstname);
+	//void changeLastname(Organization& org, User user, string newLastname);
+	//void changeEmail(Organization& org, User user, string newEmail);
+	//void changePhoneNumber(Organization& org, User user, string newPhoneNumber);
+	//void changePassword(Organization& org, User user, string oldPassword, string newPassword);
 	void addUser(Organization& org, User user);
-	void deleteUser();
+	void deleteUser(Organization& org, User user);
 	//void changeUsername(User user, string newUsername);
 };
 
