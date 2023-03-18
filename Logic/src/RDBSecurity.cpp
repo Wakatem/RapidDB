@@ -38,6 +38,12 @@ namespace RDBSecurityManager
 				if (savedUser.getPassword() == password)
 				{
 					user = savedUser;
+
+					//create RDBU file if it doesn't exist
+					if (!RDBFileManager::findRDBUfile(path))
+					{
+						RDBFileManager::createRDBUfile(user, path);
+					}
 					return true;
 				}
 			}
