@@ -1,10 +1,11 @@
 #pragma once
 
 #include <string>
-#include "Organization.h"
 #include <tuple>
 #include <vector>
+#include <boost/serialization/serialization.hpp>
 
+using namespace std;
 
 enum UserType
 {
@@ -14,6 +15,7 @@ enum UserType
 
 class User
 {
+	friend class boost::serialization::access;
 protected:
 	string firstName;
 	string lastName;
@@ -26,8 +28,20 @@ protected:
 	//vector <Report> reports;
 	//vector <tuple <string, string>> associatedDBs;
 
+	template<class Archive>
+	void serialize(Archive& ar, const unsigned int version)
+	{
+		ar& firstName;
+		ar& lastName;
+		ar& email;
+		ar& phoneNumber;
+		ar& username;
+		ar& password;
+	}
+
 public:
-	User(string firstName, string lastName, char gender, string email, string phoneNumber, string username, string password);
+	User(string firstName, string lastName, char gender, string email, string phoneNumber, string username, string password, UserType userType);
+	User();
 	string getFirstname();
 	string getLastname();
 	char getGender();
