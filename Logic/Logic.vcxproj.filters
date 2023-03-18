@@ -54,5 +54,8 @@
     <ClCompile Include="src\RDBUserManager.cpp">
       <Filter>API</Filter>
     </ClCompile>
+    <ClCompile Include="src\RDBSecurity.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

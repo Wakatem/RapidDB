@@ -39,7 +39,6 @@ namespace RDBFileManager
 				boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
 
 				inputAR >> org;
-				cout << org.getUsers().size();
 				break;
 
 			}
