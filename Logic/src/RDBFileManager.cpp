@@ -33,13 +33,16 @@ namespace RDBFileManager
 		{
 			for (const auto& entry : fs::directory_iterator(path))
 			{
-				//process reading
-				string filename = path + "\\" + entry.path().filename().string();
-				fstream f(filename, std::ios::in | std::ios::binary);
-				boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
+				if (entry.path().extension() == ".rdb")
+				{
+					//process reading
+					string filename = path + "\\" + entry.path().filename().string();
+					fstream f(filename, std::ios::in | std::ios::binary);
+					boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
 
-				inputAR >> org;
-				break;
+					inputAR >> org;
+					break;
+				}
 
 			}
 		}
@@ -111,13 +114,16 @@ namespace RDBFileManager
 		{
 			for (const auto& entry : fs::directory_iterator(path))
 			{
-				//process reading
-				string filename = path + "\\" + entry.path().filename().string();
-				fstream f(filename, std::ios::in | std::ios::binary);
-				boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
+				if (entry.path().extension() == ".rdbu")
+				{
+					//process reading
+					string filename = path + "\\" + entry.path().filename().string();
+					fstream f(filename, std::ios::in | std::ios::binary);
+					boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
 
-				inputAR >> user;
-				break;
+					inputAR >> user;
+					break;
+				}
 
 			}
 		}
