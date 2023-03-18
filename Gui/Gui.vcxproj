@@ -152,6 +152,7 @@
       <PreprocessorDefinitions>WXBUILDING;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WXUSINGDLLS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\$(Resources)\wxWidgets\lib\vc_x64_lib\mswud;$(SolutionDir)\$(Resources)\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
