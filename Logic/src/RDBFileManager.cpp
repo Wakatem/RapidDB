@@ -1,4 +1,5 @@
 #include "RDBManagers.h"
+string programFolderPath = "", assetsFolderPath="", dataFolderPath = "", reportsFolderPath = "";
 
 namespace RDBFileManager
 {
@@ -10,6 +11,13 @@ namespace RDBFileManager
 		reportsFolderPath = reportsPath;
 	}
 
+	void createFolders()
+	{
+		fs::create_directory(assetsFolderPath);
+		fs::create_directory(dataFolderPath);
+		fs::create_directory(reportsFolderPath);
+	}
+
 	void saveRDBfile(Organization& org)
 	{
 		string filename = dataFolderPath + "\\" + org.gerOrgName() + ".rdb";
@@ -19,8 +27,6 @@ namespace RDBFileManager
 		outputAR << org;
 
 	}
-
-
 
 	void readRDBfile(Organization& org)
 	{

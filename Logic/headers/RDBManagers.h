@@ -13,11 +13,12 @@
 namespace fs = std::filesystem;
 using std::fstream;
 using std::string;
-extern string programFolderPath, dataFolderPath, reportsFolderPath;
+extern string programFolderPath, assetsFolderPath, dataFolderPath, reportsFolderPath;
 
 namespace RDBFileManager
 {
 	void addPaths(string programPath, string dataPath, string reportsPath);
+	void createFolders();
 	void saveRDBfile(Organization& org);
 	void readRDBfile(Organization& org);
 	bool findRDBfile();
