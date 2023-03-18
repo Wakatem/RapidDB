@@ -1,36 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
+    <Filter Include="API">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="User Management">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Security">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Analysis">
+      <UniqueIdentifier>{12e3746f-c780-4f94-9965-bf16fb20d3c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Report">
+      <UniqueIdentifier>{622025f4-794c-43ce-8c61-c8e2064139c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RDB">
+      <UniqueIdentifier>{920abf7b-380c-40f7-853f-41825402d315}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\Database.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="headers\Organization.h">
-      <Filter>Header Files</Filter>
+      <Filter>User Management</Filter>
     </ClInclude>
     <ClInclude Include="headers\User.h">
-      <Filter>Header Files</Filter>
+      <Filter>User Management</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Database.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\RDBManagers.h">
+      <Filter>RDB</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Database.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>API</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\RDBFileManager.cpp">
+      <Filter>RDB</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Organization.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="src\User.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RDBUserManager.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RDBSecurity.cpp">
+      <Filter>API</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,13 +1,21 @@
 #pragma once
 
 #include <string>
-#include "Organization.h"
 #include <tuple>
 #include <vector>
+#include <boost/serialization/serialization.hpp>
 
+using namespace std;
 
-class User : protected Organization
+enum UserType
 {
+	ADMIN,
+	MOD
+};
+
+class User
+{
+	friend class boost::serialization::access;
 protected:
 	string firstName;
 	string lastName;
@@ -16,31 +24,33 @@ protected:
 	string phoneNumber;
 	string username;
 	string password;
-	int activityHistory [4]; //still unknown
-	int reports[4]; //still unknown
-	vector <tuple <string, string>> associatedDBs;
+	UserType userType;
+	//int activityHistory [4]; //still unknown
+	//vector <Report> reports;
+	//vector <tuple <string, string>> associatedDBs;
+
+	template<class Archive>
+	void serialize(Archive& ar, const unsigned int version)
+	{
+		ar& firstName;
+		ar& lastName;
+		ar& email;
+		ar& phoneNumber;
+		ar& username;
+		ar& password;
+		ar& userType;
+	}
 
 public:
+	User(string firstName, string lastName, char gender, string email, string phoneNumber, string username, string password, UserType userType);
 	User();
-	void setDetails();
-	void changeFirstname();
-	void changeLastname();
-	void changeEmail();
-	void changePhoneNumber();
-	void changeUsername();
-	void changePassword();
-	vector<tuple <string, string>>& getAssociatedDBs();
-};
-
-
-class Admin : public User
-{
-public:
-	void createUser();
-	void deleteUser();
-	void addDatabase();
-	void removeDatabase();
-	void updateDatabaseIP();
-	void updateDatabasePort();
-	void updateDatabaseServiceName();
+	string getFirstname();
+	string getLastname();
+	char getGender();
+	string getEmail();
+	string getPhoneNumber();
+	string getUsername();
+	string getPassword();
+	UserType getUserType();
+	//vector<tuple <string, string>> getAssociatedDBs();
 };

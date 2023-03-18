@@ -125,12 +125,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\$(Resources)\instantclient_64\sdk\include;$(SolutionDir)\$(ProjectName)\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\$(Resources)\instantclient_64\sdk\include;$(SolutionDir)\$(ProjectName)\headers;$(SolutionDir)\$(Resources)\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\$(Resources)\instantclient_64\sdk\lib\msvc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\$(Resources)\instantclient_64\sdk\lib\msvc;C:\Users\moody\source\repos\RapidDB\resources\boost\bin\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>oci.lib;ociw32.lib;oramysql.lib;oraocci21d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -154,10 +155,16 @@
     <ClInclude Include="headers\Database.h" />
     <ClInclude Include="headers\Organization.h" />
     <ClInclude Include="headers\User.h" />
+    <ClInclude Include="headers\RDBManagers.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Organization.cpp" />
+    <ClCompile Include="src\RDBFileManager.cpp" />
     <ClCompile Include="src\Database.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\RDBSecurity.cpp" />
+    <ClCompile Include="src\RDBUserManager.cpp" />
+    <ClCompile Include="src\User.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

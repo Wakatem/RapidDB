@@ -19,7 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Screens\Login.cpp" />
+    <ClCompile Include="src\Screens\AdminRegister.cpp" />
+    <ClCompile Include="src\Screens\MainScreen.cpp" />
+    <ClCompile Include="src\Screens\Org.cpp" />
+    <ClCompile Include="src\Screens\OrganizationRegister.cpp" />
+    <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\MainFrame.cpp" />
+    <ClCompile Include="src\Screens\Org_Sign.cpp" />
+    <ClCompile Include="src\Tabs\Databases.cpp" />
+    <ClCompile Include="src\Tabs\Diagnostics.cpp" />
+    <ClCompile Include="src\Tabs\Reports.cpp" />
+    <ClCompile Include="src\Tabs\Settings.cpp" />
+    <ClCompile Include="src\Tabs\UserInfo.cpp" />
+    <ClCompile Include="src\Tabs\UsersManagement.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="headers\MainFrame.h" />
+    <ClInclude Include="headers\Screens.h" />
+    <ClInclude Include="headers\Tabs.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -134,13 +152,17 @@
       <PreprocessorDefinitions>WXBUILDING;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WXUSINGDLLS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\$(Resources)\wxWidgets\lib\vc_x64_lib\mswud;$(SolutionDir)\$(Resources)\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\$(Resources)\wxWidgets\lib\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>comctl32.lib;rpcrt4.lib;shell32.lib;gdi32.lib;kernel32.lib;user32.lib;comdlg32.lib;ole32.lib;oleaut32.lib;advapi32.lib;wxpngd.lib;wxjpegd.lib;wxzlibd.lib;wxbase32ud.lib;wxmsw32ud_core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
