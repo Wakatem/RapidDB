@@ -12,15 +12,15 @@ Database::Database(string databaseIP, unsigned short databasePort, string Servic
 }
 
 
-ResultSet* Database::query(string SQLCommand)
+ResultSet* Database::executeQuery(string SQLCommand)
 {
 	result = statement->executeQuery(SQLCommand);
-	result->next(); //move cursor to first row
+	//result->next(); //move cursor to first row
 
 	return result;
 }
 
-unsigned int Database::execute(string SQLCommand)
+unsigned int Database::executeDML(string SQLCommand)
 {
 	return statement->executeUpdate(SQLCommand);
 }
@@ -46,7 +46,7 @@ void Database::connect(string username, string password)
 {
 	//create connection
 	con = env->createConnection(username, password, URL);
-	cout << "Connected!" << endl;
+	// cout << "Connected!" << endl;
 
 	//create blank statement
 	statement = con->createStatement();

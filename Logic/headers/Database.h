@@ -23,12 +23,12 @@ private:
 
 public:
 	Database(string databaseIP, unsigned short databasePort, string ServiceName = "");
-	ResultSet* query(string SQLCommand);
+	ResultSet* executeQuery(string SQLCommand);
 
 	/**
 	Executes a non-query statement such as a SQL INSERT, UPDATE, DELETE statement, a DDL statement such as CREATE/ALTER and so on, or a stored procedure call. Returns either the row count for INSERT, UPDATE or DELETE or 0 for SQL statements that return nothing
 	*/
-	unsigned int execute(string SQLCommand);
+	unsigned int executeDML(string SQLCommand);
 	/**
 	A function to terminate all allocated resources related to SQL
 	*/
