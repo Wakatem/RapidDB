@@ -13,9 +13,9 @@ namespace RDBFileManager
 
 	}
 
-	void createRDBfile(Organization* org, string path)
+	void createRDBfile(Organization& org, string path)
 	{
-		string filename = path + "\\" + org->gerOrgName() + ".rdb";
+		string filename = path + "\\" + org.gerOrgName() + ".rdb";
 		fstream f(filename, std::ios::out | std::ios::binary);
 		boost::archive::binary_oarchive outputAR(f, boost::archive::no_header);
 
@@ -25,7 +25,7 @@ namespace RDBFileManager
 
 
 
-	void readRDBfile(Organization* org, string path)
+	void readRDBfile(Organization& org, string path)
 	{
 		bool RDBfound = findRDBfile(path);
 
@@ -39,6 +39,7 @@ namespace RDBFileManager
 				boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
 
 				inputAR >> org;
+				cout << org.getUsers().size();
 				break;
 
 			}

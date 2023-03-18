@@ -1,6 +1,6 @@
 #include "User.h"
 
-User::User(string firstName, string lastName, char gender, string email, string phoneNumber, string username, string password)
+User::User(string firstName, string lastName, char gender, string email, string phoneNumber, string username, string password, UserType userType)
 {
 	this->firstName = firstName;
 	this->lastName = lastName;
@@ -9,6 +9,11 @@ User::User(string firstName, string lastName, char gender, string email, string 
 	this->phoneNumber = phoneNumber;
 	this->username = username;
 	this->password = password;
+}
+
+User::User()
+{
+
 }
 
 string User::getFirstname()

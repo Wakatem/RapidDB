@@ -43,15 +43,15 @@ string Organization::getEmail()
 	return this->email;
 }
 
-vector<User> Organization::getUsers()
+vector<User>& Organization::getUsers()
 {
 	return this->users;
 }
 
-vector<Database> Organization::getDatabases()
-{
-	return this->databases;
-}
+//vector<Database> Organization::getDatabases()
+//{
+//	return this->databases;
+//}
 
 
 void Organization::setPrivatekey(string newPrivatekey)

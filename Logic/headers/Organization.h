@@ -6,6 +6,8 @@
 #include "User.h"
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/serialization.hpp>
+#include <boost/serialization/vector.hpp>
+
 using namespace::std;
 
 class Organization
@@ -20,7 +22,7 @@ private:
 	string privatekey;
 	string email;
 	vector <User> users;
-	vector <Database> databases;
+	//vector <Database> databases;
 	//vector <Report> reports;
 
 	//serialization of non-POD data
@@ -33,7 +35,7 @@ private:
 		ar& privatekey;
 		ar& email;
 		ar& users;
-		ar& databases;
+		//ar& databases;
 	}
 
 public:
@@ -47,8 +49,8 @@ public:
 	string getPrivatekey();
 	string getEmail();
 
-	vector <User> getUsers();
-	vector <Database> getDatabases();
+	vector <User>& getUsers();
 	void setPrivatekey(string newPrivatekey);
+	//vector <Database> getDatabases();
 	//vector <Report> getReports();
 };

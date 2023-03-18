@@ -13,13 +13,12 @@
 namespace fs = std::filesystem;
 using std::fstream;
 using std::string;
-using boost::serialization::make_binary_object;
 
 namespace RDBFileManager
 {
 
-	void createRDBfile(Organization* org, string path);
-	void readRDBfile(Organization* org, string path);
+	void createRDBfile(Organization& org, string path);
+	void readRDBfile(Organization& org, string path);
 	void saveToRDBfile(string path);
 	bool findRDBfile(string path);
 	bool findLoginFile();
@@ -34,7 +33,7 @@ namespace RDBUserManager
 	//void changeEmail(User user, string newEmail);
 	//void changePhoneNumber(User user, string newPhoneNumber);
 	//void changePassword(User user, string oldPassword, string newPassword);
-	void addUser(Organization org, User user);
+	void addUser(Organization& org, User user);
 	void deleteUser();
 	//void changeUsername(User user, string newUsername);
 };
