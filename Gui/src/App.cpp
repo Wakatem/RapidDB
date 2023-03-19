@@ -64,7 +64,23 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
     }
     catch (const std::exception&)
     {
-        wxLogMessage("Unable to go to previous screen");
+        wxLogMessage("Unable to shift screens");
+    }
+}
+
+
+void clearInitialScreens()
+{
+    int i = 0;
+    for (auto& screenTuple : screensReference)
+    {
+        if (get<1>(screenTuple) != MAIN)
+        {
+            get<0>(screenTuple)->Destroy();
+            screensReference.erase(screensReference.begin() + i);
+        }
+
+        i++;
     }
 }
 
@@ -73,46 +89,57 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 bool MyApp::OnInit()
 {
 
-    try
+    RDBFileManager::addPaths(wxStandardPaths::Get().GetDataDir().ToStdString(), ASSESTS("").ToStdString(), wxStandardPaths::Get().GetDataDir().append("\\data\\").ToStdString(), wxStandardPaths::Get().GetDataDir().append("\\reports\\").ToStdString());
+    RDBFileManager::createFolders();
+
+    shared_ptr<Organization> org = std::make_shared<Organization>();
+    shared_ptr<User> user = std::make_shared<User>();
+
+
+    //Main frame setup
+    wxString* title = new wxString("RapidDB");
+    MainFrame* mainWindow = new MainFrame(*title);
+    wxString logoPath = ASSESTS("icon.ico");
+    mainWindow->SetIcon(wxIcon(logoPath, wxBITMAP_TYPE_ICO));
+
+    wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
+    mainWindow->SetSizer(mainSizer);
+
+
+    Screen OrgSet = setOrg(mainWindow);
+    Screen OrgRegister = setupOrganizationRegister(mainWindow, org);
+    Screen AdminRegister = setupAdminRegister(mainWindow, org);
+    Screen OrgSign = OrganizationSignin(mainWindow, org, user);
+    Screen Login = setupLogin(mainWindow, org, user);
+    Screen MainScreen = setupMainScreen(mainWindow);
+
+
+    //Automatic login
+    bool RDBfound = RDBFileManager::findRDBfile();
+    bool RDBUfound = RDBFileManager::findRDBUfile();
+    bool automaticLogin = RDBfound && RDBUfound;
+
+    if (automaticLogin)
     {
-        RDBFileManager::addPaths("", "", wxStandardPaths::Get().GetDataDir().append("\\data\\").ToStdString(), "");
-        RDBFileManager::createFolders();
+        clearInitialScreens();
+        MainScreen->Show();
+        mainSizer->Add(MainScreen, 1, wxEXPAND);
+    }
 
-        shared_ptr<Organization> org = std::make_shared<Organization>();
-        shared_ptr<User> user = std::make_shared<User>();
-
-
-        //Main frame setup
-        wxString* title = new wxString("RapidDB");
-        MainFrame* mainWindow = new MainFrame(*title);
-        wxString logoPath = ASSESTS("icon.ico");
-        mainWindow->SetIcon(wxIcon(logoPath, wxBITMAP_TYPE_ICO));
-
-        wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
-        mainWindow->SetSizer(mainSizer);
-
-
-        Screen OrgSet = setOrg(mainWindow);
-        Screen OrgRegister = setupOrganizationRegister(mainWindow, org);
-        Screen AdminRegister = setupAdminRegister(mainWindow, org);
-        Screen OrgSign = OrganizationSignin(mainWindow, org, user);
-        Screen Login = setupLogin(mainWindow, org, user);
-        Screen MainScreen = setupMainScreen(mainWindow);
-
+    else
+    {
+        OrgSet->Show();
         mainSizer->Add(OrgSet, 1, wxEXPAND);
         mainSizer->Add(OrgRegister, 1, wxEXPAND);
         mainSizer->Add(AdminRegister, 1, wxEXPAND);
         mainSizer->Add(OrgSign, 1, wxEXPAND);
         mainSizer->Add(Login, 1, wxEXPAND);
         mainSizer->Add(MainScreen, 1, wxEXPAND);
-
-
-
-        mainWindow->Show(true);
     }
-    catch (const std::exception& e)
-    {
-        cout << e.what();
-    }
+
+
+    mainWindow->Show(true);
+
+
     return true;
 }

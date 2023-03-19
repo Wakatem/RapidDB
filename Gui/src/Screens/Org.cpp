@@ -58,6 +58,7 @@ Screen setOrg(wxWindow* parent)
 
     //Create screen parameters
     Screen screen1 = new wxPanel(parent);
+    screen1->Hide();
     screen1->SetSize(parent->GetSize());
 
     //Add screen pointer to list
