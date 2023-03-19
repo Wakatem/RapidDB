@@ -93,6 +93,12 @@ Screen OrganizationSignin(wxWindow* parent, shared_ptr<Organization> org, shared
     backButton->SetForegroundColour("#FFFFFF");
     backButton->SetPosition(DPI_POINT(25, 35, screen));
 
+
+    //title
+    wxStaticText* screenText = new wxStaticText(screen, wxID_ANY, "Organization Sign in", wxDefaultPosition, wxDefaultSize);
+    screenText->SetPosition(DPI_POINT(527, 180, screen));
+    screenText->SetFont(screenText->GetFont().Scale(2.2f).MakeUnderlined());
+
     string title = RDBSecurityManager::loadOrgName();
     wxStaticText* text = new wxStaticText(screen, ORG_SIGN_ORG_NAME, title, wxDefaultPosition, wxDefaultSize);
     text->SetFont(text->GetFont().Scale(3.5f).MakeBold());
@@ -124,6 +130,8 @@ Screen OrganizationSignin(wxWindow* parent, shared_ptr<Organization> org, shared
 
     sizer->Add(0, 30);
     sizer->Add(bitmapImage, 0, wxALIGN_CENTER);
+    sizer->Add(0, DPI_Y(30, screen));
+    sizer->Add(screenText, 0, wxALIGN_CENTER);
     sizer->Add(0, DPI_Y(30, screen));
     sizer->Add(rowSizer, 0, wxALIGN_CENTER);
     sizer->Add(0, DPI_Y(100, screen));
