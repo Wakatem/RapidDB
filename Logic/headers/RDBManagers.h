@@ -17,7 +17,7 @@ extern string programFolderPath, assetsFolderPath, dataFolderPath, reportsFolder
 
 namespace RDBFileManager
 {
-	void addPaths(string programPath, string dataPath, string reportsPath);
+	void addPaths(string programPath, string assetsPath, string dataPath, string reportsPath);
 	void createFolders();
 	void saveRDBfile(Organization& org);
 	void readRDBfile(Organization& org);

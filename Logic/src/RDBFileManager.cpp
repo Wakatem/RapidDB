@@ -4,8 +4,9 @@ string programFolderPath = "", assetsFolderPath="", dataFolderPath = "", reports
 namespace RDBFileManager
 {
 
-	void addPaths(string programPath, string dataPath, string reportsPath)
+	void addPaths(string programPath, string assetsPath, string dataPath, string reportsPath)
 	{
+		assetsFolderPath = assetsPath;
 		programFolderPath = programPath;
 		dataFolderPath = dataPath;
 		reportsFolderPath = reportsPath;
@@ -13,9 +14,16 @@ namespace RDBFileManager
 
 	void createFolders()
 	{
-		fs::create_directory(assetsFolderPath);
-		fs::create_directory(dataFolderPath);
-		fs::create_directory(reportsFolderPath);
+		try
+		{
+			fs::create_directory(assetsFolderPath);
+			fs::create_directory(dataFolderPath);
+			fs::create_directory(reportsFolderPath);
+		}
+		catch (const std::exception&)
+		{
+
+		}
 	}
 
 	void saveRDBfile(Organization& org)
