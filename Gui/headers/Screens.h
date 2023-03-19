@@ -9,6 +9,8 @@
 #include <vector>
 #include <tuple>
 #include <string>
+#include <Organization.h>
+#include "RDBManagers.h"
 
 //if in release mode
 #if NDEBUG
@@ -47,8 +49,8 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 
 
 //Setup functions for screens
-Screen setupOrganizationRegister(wxWindow* parent);
-Screen setupAdminRegister(wxWindow* parent);
+Screen setupOrganizationRegister(wxWindow* parent, shared_ptr<Organization> org);
+Screen setupAdminRegister(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user);
 Screen setOrg(wxWindow* parent);
 Screen setupLogin(wxWindow* parent);
 Screen OrganizationSigin(wxWindow* parent);

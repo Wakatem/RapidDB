@@ -12,11 +12,58 @@ void goBackToScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nex
 
 }
 
-void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
+void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, wxSizer* inputs, shared_ptr<Organization> org, shared_ptr<User> user)
 {
-    wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Organization registered successfully", wxString::FromAscii(wxMessageBoxCaptionStr));
-    dialog->ShowModal();
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+    wxArrayString choices;
+    choices.Add("Male");
+    choices.Add("Female");
+    wxBoxSizer* temp = nullptr; // to hold different input sizers
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(0))->GetSizer());
+    wxTextCtrl* firstnameInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(1))->GetSizer());
+    wxTextCtrl* lastnameInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(3))->GetSizer());
+    wxTextCtrl* phoneNumberInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(4))->GetSizer());
+    wxTextCtrl* emailInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(5))->GetSizer());
+    size_t index = ((wxChoice*)temp->GetItem(size_t(2))->GetWindow())->GetSelection();
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(6))->GetSizer());
+    wxTextCtrl* usernameInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(7))->GetSizer());
+    wxTextCtrl* passwordInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    //Inform user to provide detail if an input is empty
+    if (firstnameInput->GetValue().IsEmpty() || lastnameInput->GetValue().IsEmpty() || phoneNumberInput->GetValue().IsEmpty() || emailInput->GetValue().IsEmpty() || index == wxNOT_FOUND || usernameInput->GetValue().IsEmpty() || passwordInput->GetValue().IsEmpty())
+    {
+        wxLogMessage("Kindly provide all the details to continue registration");
+    }
+    else
+    {
+        //Save user details
+        char gender = choices[index].ToStdString()[0];
+        *user.get() = User(firstnameInput->GetValue().ToStdString(), lastnameInput->GetValue().ToStdString(), gender, emailInput->GetValue().ToStdString(), phoneNumberInput->GetValue().ToStdString(), usernameInput->GetValue().ToStdString(), passwordInput->GetValue().ToStdString(), ADMIN);
+
+        //Add user to organization
+        RDBUserManager::addUser(*org.get(), *user.get());
+
+        //Save local files
+        RDBFileManager::saveRDBfile(*org.get());
+        RDBFileManager::createRDBUfile(*user.get());
+
+        //Go to next screen
+        wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Organization registered successfully", wxString::FromAscii(wxMessageBoxCaptionStr));
+        dialog->ShowModal();
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+    }
+
 }
 
 
@@ -94,7 +141,7 @@ wxSizer* rowInputs(wxWindow* screen)
 
 
 
-Screen setupAdminRegister(wxWindow* parent)
+Screen setupAdminRegister(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user)
 {
     //Create screen parameters
     Screen screen = new wxPanel(parent);
@@ -138,7 +185,7 @@ Screen setupAdminRegister(wxWindow* parent)
     button->SetFont(button->GetFont().Scale(1.8f));
 
     ////Bind controls with functions and add controls to sizer
-    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen](wxCommandEvent& evt) {RegisterAdmin(screen, currentScreen, nextScreen); });
+    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen, inputs, org, user](wxCommandEvent& evt) {RegisterAdmin(screen, currentScreen, nextScreen, inputs, org, user); });
     backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBackToScreen(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);

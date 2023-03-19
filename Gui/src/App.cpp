@@ -1,6 +1,9 @@
 
 #include "../headers/MainFrame.h"
 #include "../headers/Screens.h"
+#include "RDBManagers.h"
+#include "Organization.h"
+#include "User.h"
 
 using std::get;
 vector<tuple<Screen, ScreenID>> screensReference;
@@ -64,9 +67,17 @@ void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 }
 
 
+
 bool MyApp::OnInit()
 {
+    RDBFileManager::addPaths("", "", wxStandardPaths::Get().GetDataDir().append("\\data\\").ToStdString(), "");
+    RDBFileManager::createFolders();
 
+    shared_ptr<Organization> org = std::make_shared<Organization>();
+    shared_ptr<User> user = std::make_shared<User>();
+
+
+    //Main frame setup
     wxString* title = new wxString("RapidDB");
     MainFrame* mainWindow = new MainFrame(*title);
     wxString logoPath = ASSESTS("icon.ico");
@@ -75,20 +86,19 @@ bool MyApp::OnInit()
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     mainWindow->SetSizer(mainSizer);
 
-    //Screen OrgSet = setOrg(mainWindow);
-    
-    //Screen OrgRegister = setupOrganizationRegister(mainWindow);
-    //Screen AdminRegister = setupAdminRegister(mainWindow);
-    //
-    //Screen OrgSign = OrganizationSigin(mainWindow);
-    //Screen Login = setupLogin(mainWindow);
+
+    Screen OrgSet = setOrg(mainWindow);
+    Screen OrgRegister = setupOrganizationRegister(mainWindow, org);
+    Screen AdminRegister = setupAdminRegister(mainWindow, org, user);
+    Screen OrgSign = OrganizationSigin(mainWindow);
+    Screen Login = setupLogin(mainWindow);
     Screen MainScreen = setupMainScreen(mainWindow);
 
-    //mainSizer->Add(OrgSet, 1, wxEXPAND);
-    //mainSizer->Add(OrgRegister, 1, wxEXPAND);
-    //mainSizer->Add(AdminRegister, 1, wxEXPAND);
-    //mainSizer->Add(OrgSign, 1, wxEXPAND);
-    //mainSizer->Add(Login, 1, wxEXPAND);
+    mainSizer->Add(OrgSet, 1, wxEXPAND);
+    mainSizer->Add(OrgRegister, 1, wxEXPAND);
+    mainSizer->Add(AdminRegister, 1, wxEXPAND);
+    mainSizer->Add(OrgSign, 1, wxEXPAND);
+    mainSizer->Add(Login, 1, wxEXPAND);
     mainSizer->Add(MainScreen, 1, wxEXPAND);
 
 

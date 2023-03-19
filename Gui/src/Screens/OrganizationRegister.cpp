@@ -12,7 +12,7 @@ void goBackToScreenToOrgSetUp(Screen currentScreen, ScreenID currentScreenID, Sc
 
 }
 
-void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, wxSizer* inputs, Organization& org)
+void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, wxSizer* inputs, shared_ptr<Organization> org)
 {
     wxArrayString choices;
     choices.Add("UTC +9:30");
@@ -27,7 +27,6 @@ void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
     choices.Add("UTC -8:00 / -7:00");
 
     wxBoxSizer* temp = nullptr; // to hold different input sizers
-    string name, country, email, password, timezone;
 
     temp = ( (wxBoxSizer*) inputs->GetItem(size_t(0))->GetSizer());
     wxTextCtrl* nameInput = ( (wxTextCtrl*) temp->GetItem(size_t(2))->GetWindow() );
@@ -54,7 +53,8 @@ void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
     {
         //Save organization details
         string timezone = choices[index].ToStdString();
-        org = Organization(nameInput->GetValue().ToStdString(), countryInput->GetValue().ToStdString(), nameInput->GetValue().ToStdString(), passwordInput->GetValue().ToStdString(), emailInput->GetValue().ToStdString());
+        org->setDetails(nameInput->GetValue().ToStdString(), countryInput->GetValue().ToStdString(), timezone , passwordInput->GetValue().ToStdString(), emailInput->GetValue().ToStdString());
+
     }
 
 
@@ -134,8 +134,9 @@ wxSizer* rowInputs_org_setup(wxWindow* screen)
 }
 
 
-Screen setupOrganizationRegister(wxWindow* parent, Organization& org)
+Screen setupOrganizationRegister(wxWindow* parent, shared_ptr<Organization> org)
 {
+   
     //Create screen parameters
     Screen screen = new wxPanel(parent);
     screen->SetSize(parent->GetSize());
@@ -182,7 +183,7 @@ Screen setupOrganizationRegister(wxWindow* parent, Organization& org)
     button->SetFont(button->GetFont().Scale(1.8f));
 
     //Bind controls with functions
-    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen, inputs, &org](wxCommandEvent& evt) {RegisterOrg(screen, currentScreen, nextScreen, inputs, org); });
+    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen, inputs, org](wxCommandEvent& evt) { RegisterOrg(screen, currentScreen, nextScreen, inputs, org); });
     backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBackToScreenToOrgSetUp(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);

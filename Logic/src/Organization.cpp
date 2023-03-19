@@ -13,6 +13,15 @@ Organization::Organization()
 {
 }
 
+void Organization::setDetails(string orgName, string orgCountry, string timezone, string passcode, string email)
+{
+	this->name = orgName;
+	this->country = orgCountry;
+	this->timezone = timezone;
+	this->passcode = passcode;
+	this->email = email;
+}
+
 string Organization::gerOrgName()
 {
 	return this->name;
