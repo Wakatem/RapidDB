@@ -12,9 +12,54 @@ void goBackToScreenToOrgSetUp(Screen currentScreen, ScreenID currentScreenID, Sc
 
 }
 
-void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
+void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, wxSizer* inputs, Organization& org)
 {
+    wxArrayString choices;
+    choices.Add("UTC +9:30");
+    choices.Add("UTC +9");
+    choices.Add("UTC +5");
+    choices.Add("UTC +4");
+    choices.Add("UTC +3");
+    choices.Add("UTC +1");
+    choices.Add("UTC +0");
+    choices.Add("UTC -4");
+    choices.Add("UTC -6");
+    choices.Add("UTC -8:00 / -7:00");
+
+    wxBoxSizer* temp = nullptr; // to hold different input sizers
+    string name, country, email, password, timezone;
+
+    temp = ( (wxBoxSizer*) inputs->GetItem(size_t(0))->GetSizer());
+    wxTextCtrl* nameInput = ( (wxTextCtrl*) temp->GetItem(size_t(2))->GetWindow() );
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(1))->GetSizer());
+    wxTextCtrl* countryInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(2))->GetSizer());
+    wxTextCtrl* emailInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(3))->GetSizer());
+    wxTextCtrl* passwordInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(4))->GetSizer());
+    size_t index = ((wxChoice*)temp->GetItem(size_t(2))->GetWindow())->GetSelection();
+   
+
+    //Inform user to provide detail if an input is empty
+    if (nameInput->GetValue().IsEmpty() || countryInput->GetValue().IsEmpty() || emailInput->GetValue().IsEmpty() || passwordInput->GetValue().IsEmpty() || index == wxNOT_FOUND)
+    {
+        wxLogMessage("Kindly provide all the details to continue registration");
+    }
+    else
+    {
+        //Save organization details
+        string timezone = choices[index].ToStdString();
+        org = Organization(nameInput->GetValue().ToStdString(), countryInput->GetValue().ToStdString(), nameInput->GetValue().ToStdString(), passwordInput->GetValue().ToStdString(), emailInput->GetValue().ToStdString());
+    }
+
+
     shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+    
 }
 
 
@@ -89,7 +134,7 @@ wxSizer* rowInputs_org_setup(wxWindow* screen)
 }
 
 
-Screen setupOrganizationRegister(wxWindow* parent)
+Screen setupOrganizationRegister(wxWindow* parent, Organization& org)
 {
     //Create screen parameters
     Screen screen = new wxPanel(parent);
@@ -137,7 +182,7 @@ Screen setupOrganizationRegister(wxWindow* parent)
     button->SetFont(button->GetFont().Scale(1.8f));
 
     //Bind controls with functions
-    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen](wxCommandEvent& evt) {RegisterOrg(screen, currentScreen, nextScreen); });
+    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen, inputs, &org](wxCommandEvent& evt) {RegisterOrg(screen, currentScreen, nextScreen, inputs, org); });
     backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBackToScreenToOrgSetUp(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);
