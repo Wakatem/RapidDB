@@ -15,14 +15,41 @@ void Org_set(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreen
 
 void Org_sign(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
 {
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+    bool RDBfound = RDBFileManager::findRDBfile();
+
+    if (RDBfound)
+    {
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+    }
+    else
+    {
+        wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "No RDB file was found", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK);
+        dialog->ShowModal();
+    }
+
 }
 
 
 /////////////////////////////////////////			                            		///////////////////////////////////////////////////
 
 
+string checkIfRDBExists(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
+{
+    bool RDBfound = RDBFileManager::findRDBfile();
 
+    if (RDBfound)
+    {
+        return RDBSecurityManager::loadOrgName();
+    }
+    else
+    {
+        //Go back to org setup screen
+        wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Inputs will be reset. Are you sure you want to leave?", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK | wxCANCEL);
+        if (dialog->ShowModal() == wxID_OK)
+            shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_RIGHT);
+    }
+    return "";
+}
 
 
 
