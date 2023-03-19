@@ -12,7 +12,7 @@ void goBackToScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nex
 
 }
 
-void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, wxSizer* inputs, shared_ptr<Organization> org, shared_ptr<User> user)
+void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, wxSizer* inputs, shared_ptr<Organization> org)
 {
     wxArrayString choices;
     choices.Add("Male");
@@ -49,14 +49,13 @@ void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID next
     {
         //Save user details
         char gender = choices[index].ToStdString()[0];
-        *user.get() = User(firstnameInput->GetValue().ToStdString(), lastnameInput->GetValue().ToStdString(), gender, emailInput->GetValue().ToStdString(), phoneNumberInput->GetValue().ToStdString(), usernameInput->GetValue().ToStdString(), passwordInput->GetValue().ToStdString(), ADMIN);
+        User user(firstnameInput->GetValue().ToStdString(), lastnameInput->GetValue().ToStdString(), gender, emailInput->GetValue().ToStdString(), phoneNumberInput->GetValue().ToStdString(), usernameInput->GetValue().ToStdString(), passwordInput->GetValue().ToStdString(), ADMIN);
 
         //Add user to organization
-        RDBUserManager::addUser(*org.get(), *user.get());
+        RDBUserManager::addUser(*org.get(), user);
 
         //Save local files
         RDBFileManager::saveRDBfile(*org.get());
-        RDBFileManager::createRDBUfile(*user.get());
 
         //Go to next screen once file is found
         bool RDBfound = RDBFileManager::findRDBfile();
@@ -153,7 +152,7 @@ wxSizer* rowInputs(wxWindow* screen)
 
 
 
-Screen setupAdminRegister(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user)
+Screen setupAdminRegister(wxWindow* parent, shared_ptr<Organization> org)
 {
     //Create screen parameters
     Screen screen = new wxPanel(parent);
@@ -197,7 +196,7 @@ Screen setupAdminRegister(wxWindow* parent, shared_ptr<Organization> org, shared
     button->SetFont(button->GetFont().Scale(1.8f));
 
     ////Bind controls with functions and add controls to sizer
-    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen, inputs, org, user](wxCommandEvent& evt) {RegisterAdmin(screen, currentScreen, nextScreen, inputs, org, user); });
+    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen, inputs, org](wxCommandEvent& evt) {RegisterAdmin(screen, currentScreen, nextScreen, inputs, org); });
     backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBackToScreen(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);

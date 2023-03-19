@@ -55,8 +55,8 @@ void refreshScreenValues(Screen nextScreen, ScreenID nextScreenID);
 
 //Setup functions for screens
 Screen setupOrganizationRegister(wxWindow* parent, shared_ptr<Organization> org);
-Screen setupAdminRegister(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user);
+Screen setupAdminRegister(wxWindow* parent, shared_ptr<Organization> org);
 Screen setOrg(wxWindow* parent);
 Screen setupLogin(wxWindow* parent);
-Screen OrganizationSignin(wxWindow* parent);
+Screen OrganizationSignin(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user);
 Screen setupMainScreen(wxWindow* parent);

@@ -18,9 +18,19 @@ void goBackToScreenToOrgPage(Screen currentScreen, ScreenID currentScreenID, Scr
 
 }
 
-void Org_signin(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
+void Org_signin(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, shared_ptr<Organization> org, shared_ptr<User> user, string givenPasscode)
 {
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+    bool validPasscode = RDBSecurityManager::orgSignin(*org.get(), givenPasscode);
+    
+    if (validPasscode)
+    {
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+    }
+    else
+    {
+        wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Incorrect passcode", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK);
+        dialog->ShowModal();
+    }
 }
 
 
@@ -50,7 +60,7 @@ wxBoxSizer* passwordInput(wxWindow* screen, wxString title, int marginHorizontal
 
 
 
-Screen OrganizationSignin(wxWindow* parent)
+Screen OrganizationSignin(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user)
 {
     //Create screen parameters
     Screen screen = new wxPanel(parent);
@@ -102,7 +112,14 @@ Screen OrganizationSignin(wxWindow* parent)
 
 
     //Bind controls with functions
-    button->Bind(wxEVT_BUTTON, [screen, currentScreen, nextScreen](wxCommandEvent& evt) {Org_signin(screen, currentScreen, nextScreen); });
+    auto signInFunction = [screen, currentScreen, nextScreen, org, user, password](wxCommandEvent& evt)
+    {
+        wxTextCtrl* password_input_box = ((wxTextCtrl*)password->GetItem(size_t(2))->GetWindow());
+
+        Org_signin(screen, currentScreen, nextScreen, org, user, password_input_box->GetValue().ToStdString());
+    };
+
+    button->Bind(wxEVT_BUTTON, signInFunction);
     backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBackToScreenToOrgPage(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);
