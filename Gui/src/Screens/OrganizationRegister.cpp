@@ -65,7 +65,7 @@ void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
 
 /////////////////////////////////////////			                            		///////////////////////////////////////////////////
 
-wxBoxSizer* textInput_org_setup(wxWindow* screen, wxString title, int marginHorizontally)
+wxBoxSizer* textInput_org_setup(wxWindow* screen, wxString title, int marginHorizontally, int style=0L)
 {
     wxBoxSizer* inputSizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -73,7 +73,7 @@ wxBoxSizer* textInput_org_setup(wxWindow* screen, wxString title, int marginHori
     username->SetFont(username->GetFont().Scale(1.2f).MakeBold());
 
 
-    wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY);
+    wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, style);
     usernameInput->SetMinSize(DPI_SIZE(220, 25, usernameInput));
     usernameInput->SetBackgroundColour("#E5E7E9");
 
@@ -123,7 +123,7 @@ wxSizer* rowInputs_org_setup(wxWindow* screen)
     rowSizer->Add(country);
 
     wxBoxSizer* email = textInput_org_setup(screen, "Email:", 39);
-    wxBoxSizer* password = textInput_org_setup(screen, "Password:", 30);
+    wxBoxSizer* password = textInput_org_setup(screen, "Passcode:", 30, wxTE_PASSWORD);
     wxBoxSizer* choiceMenu = choicesBox_tz(screen, 20);
 
     rowSizer->Add(email, 1);

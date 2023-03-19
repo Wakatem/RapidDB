@@ -48,7 +48,7 @@ void RegisterLogin()
     wxLogMessage("User Registered");
 }
 
-wxBoxSizer* textInput_setup(wxWindow* screen, wxString title, int marginTop)
+wxBoxSizer* textInput_setup(wxWindow* screen, wxString title, int marginTop, int style=0L)
 {
     wxBoxSizer* inputSizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -56,7 +56,7 @@ wxBoxSizer* textInput_setup(wxWindow* screen, wxString title, int marginTop)
     username->SetFont(username->GetFont().Scale(1.2f).MakeBold());
 
 
-    wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY);
+    wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, style);
     usernameInput->SetMinSize(DPI_SIZE(220, 25, usernameInput));
     usernameInput->SetBackgroundColour("#E5E7E9");
 
@@ -92,7 +92,7 @@ wxSizer* rowinputs(wxWindow* screen)
     wxFlexGridSizer* rowSizer = new wxFlexGridSizer(2, 50, 100);
 
     wxBoxSizer* username1 = textInput_setup(screen, "Username :", 40);
-    wxBoxSizer* password1 = textInput_setup(screen, "Password :", 40);
+    wxBoxSizer* password1 = textInput_setup(screen, "Password :", 40, wxTE_PASSWORD);
 
     rowSizer->Add(username1);
     rowSizer->Add(password1);

@@ -70,7 +70,7 @@ void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID next
 /////////////////////////////////////////		    	GUI Elements Functions		    ///////////////////////////////////////////////////
 
 
-wxBoxSizer* textInput(wxWindow* screen, wxString title, int marginHorizontally)
+wxBoxSizer* textInput(wxWindow* screen, wxString title, int marginHorizontally, int style=0L)
 {
     wxBoxSizer* inputSizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -78,7 +78,7 @@ wxBoxSizer* textInput(wxWindow* screen, wxString title, int marginHorizontally)
     username->SetFont(username->GetFont().Scale(1.2f).MakeBold());
 
 
-    wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY);
+    wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, style);
     usernameInput->SetMinSize(DPI_SIZE(220, 25, usernameInput));
     usernameInput->SetBackgroundColour("#E5E7E9");
 
@@ -125,7 +125,7 @@ wxSizer* rowInputs(wxWindow* screen)
     wxBoxSizer* textInput4 = textInput(screen, "Email :", 75);
     wxBoxSizer* choiceMenu = choicesBox(screen);
     wxBoxSizer* textInput5 = textInput(screen, "Username :", 45);
-    wxBoxSizer* textInput6 = textInput(screen, "Password :", 45);
+    wxBoxSizer* textInput6 = textInput(screen, "Password :", 45, wxTE_PASSWORD);
 
     rowSizer->Add(textInput3, 1);
     rowSizer->Add(textInput4);

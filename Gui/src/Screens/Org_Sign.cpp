@@ -82,7 +82,8 @@ Screen OrganizationSignin(wxWindow* parent)
     backButton->SetForegroundColour("#FFFFFF");
     backButton->SetPosition(DPI_POINT(25, 35, screen));
 
-    wxStaticText* text = new wxStaticText(screen, wxID_ANY, RDBSecurityManager::loadOrgName(), wxDefaultPosition, wxDefaultSize);
+    string title = RDBSecurityManager::loadOrgName();
+    wxStaticText* text = new wxStaticText(screen, wxID_ANY, title, wxDefaultPosition, wxDefaultSize);
     text->SetFont(text->GetFont().Scale(3.5f).MakeBold());
 
 
