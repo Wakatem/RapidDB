@@ -58,10 +58,22 @@ void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID next
         RDBFileManager::saveRDBfile(*org.get());
         RDBFileManager::createRDBUfile(*user.get());
 
-        //Go to next screen
-        wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Organization registered successfully", wxString::FromAscii(wxMessageBoxCaptionStr));
-        dialog->ShowModal();
-        shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+        //Go to next screen once file is found
+        bool RDBfound = RDBFileManager::findRDBfile();
+
+        if (RDBfound)
+        {
+            wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Organization registered successfully", wxString::FromAscii(wxMessageBoxCaptionStr));
+            dialog->ShowModal();
+            shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+        }
+        else
+        {
+            wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Error in creating RDB file", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK | wxCANCEL);
+
+            if (dialog->ShowModal() == wxID_OK)
+                shiftScreen(currentScreen, currentScreenID, ORG_REGISTER, false, wxSHOW_EFFECT_SLIDE_TO_RIGHT);
+        }
     }
 
 }

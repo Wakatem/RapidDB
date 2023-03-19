@@ -49,6 +49,7 @@ wxBoxSizer* passwordInput(wxWindow* screen, wxString title, int marginHorizontal
 
 
 
+
 Screen OrganizationSignin(wxWindow* parent)
 {
     //Create screen parameters
@@ -67,13 +68,13 @@ Screen OrganizationSignin(wxWindow* parent)
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
     screen->SetSizer(sizer);
 
-    // logo
+    //logo
     wxPNGHandler* p = new wxPNGHandler();
     wxImage::AddHandler(p);
     wxString logoPath = ASSESTS("image.png");
     wxStaticBitmap* bitmapImage = new wxStaticBitmap(screen, wxID_ANY, wxBitmap(wxImage(logoPath, wxBITMAP_TYPE_PNG).Rescale(130, 160, wxIMAGE_QUALITY_HIGH)));
 
-    //back
+    //back button
     wxString backButtonPath = ASSESTS("back_button.png");
     wxButton* backButton = new wxButton(screen, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
     backButton->SetSize(DPI_SIZE(40, 40, backButton));
@@ -83,7 +84,7 @@ Screen OrganizationSignin(wxWindow* parent)
     backButton->SetPosition(DPI_POINT(25, 35, screen));
 
     string title = RDBSecurityManager::loadOrgName();
-    wxStaticText* text = new wxStaticText(screen, wxID_ANY, title, wxDefaultPosition, wxDefaultSize);
+    wxStaticText* text = new wxStaticText(screen, ORG_SIGN_ORG_NAME, title, wxDefaultPosition, wxDefaultSize);
     text->SetFont(text->GetFont().Scale(3.5f).MakeBold());
 
 

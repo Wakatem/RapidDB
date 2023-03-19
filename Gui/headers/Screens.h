@@ -44,9 +44,14 @@ enum ScreenID
 	MAIN
 };
 
+enum ScreenItemIDS
+{
+	ORG_SIGN_ORG_NAME
+};
+
 extern vector<tuple<Screen, ScreenID>> screensReference;
 void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, bool destroyCurrentScreen, wxShowEffect animation, int animationDuration = 0U);
-
+void refreshScreenValues(Screen nextScreen, ScreenID nextScreenID);
 
 //Setup functions for screens
 Screen setupOrganizationRegister(wxWindow* parent, shared_ptr<Organization> org);
