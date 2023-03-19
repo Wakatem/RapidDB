@@ -19,7 +19,7 @@ private:
 	string country;
 	string timezone;
 	string passcode;
-	string privatekey;
+	string privatekey="a";
 	string email;
 	vector <User> users;
 	//vector <Database> databases;
@@ -31,6 +31,7 @@ private:
 	{
 		ar& name;
 		ar& country;
+		ar& timezone;
 		ar& passcode;
 		ar& privatekey;
 		ar& email;
@@ -42,6 +43,7 @@ public:
 	Organization(string orgName, string orgCountry, string timezone, string passcode, string email);
 	Organization();
 
+	void setDetails(string orgName, string orgCountry, string timezone, string passcode, string email);
 	string gerOrgName();
 	string getCountry();
 	string getTimezone();

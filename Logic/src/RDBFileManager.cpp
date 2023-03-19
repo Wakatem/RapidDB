@@ -16,9 +16,9 @@ namespace RDBFileManager
 	{
 		try
 		{
-			fs::create_directory(assetsFolderPath);
-			fs::create_directory(dataFolderPath);
-			fs::create_directory(reportsFolderPath);
+			assetsFolderPath != "" ? fs::create_directory(assetsFolderPath) : NULL;
+			dataFolderPath != "" ? fs::create_directory(dataFolderPath) : NULL;
+			reportsFolderPath != "" ? fs::create_directory(reportsFolderPath) : NULL;
 		}
 		catch (const std::exception&)
 		{

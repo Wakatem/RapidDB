@@ -81,7 +81,7 @@ Screen setupMainScreen(wxWindow* parent)
     //Create screen parameters
     Screen screen = new wxPanel(parent);
     screen->SetSize(parent->GetSize());
-    //screen->Hide();
+    screen->Hide();
     screen->SetBackgroundColour(wxColor("#FFF"));
 
     //Add screen pointer to list

@@ -43,12 +43,50 @@ void SignIn(wxString username, wxString password, bool isAdmin, bool isModerator
 
 }
 
-void RegisterLogin()
+
+void login(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, shared_ptr<Organization> org, shared_ptr<User> user, wxSizer* inputs)
 {
-    wxLogMessage("User Registered");
+    
+    wxArrayString choices;
+    choices.Add("Admin");
+    choices.Add("Moderator");
+
+    wxBoxSizer* temp;
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(0))->GetSizer());
+    wxTextCtrl* usernameInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(1))->GetSizer());
+    wxTextCtrl* passwordInput = ((wxTextCtrl*)temp->GetItem(size_t(2))->GetWindow());
+
+    temp = ((wxBoxSizer*)inputs->GetItem(size_t(2))->GetSizer());
+    size_t index = ((wxChoice*)temp->GetItem(size_t(2))->GetWindow())->GetSelection();
+    UserType userType;
+    index == ADMIN ? userType = ADMIN : userType = MOD;
+
+    //Inform user to provide detail if an input is empty
+    if (usernameInput->GetValue().IsEmpty() || passwordInput->GetValue().IsEmpty() || index == wxNOT_FOUND)
+    {
+        wxLogMessage("Kindly provide all the details to login");
+    }
+    else
+    {
+        bool successfulLogin = RDBSecurityManager::userLogin(*org.get(), *user.get(), usernameInput->GetValue().ToStdString(), passwordInput->GetValue().ToStdString(), userType);
+
+        if (successfulLogin)
+        {
+            shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
+        }
+        else
+        {
+            wxMessageDialog* dialog = new wxMessageDialog(currentScreen, "Incorrect username or password", wxString::FromAscii(wxMessageBoxCaptionStr), wxOK);
+            dialog->ShowModal();
+        }
+
+    }
 }
 
-wxBoxSizer* textInput_setup(wxWindow* screen, wxString title, int marginTop)
+
+wxBoxSizer* textInput_setup(wxWindow* screen, wxString title, int marginTop, int style=0L)
 {
     wxBoxSizer* inputSizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -56,7 +94,7 @@ wxBoxSizer* textInput_setup(wxWindow* screen, wxString title, int marginTop)
     username->SetFont(username->GetFont().Scale(1.2f).MakeBold());
 
 
-    wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY);
+    wxTextCtrl* usernameInput = new wxTextCtrl(screen, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, style);
     usernameInput->SetMinSize(DPI_SIZE(220, 25, usernameInput));
     usernameInput->SetBackgroundColour("#E5E7E9");
 
@@ -92,7 +130,7 @@ wxSizer* rowinputs(wxWindow* screen)
     wxFlexGridSizer* rowSizer = new wxFlexGridSizer(2, 50, 100);
 
     wxBoxSizer* username1 = textInput_setup(screen, "Username :", 40);
-    wxBoxSizer* password1 = textInput_setup(screen, "Password :", 40);
+    wxBoxSizer* password1 = textInput_setup(screen, "Password :", 40, wxTE_PASSWORD);
 
     rowSizer->Add(username1);
     rowSizer->Add(password1);
@@ -105,7 +143,7 @@ wxSizer* rowinputs(wxWindow* screen)
     return rowSizer;
 }
 
-Screen setupLogin(wxWindow* parent)
+Screen setupLogin(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user)
 {
     //Create screen parameters
     Screen screen = new wxPanel(parent);
@@ -149,7 +187,13 @@ Screen setupLogin(wxWindow* parent)
     button->SetFont(button->GetFont().Scale(1.8f));
 
     ////Bind controls with functions and add controls to sizer
-    button->Bind(wxEVT_BUTTON, [screen, inputs](wxCommandEvent& evt) {RegisterLogin(); });
+    auto loginFunction = [screen, currentScreen, nextScreen, inputs, org, user](wxCommandEvent& evt)
+    {
+
+
+        login(screen, currentScreen, nextScreen, org, user, inputs);
+    };
+    button->Bind(wxEVT_BUTTON, loginFunction);
     backButton->Bind(wxEVT_BUTTON, [screen, currentScreen, previousScreen](wxCommandEvent& evt) {goBack(screen, currentScreen, previousScreen); });
 
     sizer->Add(0, 30);

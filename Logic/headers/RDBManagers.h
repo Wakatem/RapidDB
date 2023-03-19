@@ -31,14 +31,14 @@ namespace RDBFileManager
 
 namespace RDBUserManager
 {
-	//void changeFirstname(Organization& org, User user, string newFirstname);
-	//void changeLastname(Organization& org, User user, string newLastname);
-	//void changeEmail(Organization& org, User user, string newEmail);
-	//void changePhoneNumber(Organization& org, User user, string newPhoneNumber);
-	//void changePassword(Organization& org, User user, string oldPassword, string newPassword);
-	void addUser(Organization& org, User user);
+	void changeFirstname(Organization& org, User user, string newFirstname);
+	void changeLastname(Organization& org, User user, string newLastname);
+	void changeEmail(Organization& org, User user, string newEmail);
+	void changePhoneNumber(Organization& org, User user, string newPhoneNumber);
+	bool changePassword(Organization& org, User user, string oldPassword, string newPassword);
+	int  findUser(Organization& org, User user);
+	bool addUser(Organization& org, User user);
 	void deleteUser(Organization& org, User user);
-	//void changeUsername(User user, string newUsername);
 };
 
 namespace RDBDatabaseManager
@@ -54,7 +54,7 @@ namespace RDBSecurityManager
 {
 	string loadOrgName();
 	bool orgSignin(Organization& org, string orgPasscode);
-	bool userLogin(Organization& org, User& user, string username, string password);
+	bool userLogin(Organization& org, User& user, string username, string password, UserType userType);
 	void encrypt();
 	void decrypt();
 }
