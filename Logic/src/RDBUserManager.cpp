@@ -44,7 +44,7 @@ namespace RDBUserManager
 				return i;
 			i++;
 		}
-
+		return i;
 	}
 
 	void changeFirstname(Organization& org, User user, string newFirstname)
