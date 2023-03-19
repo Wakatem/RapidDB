@@ -25,7 +25,7 @@ namespace RDBSecurityManager
 		return false;
 	}
 
-	bool userLogin(Organization& org, User& user, string username, string password)
+	bool userLogin(Organization& org, User& user, string username, string password, UserType userType)
 	{
 		Organization temp;
 		RDBFileManager::readRDBfile(temp);
@@ -33,18 +33,21 @@ namespace RDBSecurityManager
 		//find user by username
 		for (User& savedUser : org.getUsers())
 		{
-			if (savedUser.getUsername() == username)
+			if (savedUser.getUserType() == userType)
 			{
-				if (savedUser.getPassword() == password)
+				if (savedUser.getUsername() == username)
 				{
-					user = savedUser;
-
-					//create RDBU file if it doesn't exist
-					if (!RDBFileManager::findRDBUfile())
+					if (savedUser.getPassword() == password)
 					{
-						RDBFileManager::createRDBUfile(user);
+						user = savedUser;
+
+						//create RDBU file if it doesn't exist
+						if (!RDBFileManager::findRDBUfile())
+						{
+							RDBFileManager::createRDBUfile(user);
+						}
+						return true;
 					}
-					return true;
 				}
 			}
 		}

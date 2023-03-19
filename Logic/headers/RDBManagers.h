@@ -54,7 +54,7 @@ namespace RDBSecurityManager
 {
 	string loadOrgName();
 	bool orgSignin(Organization& org, string orgPasscode);
-	bool userLogin(Organization& org, User& user, string username, string password);
+	bool userLogin(Organization& org, User& user, string username, string password, UserType userType);
 	void encrypt();
 	void decrypt();
 }
