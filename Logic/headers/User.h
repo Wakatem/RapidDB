@@ -52,5 +52,11 @@ public:
 	string getUsername();
 	string getPassword();
 	UserType getUserType();
+
+	void setFirstname(string newFirstname);
+	void setLastname(string newLastname);
+	void setEmail(string newEmail);
+	void setPhoneNumber(string newPhoneNumber);
+	void setPassword(string newPassword);
 	//vector<tuple <string, string>> getAssociatedDBs();
 };

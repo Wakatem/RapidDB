@@ -56,3 +56,32 @@ UserType User::getUserType()
 {
 	return this->userType;
 }
+
+
+void User::setFirstname(string newFirstname)
+{
+	this->firstName = newFirstname;
+}
+
+
+void User::setLastname(string newLastname)
+{
+	this->lastName= newLastname;
+}
+
+void User::setEmail(string newEmail)
+{
+	this->email= newEmail;
+}
+
+
+void User::setPhoneNumber(string newPhoneNumber)
+{
+	this->phoneNumber= newPhoneNumber;
+}
+
+
+void User::setPassword(string newPassword)
+{
+	this->password= newPassword;
+}
