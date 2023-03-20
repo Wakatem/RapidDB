@@ -39,6 +39,11 @@
     <ClInclude Include="headers\Screens.h" />
     <ClInclude Include="headers\Tabs.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logic\Logic.vcxproj">
+      <Project>{032329f5-7999-46a5-9b56-75fb8495e524}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -151,13 +156,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WXBUILDING;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WXUSINGDLLS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\$(Resources)\wxWidgets\lib\vc_x64_lib\mswud;$(SolutionDir)\$(Resources)\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\$(Resources)\wxWidgets\lib\vc_x64_lib\mswud;$(SolutionDir)\$(Resources)\wxWidgets\include;$(SolutionDir)\Logic\headers;$(SolutionDir)\$(Resources)\instantclient_64\sdk\include;$(SolutionDir)\$(Resources)\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\$(Resources)\wxWidgets\lib\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\$(Resources)\wxWidgets\lib\vc_x64_lib;$(SolutionDir)\$(Resources)\instantclient_64\sdk\lib\msvc;$(SolutionDir)\$(Resources)\boost\bin\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>comctl32.lib;rpcrt4.lib;shell32.lib;gdi32.lib;kernel32.lib;user32.lib;comdlg32.lib;ole32.lib;oleaut32.lib;advapi32.lib;wxpngd.lib;wxjpegd.lib;wxzlibd.lib;wxbase32ud.lib;wxmsw32ud_core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Manifest>

@@ -3,17 +3,17 @@
 namespace RDBSecurityManager
 {
 
-	string loadOrgName(string path)
+	string loadOrgName()
 	{
 		Organization temp;
-		RDBFileManager::readRDBfile(temp, path);
+		RDBFileManager::readRDBfile(temp);
 		return temp.gerOrgName();
 	}
 
-	bool orgSignin(Organization& org, string orgPasscode, string path)
+	bool orgSignin(Organization& org, string orgPasscode)
 	{
 		Organization temp;
-		RDBFileManager::readRDBfile(temp, path);
+		RDBFileManager::readRDBfile(temp);
 
 		//Return true if passcode matches
 		if (temp.getPasscode() == orgPasscode)
@@ -25,26 +25,29 @@ namespace RDBSecurityManager
 		return false;
 	}
 
-	bool userLogin(Organization& org, User& user, string username, string password, string path)
+	bool userLogin(Organization& org, User& user, string username, string password, UserType userType)
 	{
 		Organization temp;
-		RDBFileManager::readRDBfile(temp, path);
+		RDBFileManager::readRDBfile(temp);
 
 		//find user by username
 		for (User& savedUser : org.getUsers())
 		{
-			if (savedUser.getUsername() == username)
+			if (savedUser.getUserType() == userType)
 			{
-				if (savedUser.getPassword() == password)
+				if (savedUser.getUsername() == username)
 				{
-					user = savedUser;
-
-					//create RDBU file if it doesn't exist
-					if (!RDBFileManager::findRDBUfile(path))
+					if (savedUser.getPassword() == password)
 					{
-						RDBFileManager::createRDBUfile(user, path);
+						user = savedUser;
+
+						//create RDBU file if it doesn't exist
+						if (!RDBFileManager::findRDBUfile())
+						{
+							RDBFileManager::createRDBUfile(user);
+						}
+						return true;
 					}
-					return true;
 				}
 			}
 		}

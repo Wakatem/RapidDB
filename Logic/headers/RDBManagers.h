@@ -13,31 +13,32 @@
 namespace fs = std::filesystem;
 using std::fstream;
 using std::string;
+extern string programFolderPath, assetsFolderPath, dataFolderPath, reportsFolderPath;
 
 namespace RDBFileManager
 {
+	void addPaths(string programPath, string assetsPath, string dataPath, string reportsPath);
+	void createFolders();
+	void saveRDBfile(Organization& org);
+	void readRDBfile(Organization& org);
+	bool findRDBfile();
 
-	void saveRDBfile(Organization& org, string path);
-	void readRDBfile(Organization& org, string path);
-	bool findRDBfile(string path);
-
-	void createRDBUfile(User& user, string path);
-	void readRDBUfile(User& user, string path);
-	bool findRDBUfile(string path);
+	void createRDBUfile(User& user);
+	void readRDBUfile(User& user);
+	bool findRDBUfile();
 }
 
 
 namespace RDBUserManager
 {
-	//void setDetails(Organization org, User user, string firstName, string lastName, char gender, string email, string phoneNumber, string username, string password);
-	//void changeFirstname(User user, string newFirstname);
-	//void changeLastname(User user, string newLastname);
-	//void changeEmail(User user, string newEmail);
-	//void changePhoneNumber(User user, string newPhoneNumber);
-	//void changePassword(User user, string oldPassword, string newPassword);
-	void addUser(Organization& org, User user);
-	void deleteUser();
-	//void changeUsername(User user, string newUsername);
+	void changeFirstname(Organization& org, User user, string newFirstname);
+	void changeLastname(Organization& org, User user, string newLastname);
+	void changeEmail(Organization& org, User user, string newEmail);
+	void changePhoneNumber(Organization& org, User user, string newPhoneNumber);
+	bool changePassword(Organization& org, User user, string oldPassword, string newPassword);
+	int  findUser(Organization& org, User user);
+	bool addUser(Organization& org, User user);
+	void deleteUser(Organization& org, User user);
 };
 
 namespace RDBDatabaseManager
@@ -51,9 +52,9 @@ namespace RDBDatabaseManager
 
 namespace RDBSecurityManager
 {
-	string loadOrgName(string path);
-	bool orgSignin(Organization& org, string orgPasscode, string path);
-	bool userLogin(Organization& org, User& user, string username, string password, string path);
+	string loadOrgName();
+	bool orgSignin(Organization& org, string orgPasscode);
+	bool userLogin(Organization& org, User& user, string username, string password, UserType userType);
 	void encrypt();
 	void decrypt();
 }

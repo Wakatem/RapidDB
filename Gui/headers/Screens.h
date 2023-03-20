@@ -9,8 +9,18 @@
 #include <vector>
 #include <tuple>
 #include <string>
+#include <Organization.h>
+#include "RDBManagers.h"
 
-#define ASSESTS(assestName) wxStandardPaths::Get().GetDataDir().erase(wxStandardPaths::Get().GetDataDir().find("RapidDB") + 7).append("\\resources\\assets\\").append(assestName)
+//if in release mode
+#if NDEBUG
+	#define ASSESTS(assestName) wxStandardPaths::Get().GetDataDir().append("\\assets\\").append(assestName)
+	#define RDB_DATA(filename) wxStandardPaths::Get().GetDataDir().append("\\data\\").append(filename)
+#else
+	#define ASSESTS(assestName) wxStandardPaths::Get().GetDataDir().erase(wxStandardPaths::Get().GetDataDir().find("RapidDB") + 7).append("\\resources\\assets\\").append(assestName)
+#endif
+
+//#define ASSESTS(assestName) wxStandardPaths::Get().GetDataDir().erase(wxStandardPaths::Get().GetDataDir().find("RapidDB") + 7).append("\\resources\\assets\\").append(assestName)
 #define DPI_SIZE(width, height, window) wxWindow::FromDIP(wxSize(width, height), window)
 #define DPI_POINT(x, y, window) wxWindow::FromDIP(wxPoint(x, y), window)
 #define DPI_X(xValue, window) wxWindow::FromDIP(xValue, window)
@@ -34,14 +44,19 @@ enum ScreenID
 	MAIN
 };
 
+enum ScreenItemIDS
+{
+	ORG_SIGN_ORG_NAME
+};
+
 extern vector<tuple<Screen, ScreenID>> screensReference;
 void shiftScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID, bool destroyCurrentScreen, wxShowEffect animation, int animationDuration = 0U);
-
+void refreshScreenValues(Screen nextScreen, ScreenID nextScreenID);
 
 //Setup functions for screens
-Screen setupOrganizationRegister(wxWindow* parent);
-Screen setupAdminRegister(wxWindow* parent);
+Screen setupOrganizationRegister(wxWindow* parent, shared_ptr<Organization> org);
+Screen setupAdminRegister(wxWindow* parent, shared_ptr<Organization> org);
 Screen setOrg(wxWindow* parent);
-Screen setupLogin(wxWindow* parent);
-Screen OrganizationSigin(wxWindow* parent);
+Screen setupLogin(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user);
+Screen OrganizationSignin(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user);
 Screen setupMainScreen(wxWindow* parent);
