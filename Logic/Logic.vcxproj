@@ -152,12 +152,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Database_Report.h" />
     <ClInclude Include="headers\Database.h" />
     <ClInclude Include="headers\Organization.h" />
     <ClInclude Include="headers\User.h" />
     <ClInclude Include="headers\RDBManagers.h" />
+    <ClInclude Include="Query_Report.h" />
+    <ClInclude Include="Report.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Database_Report.cpp" />
+    <ClCompile Include="Query_Report.cpp" />
+    <ClCompile Include="Report.cpp" />
     <ClCompile Include="src\Organization.cpp" />
     <ClCompile Include="src\RDBFileManager.cpp" />
     <ClCompile Include="src\Database.cpp" />
