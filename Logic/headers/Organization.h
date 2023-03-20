@@ -52,9 +52,6 @@ public:
 	string getEmail();
 	void setPrivatekey(string newPrivatekey);
 
-    vector <User>& getUsers();
-	void setPrivatekey(string newPrivatekey);
-	//vector <Database> getDatabases();
 	vector <User>& getUsers();
 	vector <Database>& getDatabases();
 	//vector <Report> getReports();
