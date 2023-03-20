@@ -75,10 +75,10 @@ void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID next
     {
         wxLogMessage("Kindly provide all the details to continue registration");
     }
-    else if (emailInput->GetValue() != "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+") 
-    {
-        wxLogMessage("Kindly provide a valid email");
-    }
+    //else if (emailInput->GetValue() != "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+") 
+    //{
+    //    wxLogMessage("Kindly provide a valid email");
+    //}
     else if (checkPasswordUser(passwordInput) == false)
     {
         wxLogMessage("Kindly provide a password that meets the following:\n\nPassword should be:\nMore than 6 characters\nContain at least 1 upper case letter\nContain at least 1 lower case letter\n Contain at least 1 number");

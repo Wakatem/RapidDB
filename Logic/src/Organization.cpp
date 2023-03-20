@@ -13,6 +13,12 @@ Organization::Organization()
 {
 }
 
+Organization::~Organization()
+{
+	databases.clear();
+	users.clear();
+}
+
 void Organization::setDetails(string orgName, string orgCountry, string timezone, string passcode, string email)
 {
 	this->name = orgName;

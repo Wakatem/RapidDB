@@ -34,6 +34,10 @@ Database::Database(string databaseIP, unsigned short databasePort, string Servic
 }
 
 
+Database::Database()
+{
+}
+
 ResultSet* Database::executeQuery(string SQLCommand)
 {
 	result = statement->executeQuery(SQLCommand);

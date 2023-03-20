@@ -36,12 +36,13 @@ private:
 		ar& privatekey;
 		ar& email;
 		ar& users;
-		//ar& databases;
+		ar& databases;
 	}
 
 public:
 	Organization(string orgName, string orgCountry, string timezone, string passcode, string email);
 	Organization();
+	~Organization();
 
 	void setDetails(string orgName, string orgCountry, string timezone, string passcode, string email);
 	string gerOrgName();

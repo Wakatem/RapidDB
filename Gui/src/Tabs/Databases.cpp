@@ -59,12 +59,11 @@ TabWindow setupDatabasesWindow(wxWindow* parent, shared_ptr<Organization> org)
 	
 	//determine number of databases and create rows accordingly
 	int rows = org->getDatabases().size() / 2;
-	if (org->getDatabases().size() % 2 != 0)
-		rows+= 2; //+1 for the space above, and +1 for the odd row
+	rows += 2; //+1 for the space above, and +1 for the odd row
 
 	wxBoxSizer* sizer1 = new wxBoxSizer(wxHORIZONTAL);
 	window->SetSizer(sizer1);
-	wxFlexGridSizer* sizer2 = new wxFlexGridSizer(10, 2, 70, 50);
+	wxFlexGridSizer* sizer2 = new wxFlexGridSizer(rows, 2, 70, 50);
 	sizer1->Add(DPI_X(20, window), 0);
 	sizer1->Add(sizer2, 1);
 	sizer2->Add(0, DPI_Y(1, window));
@@ -76,13 +75,18 @@ TabWindow setupDatabasesWindow(wxWindow* parent, shared_ptr<Organization> org)
 	{
 		sizer2->Add(databaseBox(window, db));
 	}
-	//sizer2->Add(databaseBox(window, org));
-	//sizer2->Add(databaseBox(window));
 
+
+	wxButton* addButton = new wxButton(window, wxID_ANY, "Add a database");
+	addButton->SetPosition(DPI_POINT(600, 600, addButton));
+	addButton->SetMinSize(DPI_SIZE(210, 100, addButton));
+	addButton->SetFont(addButton->GetFont().Scale(1.2f));
+	addButton->Raise();
 
 	wxBoxSizer* windowSizer = new wxBoxSizer(wxVERTICAL);
 	parent->SetSizer(windowSizer);
 	windowSizer->Add(window, 1, wxEXPAND);
+	parent->Layout();
 	return window;
 }
 

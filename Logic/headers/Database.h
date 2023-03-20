@@ -54,6 +54,7 @@ private:
 public:
 	Database(string name, string type, DatabaseLocation location, string databaseIP, unsigned short databasePort, string ServiceName = "");
 	Database(string databaseIP, unsigned short databasePort, string ServiceName = "");
+	Database();
 	ResultSet* executeQuery(string SQLCommand);
 
 	/**

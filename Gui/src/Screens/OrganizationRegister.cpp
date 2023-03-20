@@ -72,10 +72,10 @@ void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
     {
         wxLogMessage("Kindly provide all the details to continue registration");
     }
-    else if (emailInput->GetValue() != "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+") 
-    {
-        wxLogMessage("Kindly provide a valid email");
-    }
+    //else if (emailInput->GetValue() != "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+") 
+    //{
+    //    wxLogMessage("Kindly provide a valid email");
+    //}
     else if (checkPassword(passwordInput) == false) 
     {
         wxLogMessage("Kindly provide a password that meets the following:\n\nPassword should be:\nMore than 6 characters\nContain at least 1 upper case letter\nContain at least 1 lower case letter\n Contain at least 1 number");
@@ -85,11 +85,11 @@ void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
         //Save organization details
         string timezone = choices[index].ToStdString();
         org->setDetails(nameInput->GetValue().ToStdString(), countryInput->GetValue().ToStdString(), timezone , passwordInput->GetValue().ToStdString(), emailInput->GetValue().ToStdString());
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
 
     }
 
 
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
     
 }
 

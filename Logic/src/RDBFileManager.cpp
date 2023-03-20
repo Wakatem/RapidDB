@@ -28,11 +28,12 @@ namespace RDBFileManager
 
 	void saveRDBfile(Organization& org)
 	{
+		Organization encryptedORG = RDBSecurityManager::encrypt(&org);
 		string filename = dataFolderPath + "\\" + org.gerOrgName() + ".rdb";
 		fstream f(filename, std::ios::out | std::ios::binary);
 		boost::archive::binary_oarchive outputAR(f, boost::archive::no_header);
 
-		outputAR << org;
+		outputAR << encryptedORG;
 
 	}
 
@@ -52,6 +53,10 @@ namespace RDBFileManager
 					boost::archive::binary_iarchive inputAR(f, boost::archive::no_header);
 
 					inputAR >> org;
+
+					//decrypt and extract
+					//org = RDBSecurityManager::decrypt(&org);
+					//cout << org.getPasscode();
 					break;
 				}
 
