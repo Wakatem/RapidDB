@@ -59,4 +59,4 @@ Screen setupAdminRegister(wxWindow* parent, shared_ptr<Organization> org);
 Screen setOrg(wxWindow* parent);
 Screen setupLogin(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user);
 Screen OrganizationSignin(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user);
-Screen setupMainScreen(wxWindow* parent);
+Screen setupMainScreen(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user);

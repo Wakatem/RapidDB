@@ -22,7 +22,7 @@ private:
 	string privatekey="a";
 	string email;
 	vector <User> users;
-	//vector <Database> databases;
+	vector <Database> databases;
 	//vector <Report> reports;
 
 	//serialization of non-POD data
@@ -50,9 +50,12 @@ public:
 	string getPasscode();
 	string getPrivatekey();
 	string getEmail();
+	void setPrivatekey(string newPrivatekey);
 
     vector <User>& getUsers();
 	void setPrivatekey(string newPrivatekey);
 	//vector <Database> getDatabases();
+	vector <User>& getUsers();
+	vector <Database>& getDatabases();
 	//vector <Report> getReports();
 };

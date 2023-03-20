@@ -74,7 +74,7 @@ void activateTab(int previousTabWindowID, int newTabWindowID, wxWindow* tabWindo
 
 
 
-Screen setupMainScreen(wxWindow* parent)
+Screen setupMainScreen(wxWindow* parent, shared_ptr<Organization> org, shared_ptr<User> user)
 {
 
     bool userIsAdmin = true;

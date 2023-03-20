@@ -43,7 +43,7 @@ namespace RDBUserManager
 
 namespace RDBDatabaseManager
 {
-	void addDatabase();
+	void addDatabase(Organization& org, Database db);
 	void removeDatabase();
 	void updateDatabaseIP();
 	void updateDatabasePort();
