@@ -66,12 +66,6 @@
     <ClCompile Include="src\RDBSecurity.cpp">
       <Filter>API</Filter>
     </ClCompile>
-    <ClCompile Include="Report.cpp">
-      <Filter>API</Filter>
-    </ClCompile>
-    <ClCompile Include="Query_Report.cpp">
-      <Filter>API</Filter>
-    </ClCompile>
     <ClCompile Include="Database_Report.cpp">
       <Filter>API</Filter>
     </ClCompile>
