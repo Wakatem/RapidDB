@@ -10,7 +10,7 @@ TabWindow setupUsersManagementWindow(wxWindow* parent)
 	wxGrid* grid = new wxGrid(window, wxID_ANY);
 
 	// Set the size and number of rows and columns
-	grid->CreateGrid(Organization::getUsers().size(), 3);
+	//grid->CreateGrid(Organization::getUsers().size(), 3);
 	grid->SetRowLabelSize(30);
 	grid->SetColLabelSize(30);
 	grid->SetDefaultRowSize(25);

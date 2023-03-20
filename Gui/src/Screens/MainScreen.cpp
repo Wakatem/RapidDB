@@ -99,7 +99,7 @@ Screen setupMainScreen(wxWindow* parent, shared_ptr<Organization> org, shared_pt
 
     //Create tabs
     Tab UserInfoTab = setupUserInfoTab(screen, tabWindow);
-    Tab DatabasesTab = setupDatabasesTab(screen, tabWindow);
+    Tab DatabasesTab = setupDatabasesTab(screen, tabWindow, org);
     Tab DiagnosticsTab = setupDiagnosticsTab(screen, tabWindow);
     Tab Reports = setupReportsTab(screen, tabWindow);
     Tab SettingsTab = setupSettingsTab(screen, tabWindow);
