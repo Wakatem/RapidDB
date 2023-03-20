@@ -112,7 +112,7 @@ bool MyApp::OnInit()
     Screen AdminRegister = setupAdminRegister(mainWindow, org);
     Screen OrgSign = OrganizationSignin(mainWindow, org, user);
     Screen Login = setupLogin(mainWindow, org, user);
-    Screen MainScreen = setupMainScreen(mainWindow);
+    Screen MainScreen = setupMainScreen(mainWindow, org, user);
 
 
     //Automatic login
