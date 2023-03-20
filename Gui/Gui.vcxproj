@@ -163,7 +163,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\$(Resources)\wxWidgets\lib\vc_x64_lib;$(SolutionDir)\$(Resources)\instantclient_64\sdk\lib\msvc;$(SolutionDir)\$(Resources)\boost\bin\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;shell32.lib;gdi32.lib;kernel32.lib;user32.lib;comdlg32.lib;ole32.lib;oleaut32.lib;advapi32.lib;wxpngd.lib;wxjpegd.lib;wxzlibd.lib;wxbase32ud.lib;wxmsw32ud_core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;shell32.lib;gdi32.lib;kernel32.lib;user32.lib;comdlg32.lib;ole32.lib;oleaut32.lib;advapi32.lib;wxpngd.lib;wxjpegd.lib;wxzlibd.lib;wxbase32ud.lib;wxmsw32ud_core.lib;oci.lib;ociw32.lib;oramysql.lib;oraocci21d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Manifest>
       <EnableDpiAwareness>true</EnableDpiAwareness>
