@@ -14,6 +14,7 @@ namespace fs = std::filesystem;
 using std::fstream;
 using std::string;
 extern string programFolderPath, assetsFolderPath, dataFolderPath, reportsFolderPath;
+extern const char encryptionKey;
 
 namespace RDBFileManager
 {
@@ -43,7 +44,7 @@ namespace RDBUserManager
 
 namespace RDBDatabaseManager
 {
-	void addDatabase();
+	void addDatabase(Organization& org, Database db);
 	void removeDatabase();
 	void updateDatabaseIP();
 	void updateDatabasePort();
@@ -55,6 +56,6 @@ namespace RDBSecurityManager
 	string loadOrgName();
 	bool orgSignin(Organization& org, string orgPasscode);
 	bool userLogin(Organization& org, User& user, string username, string password, UserType userType);
-	void encrypt();
-	void decrypt();
+	Organization encrypt(Organization* org);
+	Organization decrypt(Organization* org);
 }

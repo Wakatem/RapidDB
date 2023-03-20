@@ -13,6 +13,12 @@ Organization::Organization()
 {
 }
 
+Organization::~Organization()
+{
+	databases.clear();
+	users.clear();
+}
+
 void Organization::setDetails(string orgName, string orgCountry, string timezone, string passcode, string email)
 {
 	this->name = orgName;
@@ -57,10 +63,10 @@ vector<User>& Organization::getUsers()
 	return this->users;
 }
 
-//vector<Database> Organization::getDatabases()
-//{
-//	return this->databases;
-//}
+vector<Database>& Organization::getDatabases()
+{
+	return this->databases;
+}
 
 
 void Organization::setPrivatekey(string newPrivatekey)

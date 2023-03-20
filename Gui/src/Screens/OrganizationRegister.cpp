@@ -1,4 +1,27 @@
 #include "../../headers/Screens.h"
+#include <regex>
+
+ static bool checkPassword(wxTextCtrl* passwordCtrl)
+{
+    wxString password = passwordCtrl->GetValue();
+    int n = password.length();
+    bool hasLower = false, hasUpper = false, hasDigit = false;
+
+    for (int i = 0; i < n; i++) {
+        if (islower(password[i]))
+            hasLower = true;
+        if (isupper(password[i]))
+            hasUpper = true;
+        if (isdigit(password[i]))
+            hasDigit = true;
+    }
+
+    if (hasUpper && hasDigit && hasLower && (n >= 6)) // considering a strong must be of length 6 or more
+        return true;
+
+    else
+        return false;
+}
 
 
 /////////////////////////////////////////			User Input Control Functions		///////////////////////////////////////////////////
@@ -49,16 +72,24 @@ void RegisterOrg(Screen currentScreen, ScreenID currentScreenID, ScreenID nextSc
     {
         wxLogMessage("Kindly provide all the details to continue registration");
     }
+    //else if (emailInput->GetValue() != "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+") 
+    //{
+    //    wxLogMessage("Kindly provide a valid email");
+    //}
+    else if (checkPassword(passwordInput) == false) 
+    {
+        wxLogMessage("Kindly provide a password that meets the following:\n\nPassword should be:\nMore than 6 characters\nContain at least 1 upper case letter\nContain at least 1 lower case letter\n Contain at least 1 number");
+    }
     else
     {
         //Save organization details
         string timezone = choices[index].ToStdString();
         org->setDetails(nameInput->GetValue().ToStdString(), countryInput->GetValue().ToStdString(), timezone , passwordInput->GetValue().ToStdString(), emailInput->GetValue().ToStdString());
+        shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
 
     }
 
 
-    shiftScreen(currentScreen, currentScreenID, nextScreenID, false, wxSHOW_EFFECT_SLIDE_TO_LEFT);
     
 }
 

@@ -1,4 +1,5 @@
 #include "RDBManagers.h"
+const char encryptionKey = 'w';
 
 namespace RDBSecurityManager
 {
@@ -54,4 +55,30 @@ namespace RDBSecurityManager
 
 		return false;
 	}
+
+
+	Organization encrypt(Organization* org) {
+		char* data = reinterpret_cast<char*>(org);
+		size_t size = sizeof(org);
+
+		// XOR encrypt the binary data
+		for (size_t i = 0; i < size; i++) {
+			data[i] ^= encryptionKey;
+		}
+
+		return *org;
+	}
+
+	Organization decrypt(Organization* org) {
+		char* data = reinterpret_cast<char*>(org);
+		size_t size = sizeof(org);
+
+		// XOR decrypt the binary data
+		for (size_t i = 0; i < size; i++) {
+			data[i] ^= encryptionKey;
+		}
+
+		return *org;
+	}
+
 }

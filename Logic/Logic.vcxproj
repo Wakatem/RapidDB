@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="src\Database_Report.cpp" />
     <ClCompile Include="src\Organization.cpp" />
+    <ClCompile Include="src\RDBDatabaseManager.cpp" />
     <ClCompile Include="src\Query_Report.cpp" />
     <ClCompile Include="src\RDBFileManager.cpp" />
     <ClCompile Include="src\Database.cpp" />

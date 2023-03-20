@@ -1,11 +1,20 @@
 #include "../../headers/Tabs.h"
+#include <wx/grid.h>
+#include "Organization.h"
 
 TabWindow setupUsersManagementWindow(wxWindow* parent)
 {
 	wxPanel* window = new wxPanel(parent);
 	window->SetSize(parent->GetSize());
 
-	//CONTENT HERE
+	wxGrid* grid = new wxGrid(window, wxID_ANY);
+
+	// Set the size and number of rows and columns
+	//grid->CreateGrid(Organization::getUsers().size(), 3);
+	grid->SetRowLabelSize(30);
+	grid->SetColLabelSize(30);
+	grid->SetDefaultRowSize(25);
+	grid->SetDefaultColSize(80);
 
 	wxStaticText* text = new wxStaticText(window, wxID_ANY, "UsersManagement content here", wxDefaultPosition, wxDefaultSize);
 	text->SetFont(text->GetFont().Scale(2.2f).MakeUnderlined());

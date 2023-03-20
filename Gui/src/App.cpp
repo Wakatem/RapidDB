@@ -95,6 +95,14 @@ bool MyApp::OnInit()
     shared_ptr<Organization> org = std::make_shared<Organization>();
     shared_ptr<User> user = std::make_shared<User>();
 
+    //RDBDatabaseManager::addDatabase(*org.get(), Database("OC1", "Oracle", LOCAL, "localhost", 1521, "xepdb1"));
+    //RDBDatabaseManager::addDatabase(*org.get(), Database("OC1", "Oracle", LOCAL, "localhost", 1521, "xepdb1"));
+    //RDBDatabaseManager::addDatabase(*org.get(), Database("OC1", "Oracle", LOCAL, "localhost", 1521, "xepdb1"));
+    //RDBDatabaseManager::addDatabase(*org.get(), Database("OC1", "Oracle", LOCAL, "localhost", 1521, "xepdb1"));
+    //RDBDatabaseManager::addDatabase(*org.get(), Database("OC1", "Oracle", LOCAL, "localhost", 1521, "xepdb1"));
+    //RDBDatabaseManager::addDatabase(*org.get(), Database("OC1", "Oracle", LOCAL, "localhost", 1521, "xepdb1"));
+    //RDBDatabaseManager::addDatabase(*org.get(), Database("OC1", "Oracle", LOCAL, "localhost", 1521, "xepdb1"));
+    //RDBDatabaseManager::addDatabase(*org.get(), Database("OC1", "Oracle", LOCAL, "localhost", 1521, "xepdb1"));
 
     //Main frame setup
     wxString* title = new wxString("RapidDB");
@@ -111,7 +119,7 @@ bool MyApp::OnInit()
     Screen AdminRegister = setupAdminRegister(mainWindow, org);
     Screen OrgSign = OrganizationSignin(mainWindow, org, user);
     Screen Login = setupLogin(mainWindow, org, user);
-    Screen MainScreen = setupMainScreen(mainWindow);
+    Screen MainScreen = setupMainScreen(mainWindow, org, user);
 
 
     //Automatic login

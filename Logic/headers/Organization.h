@@ -22,7 +22,7 @@ private:
 	string privatekey="a";
 	string email;
 	vector <User> users;
-	//vector <Database> databases;
+	vector <Database> databases;
 	//vector <Report> reports;
 
 	//serialization of non-POD data
@@ -36,12 +36,13 @@ private:
 		ar& privatekey;
 		ar& email;
 		ar& users;
-		//ar& databases;
+		ar& databases;
 	}
 
 public:
 	Organization(string orgName, string orgCountry, string timezone, string passcode, string email);
 	Organization();
+	~Organization();
 
 	void setDetails(string orgName, string orgCountry, string timezone, string passcode, string email);
 	string gerOrgName();
@@ -50,9 +51,9 @@ public:
 	string getPasscode();
 	string getPrivatekey();
 	string getEmail();
+	void setPrivatekey(string newPrivatekey);
 
 	vector <User>& getUsers();
-	void setPrivatekey(string newPrivatekey);
-	//vector <Database> getDatabases();
+	vector <Database>& getDatabases();
 	//vector <Report> getReports();
 };

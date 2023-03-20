@@ -2,6 +2,24 @@
 #include <iostream>
 #include "Database.h"
 
+
+Database::Database(string name, string type, DatabaseLocation location, string databaseIP, unsigned short databasePort, string ServiceName)
+{
+	//setup OCCI environment
+	env = Environment::createEnvironment(Environment::DEFAULT);
+
+	//setup connection url
+	URL = databaseIP + ":" + to_string(databasePort) + (ServiceName.empty() ? "" : "/" + ServiceName);
+
+	this->name = name;
+	this->type = type;
+	this->location = location;
+	this->databaseIP = databaseIP;
+	this->databasePort = databasePort;
+	this->serviceName = ServiceName;
+}
+
+
 Database::Database(string databaseIP, unsigned short databasePort, string ServiceName)
 {
 	//setup OCCI environment
@@ -9,8 +27,16 @@ Database::Database(string databaseIP, unsigned short databasePort, string Servic
 
 	//setup connection url
 	URL = databaseIP + ":" + to_string(databasePort) + (ServiceName.empty() ? "" : "/" + ServiceName);
+
+	this->databaseIP = databaseIP;
+	this->databasePort = databasePort;
+	this->serviceName = ServiceName;
 }
 
+
+Database::Database()
+{
+}
 
 ResultSet* Database::executeQuery(string SQLCommand)
 {
@@ -62,6 +88,51 @@ void Database::disconnect()
 void Database::closeEnvironment()
 {
 	Environment::terminateEnvironment(env);
+}
+
+string Database::getName()
+{
+	return this->name;
+}
+
+string Database::getType()
+{
+	return this->type;
+}
+
+DatabaseLocation Database::getLocation()
+{
+	return this->location;
+}
+
+string Database::getLocationText()
+{
+	if (this->location == LOCAL)
+	{
+		return "Local";
+	}
+	return "External";
+
+}
+
+string Database::getIP()
+{
+	return this->databaseIP;
+}
+
+unsigned short Database::getPort()
+{
+	return databasePort;
+}
+
+string Database::getServiceName()
+{
+	return this->serviceName;
+}
+
+string Database::getURL()
+{
+	return this->URL;
 }
 
 void Database::freeResources()
