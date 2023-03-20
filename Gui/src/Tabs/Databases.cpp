@@ -77,11 +77,11 @@ TabWindow setupDatabasesWindow(wxWindow* parent, shared_ptr<Organization> org)
 	}
 
 
-	wxButton* addButton = new wxButton(window, wxID_ANY, "Add a database");
-	addButton->SetPosition(DPI_POINT(600, 600, addButton));
-	addButton->SetMinSize(DPI_SIZE(210, 100, addButton));
-	addButton->SetFont(addButton->GetFont().Scale(1.2f));
-	addButton->Raise();
+	//wxButton* addButton = new wxButton(window, wxID_ANY, "Add a database");
+	//addButton->SetPosition(DPI_POINT(600, 600, addButton));
+	//addButton->SetMinSize(DPI_SIZE(210, 100, addButton));
+	//addButton->SetFont(addButton->GetFont().Scale(1.2f));
+	//addButton->Raise();
 
 	wxBoxSizer* windowSizer = new wxBoxSizer(wxVERTICAL);
 	parent->SetSizer(windowSizer);
