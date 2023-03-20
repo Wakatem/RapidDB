@@ -14,7 +14,6 @@ std::vector<std::string> analyzeQueryTime(Database& db, std::string query)
 	std::vector <std::string> suggestions;
 	try
 	{
-
 		clock_t start_time = clock();
 		ResultSet* rec = db.executeQuery(query);
 		while (rec->next()) {};
@@ -42,6 +41,7 @@ std::vector<std::string> analyzeQueryTime(Database& db, std::string query)
 	{
 		std::cout << "ERROR: " << e.what();
 	}
+
 }
 
 /* not compelted */
@@ -457,22 +457,21 @@ ResultSet* getExplainPlan(std::string query, Database db)
 
 void displayReports(std::vector<Report> reports, std::string title)
 {
-	std::cout << "--------------------------------------------------------------------------";
-	std::cout << "                               " << title << "                            ";
-	std::cout << "--------------------------------------------------------------------------";
+	std::cout << "--------------------------------------------------------------------------" << std::endl;
+	std::cout << "                               " << title << "                            " << std::endl;
+	std::cout << "--------------------------------------------------------------------------" << std::endl;
 	for (int i = 0; i < reports.size(); i++)
 	{
 		std::cout << "   Category: ";
 		std::cout << reports[i].getAnalysisType();
 
-		std::cout << "     Suggestions:";
+		std::cout << "\n     Suggestions:" << std::endl;;
 		for (int j = 0; j < reports[i].retrieveSuggestions().size(); j++)
 		{
-			std::cout << "      " << reports[i].retrieveSuggestions()[j] << " ";
+			std::cout << "      " << reports[i].retrieveSuggestions()[j] << " " << std::endl;;
 		}
 	}
 }
-
 
 int main()
 {
@@ -480,20 +479,20 @@ int main()
 	{
 		// Creating database connection
 		Database oracleDB("localhost", 1521, "xepdb1");
-		oracleDB.connect("CSCI317", "oracle");
+		oracleDB.connect("CSCI317", "csci317");
 
 		// Database analysis
-		auto lockTimeSuggestions = analyzeLockTime(oracleDB, 50);
+		//auto lockTimeSuggestions = analyzeLockTime(oracleDB, 50);
 		auto DBFileSuggestions = analyzeDBfile(oracleDB, "TPCHR");
 		auto leastUsedIndexes = suggestLeastUsedIndexes(oracleDB);
 		auto IndexFragmentation = suggestIndexFragmentation(oracleDB);
 		auto PartitioningIndex = suggestPartitioningIndex(oracleDB);
-		auto lowSelectivitySuggestions = suggestRemovalLowSelectivity(oracleDB);
-		auto bufferCache = analyzeBufferCacheSize(oracleDB);
+		//auto lowSelectivitySuggestions = suggestRemovalLowSelectivity(oracleDB);
+		//auto bufferCache = analyzeBufferCacheSize(oracleDB);
 		auto PGASuggestions = analyzePGAAggeregate(oracleDB);
 
-		Database_Report lockTime("Lock Time", "This analyzes the lock time of a random session and provides suggestions based on it");
-		lockTime.addSuggestions(lockTimeSuggestions);
+		//Database_Report lockTime("Lock Time", "This analyzes the lock time of a random session and provides suggestions based on it");
+		//lockTime.addSuggestions(lockTimeSuggestions);
 		
 		Database_Report DBFile("Database File", "This analyzes the sizes of database files.");
 		DBFile.addSuggestions(DBFileSuggestions);
@@ -507,11 +506,11 @@ int main()
 		Database_Report PartitionIndex("Index Partition", "Analyzes Index leaf blocks present in proportion to the number of rows present");
 		PartitionIndex.addSuggestions(PartitioningIndex);
 
-		Database_Report lowSelectivity("Index Selectivity", "Analyzes indexes of a database that has low selectivity and suggests removal");
-		lowSelectivity.addSuggestions(lowSelectivitySuggestions);
+		//Database_Report lowSelectivity("Index Selectivity", "Analyzes indexes of a database that has low selectivity and suggests removal");
+		//lowSelectivity.addSuggestions(lowSelectivitySuggestions);
 
-		Database_Report bufferC("Buffer Cache", "Analyzes the buffer cache hit ratio and determines if the buffer is large enough to contain all frequently requested objects");
-		bufferC.addSuggestions(bufferCache);
+		//Database_Report bufferC("Buffer Cache", "Analyzes the buffer cache hit ratio and determines if the buffer is large enough to contain all frequently requested objects");
+		//bufferC.addSuggestions(bufferCache);
 
 		Database_Report PGA("PGA", "Analyzes the PGA available to the program and determines if the program has enough space to operate");
 		PGA.addSuggestions(PGASuggestions);
@@ -524,13 +523,13 @@ int main()
 		queryTimeAnalysis.addSuggestions(QueryTimeSuggestions);
 
 		std::vector<Report> database_reports;
-		database_reports.push_back(lockTime);
+		//database_reports.push_back(lockTime);
 		database_reports.push_back(DBFile);
 		database_reports.push_back(leastUsed);
 		database_reports.push_back(IndexFragment);
 		database_reports.push_back(PartitionIndex);
-		database_reports.push_back(lowSelectivity);
-		database_reports.push_back(bufferC);
+		//database_reports.push_back(lowSelectivity);
+		//database_reports.push_back(bufferC);
 		database_reports.push_back(PGA);
 
 		std::vector<Report> query_reports;
@@ -538,8 +537,6 @@ int main()
 
 		displayReports(database_reports, " Database Reports ");
 		displayReports(query_reports, " Query Reports");
-
-
 
 		oracleDB.freeResources();
 		oracleDB.disconnect();

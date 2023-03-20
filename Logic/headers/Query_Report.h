@@ -1,5 +1,5 @@
 #pragma once
-#include "Report.h"
+#include "..\headers\Report.h"
 
 class Query_Report : public Report
 {
