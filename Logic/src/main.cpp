@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include "Database.h"
+#include "Query_Report.h"
+#include "Database_Report.h"
 
 using namespace std;
 
@@ -128,52 +130,6 @@ std::vector<std::string> denormalizationSuggestion(Database& db, std::string que
 /*------------QUERY ANALYSIS------------*/
 
 /*------------DATABASE ANALYSIS------------*/
-std::vector<std::string> checkDatabaseStatus (Database& db)
-{
-	std::vector<std::string> suggestions;
-
-	// Check buffer cache size
-	ResultSet* rec = db.executeQuery("SELECT value FROM V$PARAMETER WHERE name = 'db_block_bufferec'");
-
-	rec->next();
-	unsigned long buffer_cache_size = (unsigned long)rec->getNumber(1);
-	if (buffer_cache_size < 100000)
-	{
-		suggestions.push_back("Buffer cache size is set to a low value. You should try increasing it to improve I/O performance.");
-	}
-	rec->~ResultSet();
-
-	// Check max open curecorec
-	rec = db.executeQuery("SELECT value FROM V$PARAMETER WHERE name = 'open_curecorec'");
-	
-	rec->next();
-	int open_curecorec = rec->getInt(1);
-	if (open_curecorec < 100)
-	{
-		suggestions.push_back("Maximum number of open curecorec is set to a low value. You should try increasing it to avoid curecor cache thrashing.");
-	}
-
-	//rec->~ResultSet();
-
-	// Check datafile size
-	rec = db.executeQuery("SELECT SUM(bytes) FROM dba_data_files");
-	
-	rec->next();
-	unsigned long datafile_size = (unsigned long)rec->getNumber(1);
-	if (datafile_size < (unsigned long)1073741824)
-	{
-		suggestions.push_back("Total size of datafiles is less than 1GB. You should try adding more datafiles to increase storage capacity.");
-	}
-	rec->~ResultSet();
-
-	// If no suggestions needed
-	if (suggestions.size() == 0)
-	{
-		suggestions.push_back("Database configuration is optimal");
-	}
-
-	return suggestions;
-}
 std::vector<std::string> analyzeLockTime(Database& db, int max_wait_time)
 {
 	std::vector < std::string> suggestions;
@@ -237,16 +193,64 @@ std::vector<std::string> analyzeDBfile(Database& db, std::string tablespace_name
 	return suggestions;
 }
 
+/* not needed, repeat info */
+std::vector<std::string> checkDatabaseStatus (Database& db)
+{
+	std::vector<std::string> suggestions;
+
+	// Check buffer cache size
+	ResultSet* rec = db.executeQuery("SELECT value FROM V$PARAMETER WHERE name = 'db_block_bufferec'");
+
+	rec->next();
+	unsigned long buffer_cache_size = (unsigned long)rec->getNumber(1);
+	if (buffer_cache_size < 100000)
+	{
+		suggestions.push_back("Buffer cache size is set to a low value. You should try increasing it to improve I/O performance.");
+	}
+	rec->~ResultSet();
+
+	// Check max open curecorec
+	rec = db.executeQuery("SELECT value FROM V$PARAMETER WHERE name = 'open_curecorec'");
+	
+	rec->next();
+	int open_curecorec = rec->getInt(1);
+	if (open_curecorec < 100)
+	{
+		suggestions.push_back("Maximum number of open curecorec is set to a low value. You should try increasing it to avoid curecor cache thrashing.");
+	}
+
+	//rec->~ResultSet();
+
+	// Check datafile size
+	rec = db.executeQuery("SELECT SUM(bytes) FROM dba_data_files");
+	
+	rec->next();
+	unsigned long datafile_size = (unsigned long)rec->getNumber(1);
+	if (datafile_size < (unsigned long)1073741824)
+	{
+		suggestions.push_back("Total size of datafiles is less than 1GB. You should try adding more datafiles to increase storage capacity.");
+	}
+	rec->~ResultSet();
+
+	// If no suggestions needed
+	if (suggestions.size() == 0)
+	{
+		suggestions.push_back("Database configuration is optimal");
+	}
+
+	return suggestions;
+}
+/* not needed, repeat info */
 /* Not completed */
 std::vector<std::string> analyzePCTFree(Database& db, std::string tablespace_name)
 {
 	std::vector<std::string> suggestions;
 	
 	// Get all table names in a tablespace
-	ResultSet* table_names = db.executeQuery("SELECT table_name FROM user_tables WHERE tablespace_name = " + tablespace_name);
+	ResultSet* table_names = db.executeQuery("SELECT table_name FROM user_tables WHERE tablespace_name = '" + tablespace_name + "'");
 	while (table_names->next())
 	{
-		ResultSet* rec = db.executeQuery("SELECT pct_free, num_rows FROM user_tables WHERE tablespace_name = " + tablespace_name + " AND table_name = " + table_names->getString(1));
+		ResultSet* rec = db.executeQuery("SELECT pct_free, num_rows FROM user_tables WHERE tablespace_name = '" + tablespace_name + "' AND table_name = " + table_names->getString(1));
 		rec->next();
 
 		int pct_free = rec->getInt(1);
@@ -274,7 +278,7 @@ std::vector<std::string> analyzePCTFree(Database& db, std::string tablespace_nam
 }
 /* Not completed */
 
-std::vector<std::string> leastUsedIndexes(Database& db)
+std::vector<std::string> suggestLeastUsedIndexes(Database& db)
 {
 	std::vector<std::string> suggestions;
 	ResultSet* rec = db.executeQuery("SELECT index_name, last_analyzed, (to_date(SYSDATE) - to_date(last_analyzed)) AS duration FROM user_indexes WHERE (to_date(SYSDATE) - to_date(last_analyzed)) > 365");
@@ -292,7 +296,7 @@ std::vector<std::string> leastUsedIndexes(Database& db)
 	}
 	return suggestions;
 }
-std::vector<std::string> IndexFragmentation(Database& db)
+std::vector<std::string> suggestIndexFragmentation(Database& db)
 {
 	std::vector<std::string> suggestions;
 	ResultSet* rec = db.executeQuery("SELECT index_name, blevel, leaf_blocks FROM user_indexes WHERE blevel>leaf_blocks");
@@ -341,6 +345,7 @@ std::vector<std::string> suggestRemovalLowSelectivity(Database& db, int selectiv
 
 	return suggestions;
 }
+
 std::vector<std::string> analyzeBufferCacheSize(Database& db)
 {
 	std::vector<std::string> suggestions;
@@ -419,8 +424,6 @@ std::vector<std::string> analyzeHitRatioSharedPool(Database& db)
 }
 /* not completed */
 
-
-
 /*------------DATABASE ANALYSIS------------*/
 
 /*------------SUPPORTING FUNCTION------------*/
@@ -451,10 +454,25 @@ ResultSet* getExplainPlan(std::string query, Database db)
 
 	return rec;
 }
-//
 
-// ooo eee ooo ooo ah ting tang wala wala bing bang
-// ooo eee ooo ah ting tang wala wala bing bang
+void displayReports(std::vector<Report> reports, std::string title)
+{
+	std::cout << "--------------------------------------------------------------------------";
+	std::cout << "                               " << title << "                            ";
+	std::cout << "--------------------------------------------------------------------------";
+	for (int i = 0; i < reports.size(); i++)
+	{
+		std::cout << "   Category: ";
+		std::cout << reports[i].getAnalysisType();
+
+		std::cout << "     Suggestions:";
+		for (int j = 0; j < reports[i].retrieveSuggestions().size(); j++)
+		{
+			std::cout << "      " << reports[i].retrieveSuggestions()[j] << " ";
+		}
+	}
+}
+
 
 int main()
 {
@@ -464,20 +482,90 @@ int main()
 		Database oracleDB("localhost", 1521, "xepdb1");
 		oracleDB.connect("CSCI317", "oracle");
 
+		// Database analysis
+		auto lockTimeSuggestions = analyzeLockTime(oracleDB, 50);
+		auto DBFileSuggestions = analyzeDBfile(oracleDB, "TPCHR");
+		auto leastUsedIndexes = suggestLeastUsedIndexes(oracleDB);
+		auto IndexFragmentation = suggestIndexFragmentation(oracleDB);
+		auto PartitioningIndex = suggestPartitioningIndex(oracleDB);
+		auto lowSelectivitySuggestions = suggestRemovalLowSelectivity(oracleDB);
+		auto bufferCache = analyzeBufferCacheSize(oracleDB);
+		auto PGASuggestions = analyzePGAAggeregate(oracleDB);
 
+		Database_Report lockTime("Lock Time", "This analyzes the lock time of a random session and provides suggestions based on it");
+		lockTime.addSuggestions(lockTimeSuggestions);
+		
+		Database_Report DBFile("Database File", "This analyzes the sizes of database files.");
+		DBFile.addSuggestions(DBFileSuggestions);
+
+		Database_Report leastUsed("Least Used Index", "Analyzes all indexes present in the atabase and suggests removal of the least used indexes");
+		leastUsed.addSuggestions(leastUsedIndexes);
+
+		Database_Report IndexFragment("Index Fragmentation", "Analyzes if fragmentation is present in indexes and suggests rebuilt of the ones that do");
+		IndexFragment.addSuggestions(IndexFragmentation);
+
+		Database_Report PartitionIndex("Index Partition", "Analyzes Index leaf blocks present in proportion to the number of rows present");
+		PartitionIndex.addSuggestions(PartitioningIndex);
+
+		Database_Report lowSelectivity("Index Selectivity", "Analyzes indexes of a database that has low selectivity and suggests removal");
+		lowSelectivity.addSuggestions(lowSelectivitySuggestions);
+
+		Database_Report bufferC("Buffer Cache", "Analyzes the buffer cache hit ratio and determines if the buffer is large enough to contain all frequently requested objects");
+		bufferC.addSuggestions(bufferCache);
+
+		Database_Report PGA("PGA", "Analyzes the PGA available to the program and determines if the program has enough space to operate");
+		PGA.addSuggestions(PGASuggestions);
+
+		// Query Analysis
+		std::string query = "SELECT * FROM CUSTOMER";
+		auto QueryTimeSuggestions = analyzeQueryTime(oracleDB, "SELECT * FROM CUSTOMER");
+		
+		Query_Report queryTimeAnalysis(std::string("Query Time Analysis"), std::string("This report shows the analysis of a given query"), query);
+		queryTimeAnalysis.addSuggestions(QueryTimeSuggestions);
+
+		std::vector<Report> database_reports;
+		database_reports.push_back(lockTime);
+		database_reports.push_back(DBFile);
+		database_reports.push_back(leastUsed);
+		database_reports.push_back(IndexFragment);
+		database_reports.push_back(PartitionIndex);
+		database_reports.push_back(lowSelectivity);
+		database_reports.push_back(bufferC);
+		database_reports.push_back(PGA);
+
+		std::vector<Report> query_reports;
+		query_reports.push_back(queryTimeAnalysis);
+
+		displayReports(database_reports, " Database Reports ");
+		displayReports(query_reports, " Query Reports");
+
+
+
+		oracleDB.freeResources();
+		oracleDB.disconnect();
+		oracleDB.closeEnvironment();
+	}
+	catch (const exception& x)
+	{
+		cout << x.what();
+	}
+}
+
+
+/*
 		// Rida
-		/*
+		
 		printSuggestions(leastUsedIndexes(oracleDB));
 		printSuggestions(IndexFragmentation(oracleDB));
 		printSuggestions(suggestPartitioningIndex(oracleDB));
 		printSuggestions(suggestRemovalLowSelectivity(oracleDB, 0.15));
-		*/
+		
 
 		// Maryam
-		/*
+		
 		printSuggestions(checkDatabaseStatus(oracleDB));
 		printSuggestions(analyzeLockTime(oracleDB, 50));
-		*/
+		
 
 
 		// Hiba
@@ -499,35 +587,4 @@ int main()
 		oracleDB.executeDML("EXPLAIN PLAN FOR " + std::string("SELECT * FROM LINEITEM"));
 
 		//oracleDB.executeQuery("EXPLAIN PLAN FOR " + std::string("SELECT * FROM LINEITEM"));
-		
-		//// Database Analysis
-		////auto dbStatus = checkDatabaseStatus(oracleDB);
-		////auto lockTime = analyzeLockTime(oracleDB, 50); // session
-		////auto DBFiles = analyzeDBfile(oracleDB, "TPCHR");
-
-		//// Query Analysis
-		//std::string query = "SELECT * FROM CUSTOMER";
-		//auto queryTime = analyzeQueryTime(oracleDB, query);
-
-		//Query_Report q_rep;
-		//q_rep.query = query;
-		//q_rep.analysis_type = "Query Time Analysis";
-		//q_rep.desc = "Analysing the type of the query";
-		//addToQueryReport(q_rep, queryTime);
-		//
-		//displayQueryReport(q_rep);
-
-
-
-
-
-		oracleDB.freeResources();
-		oracleDB.disconnect();
-		oracleDB.closeEnvironment();
-	}
-	catch (const exception& x)
-	{
-		cout << x.what();
-	}
-}
-
+*/	

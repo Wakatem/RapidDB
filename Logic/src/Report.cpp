@@ -6,9 +6,12 @@ Report::Report(std::string an_ty, std::string d)
 	this->desc = d;
 }
 
-void Report::addSuggestions(std::string suggestion)
+void Report::addSuggestions(std::vector<std::string> suggestion)
 {
-	this->report_suggestions.push_back(suggestion);
+	for (int i = 0; i < suggestion.size(); i++)
+	{
+		this->report_suggestions.push_back(suggestion[i]);
+	}
 }
 
 std::string Report::getAnalysisType() const
@@ -26,6 +29,10 @@ std::vector<std::string> Report::getSuggestions() const
 	return this->report_suggestions;
 }
 
+std::vector<std::string> Report::retrieveSuggestions() const
+{
+	return report_suggestions;
+}
 
 
 

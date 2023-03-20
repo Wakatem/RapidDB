@@ -10,12 +10,13 @@ class Report
 		std::vector<std::string> report_suggestions;
 	public:
 		Report(std::string an_ty, std::string d);
-		void addSuggestions(std::string);
+		void addSuggestions(std::vector<std::string>);
 
 		// retrieve report information
 		std::vector<std::string> getSuggestions() const;
 		std::string getDesc() const;
 		std::string getAnalysisType() const;
+		std::vector<std::string> retrieveSuggestions() const;
 
 
 };

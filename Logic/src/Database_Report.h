@@ -4,7 +4,7 @@ class Database_Report :
     public Report
 {
     private:
-        int sid;
-        int serial;
+    public:
+        Database_Report(std::string an_ty, std::string d);
 };
 
