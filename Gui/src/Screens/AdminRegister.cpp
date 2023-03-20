@@ -1,6 +1,36 @@
 #include "../../headers/Screens.h"
 
+
 /////////////////////////////////////////			User Input Control Functions		///////////////////////////////////////////////////
+static bool checkPasswordUser(wxTextCtrl* passwordCtrl)
+{
+    wxString password = passwordCtrl->GetValue();
+    int n = password.length();
+    bool hasLower = false, hasUpper = false, hasDigit = false;
+
+    for (int i = 0; i < n; i++) {
+        if (islower(password[i]))
+            hasLower = true;
+        if (isupper(password[i]))
+            hasUpper = true;
+        if (isdigit(password[i]))
+            hasDigit = true;
+    }
+
+    if (hasUpper && hasDigit && hasLower && (n >= 6)) // considering a strong must be of length 6 or more
+        return true;
+
+    else
+        return false;
+}
+
+bool isNumber(wxTextCtrl* numberCtrl) {
+    wxString phone = numberCtrl->GetValue();
+    for (char c : phone)
+        if (c < '0' || c > '9')
+            return false;
+    return true;
+}
 
 
 void goBackToScreen(Screen currentScreen, ScreenID currentScreenID, ScreenID nextScreenID)
@@ -45,7 +75,18 @@ void RegisterAdmin(Screen currentScreen, ScreenID currentScreenID, ScreenID next
     {
         wxLogMessage("Kindly provide all the details to continue registration");
     }
-    else
+    else if (emailInput->GetValue() != "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+") 
+    {
+        wxLogMessage("Kindly provide a valid email");
+    }
+    else if (checkPasswordUser(passwordInput) == false)
+    {
+        wxLogMessage("Kindly provide a password that meets the following:\n\nPassword should be:\nMore than 6 characters\nContain at least 1 upper case letter\nContain at least 1 lower case letter\n Contain at least 1 number");
+    }
+    else if (isNumber(phoneNumberInput) == false) {
+        wxLogMessage("Kindly provide a valid phone number");
+    }
+    else 
     {
         //Save user details
         char gender = choices[index].ToStdString()[0];
